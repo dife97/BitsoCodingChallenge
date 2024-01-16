@@ -17,10 +17,18 @@ public struct ArtListRequestModel: EquatableModel {
 // MARK: - Response
 public struct ArtListResponseModel: Codable { // TODO: Change to use only decoder?
     let pagination: PaginationModel
-    let data: ArtListData
+    public let data: [ArtListData]
+
+    public init(
+        pagination: PaginationModel,
+        data: [ArtListData]
+    ) {
+        self.pagination = pagination
+        self.data = data
+    }
 }
 
-struct PaginationModel: Codable {
+public struct PaginationModel: Codable {
     let currentPage: Int
     let offset: Int
 
@@ -28,12 +36,34 @@ struct PaginationModel: Codable {
         case currentPage = "current_page"
         case offset
     }
+
+    public init(
+        currentPage: Int,
+        offset: Int
+    ) {
+        self.currentPage = currentPage
+        self.offset = offset
+    }
 }
 
-struct ArtListData: Codable {
-    let id: String
-    let imageId: String
-    let title: String
-    let year: String
-    let author: String
+public struct ArtListData: Codable {
+    public let id: String
+    public let imageId: String
+    public let title: String
+    public let year: String
+    public let author: String
+
+    public init(
+        id: String,
+        imageId: String,
+        title: String,
+        year: String,
+        author: String
+    ) {
+        self.id = id
+        self.imageId = imageId
+        self.title = title
+        self.year = year
+        self.author = author
+    }
 }

@@ -4,4 +4,8 @@ protocol ArtListProtocol {
 
 public typealias ArtListResult = Result<ArtListModel, ArtListError>
 
-public enum ArtListError: Error {}
+public enum ArtListError: Error {
+    case isFetching
+    case connection
+    case dataParsing
+}
