@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		940F4F5B2B563229006A9AC7 /* ArtApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940F4F532B563229006A9AC7 /* ArtApp.framework */; };
 		940F4F602B563229006A9AC7 /* ArtAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F5F2B563229006A9AC7 /* ArtAppTests.swift */; };
-		940F4F692B56326A006A9AC7 /* ArtExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F682B56326A006A9AC7 /* ArtExample.swift */; };
+		940F4F692B56326A006A9AC7 /* ArtList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F682B56326A006A9AC7 /* ArtList.swift */; };
+		940F4F732B5696D5006A9AC7 /* ArtListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F722B5696D5006A9AC7 /* ArtListModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,7 +27,8 @@
 		940F4F532B563229006A9AC7 /* ArtApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ArtApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		940F4F5A2B563229006A9AC7 /* ArtAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		940F4F5F2B563229006A9AC7 /* ArtAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtAppTests.swift; sourceTree = "<group>"; };
-		940F4F682B56326A006A9AC7 /* ArtExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtExample.swift; sourceTree = "<group>"; };
+		940F4F682B56326A006A9AC7 /* ArtList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtList.swift; sourceTree = "<group>"; };
+		940F4F722B5696D5006A9AC7 /* ArtListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,7 +71,7 @@
 		940F4F542B563229006A9AC7 /* ArtApp */ = {
 			isa = PBXGroup;
 			children = (
-				940F4F682B56326A006A9AC7 /* ArtExample.swift */,
+				940F4F6A2B56345E006A9AC7 /* ArtList */,
 			);
 			path = ArtApp;
 			sourceTree = "<group>";
@@ -80,6 +82,15 @@
 				940F4F5F2B563229006A9AC7 /* ArtAppTests.swift */,
 			);
 			path = ArtAppTests;
+			sourceTree = "<group>";
+		};
+		940F4F6A2B56345E006A9AC7 /* ArtList */ = {
+			isa = PBXGroup;
+			children = (
+				940F4F682B56326A006A9AC7 /* ArtList.swift */,
+				940F4F722B5696D5006A9AC7 /* ArtListModel.swift */,
+			);
+			path = ArtList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,7 +202,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				940F4F692B56326A006A9AC7 /* ArtExample.swift in Sources */,
+				940F4F692B56326A006A9AC7 /* ArtList.swift in Sources */,
+				940F4F732B5696D5006A9AC7 /* ArtListModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
