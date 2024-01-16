@@ -16,6 +16,7 @@
 		94561D012B56F6E700DD43CC /* ArtListServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94561D002B56F6E700DD43CC /* ArtListServiceProtocol.swift */; };
 		94561D0F2B56F7E200DD43CC /* ArtNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94561D072B56F7E200DD43CC /* ArtNetwork.framework */; };
 		94561D142B56F7E200DD43CC /* URLSessionHTTPProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94561D132B56F7E200DD43CC /* URLSessionHTTPProviderTests.swift */; };
+		946B78742B573F6F00F6DC91 /* URLBaseStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B78732B573F6F00F6DC91 /* URLBaseStrings.swift */; };
 		94DF17652B56F83B008EB27F /* HTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17642B56F83B008EB27F /* HTTPProvider.swift */; };
 		94DF17672B56F871008EB27F /* ServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17662B56F871008EB27F /* ServiceTarget.swift */; };
 		94DF176A2B56F8CC008EB27F /* URLSessionHTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17692B56F8CC008EB27F /* URLSessionHTTPProvider.swift */; };
@@ -82,6 +83,7 @@
 		94561D072B56F7E200DD43CC /* ArtNetwork.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ArtNetwork.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		94561D0E2B56F7E200DD43CC /* ArtNetworkTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtNetworkTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94561D132B56F7E200DD43CC /* URLSessionHTTPProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPProviderTests.swift; sourceTree = "<group>"; };
+		946B78732B573F6F00F6DC91 /* URLBaseStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBaseStrings.swift; sourceTree = "<group>"; };
 		94DF17642B56F83B008EB27F /* HTTPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPProvider.swift; sourceTree = "<group>"; };
 		94DF17662B56F871008EB27F /* ServiceTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTarget.swift; sourceTree = "<group>"; };
 		94DF17692B56F8CC008EB27F /* URLSessionHTTPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPProvider.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				94DF17642B56F83B008EB27F /* HTTPProvider.swift */,
 				94DF17762B5707D1008EB27F /* HTTPProviderError.swift */,
 				94DF17662B56F871008EB27F /* ServiceTarget.swift */,
+				946B78732B573F6F00F6DC91 /* URLBaseStrings.swift */,
 				94DF17682B56F8C6008EB27F /* URLSession */,
 			);
 			path = ArtNetwork;
@@ -501,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				946B78742B573F6F00F6DC91 /* URLBaseStrings.swift in Sources */,
 				94DF17672B56F871008EB27F /* ServiceTarget.swift in Sources */,
 				94DF176A2B56F8CC008EB27F /* URLSessionHTTPProvider.swift in Sources */,
 				94DF17652B56F83B008EB27F /* HTTPProvider.swift in Sources */,
