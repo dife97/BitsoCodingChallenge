@@ -1,12 +1,3 @@
-public protocol RemoteArtListProtocol {
-    func getArtList(
-        requestModel: ArtListRequestModel,
-        _ completion: @escaping (RemoteArtListResult) -> Void
-    )
-}
-
-public typealias RemoteArtListResult = Result<ArtListResponseModel, HTTPError>
-
 public final class RemoteArtListUseCase: ArtListProtocol {
     // MARK: - Properties
     private var isFetching = false
