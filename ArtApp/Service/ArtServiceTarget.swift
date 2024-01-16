@@ -1,17 +1,19 @@
-enum ArtServiceTarget {
+import ArtNetwork
+
+public enum ArtServiceTarget {
     case getArtList(ArtListRequestModel)
 }
 
 extension ArtServiceTarget: ServiceTarget {
-    var method: HTTPMethod {
+    public var method: HTTPMethod {
         .get
     }
     
-    var path: String {
+    public var path: String {
         "artworks"
     }
     
-    var headers: [String : String] {
+    public var headers: [String : String] {
         [:]
     }
 }

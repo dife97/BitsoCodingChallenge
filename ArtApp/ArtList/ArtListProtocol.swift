@@ -7,5 +7,5 @@ public typealias ArtListResult = Result<ArtListModel, ArtListError>
 public enum ArtListError: Error {
     case isFetching
     case connection
-    case dataParsing
+    case undefined
 }

@@ -25,7 +25,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
 
         expectedRequestModels.forEach { _ in
             sut.execute { _ in }
-            serviceSpy.complete(with: .failure(.noConnection))
+            serviceSpy.complete(with: .failure(.connection))
         }
 
         XCTAssertEqual(serviceSpy.receivedRequestModel, expectedRequestModels)
@@ -65,11 +65,11 @@ final class RemoteArtListUseCaseTests: XCTestCase {
             exp.fulfill()
         }
 
-        serviceSpy.complete(with: .failure(.noConnection))
+        serviceSpy.complete(with: .failure(.connection))
         wait(for: [exp], timeout: 1)
     }
 
-    func test_deliversDataParsingError_whenClientCompletesWithInvalidData() {
+    func test_deliversUndefinedError_whenClientCompletesWithDataParsing() {
         let (sut, serviceSpy) = buildSUT()
         let exp = expectation(description: "Wait to complete request")
 
@@ -78,12 +78,12 @@ final class RemoteArtListUseCaseTests: XCTestCase {
             case .success:
                 XCTFail("Expected dataParsing error but received \(result) instead.")
             case .failure(let error):
-                XCTAssertEqual(error, .dataParsing)
+                XCTAssertEqual(error, .undefined)
             }
             exp.fulfill()
         }
 
-        serviceSpy.complete(with: .failure(.invalidData))
+        serviceSpy.complete(with: .failure(.undefined))
         wait(for: [exp], timeout: 1)
     }
 
@@ -122,7 +122,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
 
         sut?.execute { result = $0 }
         sut = nil
-        serviceSpy.complete(with: .failure(.noConnection))
+        serviceSpy.complete(with: .failure(.connection))
 
         XCTAssertNil(result)
     }

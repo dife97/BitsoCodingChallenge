@@ -1,6 +1,6 @@
 import ArtApp
 
-final class RemoteArtListServiceSpy: RemoteArtListProtocol {
+final class RemoteArtListServiceSpy: ArtListServiceProtocol {
     private(set) var receivedRequestModel: [ArtListRequestModel] = []
     private var receivedCompletion: [(RemoteArtListResult) -> Void] = []
 

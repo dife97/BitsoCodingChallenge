@@ -1,5 +1,3 @@
-public protocol EquatableModel: Equatable {} // TODO: Move to own file
-
 // MARK: - Request
 public struct ArtListRequestModel: EquatableModel {
     let page: Int
@@ -15,7 +13,7 @@ public struct ArtListRequestModel: EquatableModel {
 }
 
 // MARK: - Response
-public struct ArtListResponseModel: Codable { // TODO: Change to use only decoder?
+public struct ArtListResponseModel: EquatableModel { // TODO: Change to use only decoder?
     let pagination: PaginationModel
     public let data: [ArtListData]
 
@@ -28,7 +26,7 @@ public struct ArtListResponseModel: Codable { // TODO: Change to use only decod
     }
 }
 
-public struct PaginationModel: Codable {
+public struct PaginationModel: EquatableModel {
     let currentPage: Int
     let offset: Int
 
@@ -46,7 +44,7 @@ public struct PaginationModel: Codable {
     }
 }
 
-public struct ArtListData: Codable {
+public struct ArtListData: EquatableModel {
     public let id: String
     public let imageId: String
     public let title: String

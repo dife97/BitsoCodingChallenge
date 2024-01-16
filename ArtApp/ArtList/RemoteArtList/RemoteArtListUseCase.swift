@@ -1,3 +1,5 @@
+import ArtNetwork
+
 public final class RemoteArtListUseCase: ArtListProtocol {
     // MARK: - Properties
     private var isFetching = false
@@ -5,9 +7,9 @@ public final class RemoteArtListUseCase: ArtListProtocol {
     private let limit = 10
 
     // MARK: - Initializer
-    private let service: RemoteArtListProtocol
+    private let service: ArtListServiceProtocol
 
-    public init(service: RemoteArtListProtocol) {
+    public init(service: ArtListServiceProtocol) {
         self.service = service
     }
 
@@ -44,14 +46,14 @@ public final class RemoteArtListUseCase: ArtListProtocol {
 // MARK: - Private Methods
 extension RemoteArtListUseCase {
     private func handleGetArtList(
-        _ error: HTTPError,
+        _ error: ArtListServiceError,
         with completion: @escaping (ArtListResult) -> Void
     ) {
         switch error {
-        case .noConnection:
+        case .connection:
             completion(.failure(.connection))
-        case .invalidData:
-            completion(.failure(.dataParsing))
+        case .dataParsing, .undefined:
+            completion(.failure(.undefined))
         }
     }
 
