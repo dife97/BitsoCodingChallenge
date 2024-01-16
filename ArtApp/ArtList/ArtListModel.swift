@@ -1,4 +1,4 @@
-struct ArtListModel {
+public struct ArtListModel {
     let artList: ArtList
 }
 

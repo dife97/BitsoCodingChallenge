@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		940F4F5B2B563229006A9AC7 /* ArtApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940F4F532B563229006A9AC7 /* ArtApp.framework */; };
-		940F4F602B563229006A9AC7 /* ArtAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F5F2B563229006A9AC7 /* ArtAppTests.swift */; };
+		940F4F602B563229006A9AC7 /* RemoteArtListUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F5F2B563229006A9AC7 /* RemoteArtListUseCaseTests.swift */; };
 		940F4F692B56326A006A9AC7 /* ArtList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F682B56326A006A9AC7 /* ArtList.swift */; };
 		940F4F732B5696D5006A9AC7 /* ArtListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F722B5696D5006A9AC7 /* ArtListModel.swift */; };
+		940F4F782B56A1D1006A9AC7 /* RemoteArtListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F772B56A1D1006A9AC7 /* RemoteArtListUseCase.swift */; };
+		940F4F7C2B56A208006A9AC7 /* HTTPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F7B2B56A208006A9AC7 /* HTTPError.swift */; };
+		940F4F812B56A398006A9AC7 /* RemoteArtListServiceSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940F4F802B56A398006A9AC7 /* RemoteArtListServiceSpy.swift */; };
+		94EBFA692B56C4AC006F0493 /* ArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA682B56C4AC006F0493 /* ArtService.swift */; };
+		94EBFA6B2B56C4BC006F0493 /* ArtServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA6A2B56C4BC006F0493 /* ArtServiceTarget.swift */; };
+		94EBFA6D2B56C7FD006F0493 /* InfraServiceModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA6C2B56C7FD006F0493 /* InfraServiceModule.swift */; };
+		94EBFA702B56D41F006F0493 /* RemoteArtListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA6F2B56D41F006F0493 /* RemoteArtListModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -26,9 +33,16 @@
 /* Begin PBXFileReference section */
 		940F4F532B563229006A9AC7 /* ArtApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ArtApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		940F4F5A2B563229006A9AC7 /* ArtAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ArtAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		940F4F5F2B563229006A9AC7 /* ArtAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtAppTests.swift; sourceTree = "<group>"; };
+		940F4F5F2B563229006A9AC7 /* RemoteArtListUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArtListUseCaseTests.swift; sourceTree = "<group>"; };
 		940F4F682B56326A006A9AC7 /* ArtList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtList.swift; sourceTree = "<group>"; };
 		940F4F722B5696D5006A9AC7 /* ArtListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListModel.swift; sourceTree = "<group>"; };
+		940F4F772B56A1D1006A9AC7 /* RemoteArtListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArtListUseCase.swift; sourceTree = "<group>"; };
+		940F4F7B2B56A208006A9AC7 /* HTTPError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPError.swift; sourceTree = "<group>"; };
+		940F4F802B56A398006A9AC7 /* RemoteArtListServiceSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArtListServiceSpy.swift; sourceTree = "<group>"; };
+		94EBFA682B56C4AC006F0493 /* ArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtService.swift; sourceTree = "<group>"; };
+		94EBFA6A2B56C4BC006F0493 /* ArtServiceTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtServiceTarget.swift; sourceTree = "<group>"; };
+		94EBFA6C2B56C7FD006F0493 /* InfraServiceModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfraServiceModule.swift; sourceTree = "<group>"; };
+		94EBFA6F2B56D41F006F0493 /* RemoteArtListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArtListModels.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				940F4F6A2B56345E006A9AC7 /* ArtList */,
+				940F4F762B56A1BA006A9AC7 /* Service */,
 			);
 			path = ArtApp;
 			sourceTree = "<group>";
@@ -79,7 +94,8 @@
 		940F4F5E2B563229006A9AC7 /* ArtAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				940F4F5F2B563229006A9AC7 /* ArtAppTests.swift */,
+				940F4F7F2B56A38B006A9AC7 /* Sources */,
+				940F4F7D2B56A37C006A9AC7 /* Tests */,
 			);
 			path = ArtAppTests;
 			sourceTree = "<group>";
@@ -89,8 +105,61 @@
 			children = (
 				940F4F682B56326A006A9AC7 /* ArtList.swift */,
 				940F4F722B5696D5006A9AC7 /* ArtListModel.swift */,
+				94EBFA712B56D45C006F0493 /* RemoteArtList */,
 			);
 			path = ArtList;
+			sourceTree = "<group>";
+		};
+		940F4F762B56A1BA006A9AC7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				94EBFA682B56C4AC006F0493 /* ArtService.swift */,
+				94EBFA6A2B56C4BC006F0493 /* ArtServiceTarget.swift */,
+				940F4F7B2B56A208006A9AC7 /* HTTPError.swift */,
+				94EBFA6E2B56CDC9006F0493 /* Infra */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		940F4F7D2B56A37C006A9AC7 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				940F4F7E2B56A386006A9AC7 /* ArtList */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		940F4F7E2B56A386006A9AC7 /* ArtList */ = {
+			isa = PBXGroup;
+			children = (
+				940F4F5F2B563229006A9AC7 /* RemoteArtListUseCaseTests.swift */,
+			);
+			path = ArtList;
+			sourceTree = "<group>";
+		};
+		940F4F7F2B56A38B006A9AC7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				940F4F802B56A398006A9AC7 /* RemoteArtListServiceSpy.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		94EBFA6E2B56CDC9006F0493 /* Infra */ = {
+			isa = PBXGroup;
+			children = (
+				94EBFA6C2B56C7FD006F0493 /* InfraServiceModule.swift */,
+			);
+			path = Infra;
+			sourceTree = "<group>";
+		};
+		94EBFA712B56D45C006F0493 /* RemoteArtList */ = {
+			isa = PBXGroup;
+			children = (
+				940F4F772B56A1D1006A9AC7 /* RemoteArtListUseCase.swift */,
+				94EBFA6F2B56D41F006F0493 /* RemoteArtListModels.swift */,
+			);
+			path = RemoteArtList;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,8 +271,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				940F4F782B56A1D1006A9AC7 /* RemoteArtListUseCase.swift in Sources */,
+				94EBFA692B56C4AC006F0493 /* ArtService.swift in Sources */,
+				94EBFA6D2B56C7FD006F0493 /* InfraServiceModule.swift in Sources */,
+				94EBFA6B2B56C4BC006F0493 /* ArtServiceTarget.swift in Sources */,
 				940F4F692B56326A006A9AC7 /* ArtList.swift in Sources */,
+				940F4F7C2B56A208006A9AC7 /* HTTPError.swift in Sources */,
 				940F4F732B5696D5006A9AC7 /* ArtListModel.swift in Sources */,
+				94EBFA702B56D41F006F0493 /* RemoteArtListModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,7 +286,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				940F4F602B563229006A9AC7 /* ArtAppTests.swift in Sources */,
+				940F4F812B56A398006A9AC7 /* RemoteArtListServiceSpy.swift in Sources */,
+				940F4F602B563229006A9AC7 /* RemoteArtListUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
