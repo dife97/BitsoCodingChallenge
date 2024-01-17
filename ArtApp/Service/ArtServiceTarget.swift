@@ -2,6 +2,7 @@ import ArtNetwork
 
 public enum ArtServiceTarget {
     case getArtList(ArtListRequestModel)
+    case getImage(ArtImageRequestModel)
 }
 
 extension ArtServiceTarget: ServiceTarget {
@@ -9,6 +10,8 @@ extension ArtServiceTarget: ServiceTarget {
         switch self {
         case .getArtList:
             return .artAPI
+        case .getImage:
+            return .iiifImageAPI
         }
     }
 
@@ -20,6 +23,8 @@ extension ArtServiceTarget: ServiceTarget {
         switch self {
         case .getArtList:
             return "artworks"
+        case .getImage(let requestModel):
+            return "\(requestModel.imagedId)/full/843,/0/default.jpg"
         }
     }
 
@@ -34,6 +39,8 @@ extension ArtServiceTarget: ServiceTarget {
         switch self {
         case .getArtList(let artListRequestModel):
             return getArtListParameters(from: artListRequestModel)
+        case .getImage:
+            return nil
         }
     }
 }

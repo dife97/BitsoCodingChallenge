@@ -1,5 +1,3 @@
-import ArtNetwork
-
 public protocol ArtListServiceProtocol {
     func getArtList(
         requestModel: ArtListRequestModel,

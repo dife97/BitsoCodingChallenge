@@ -9,20 +9,20 @@ public struct ArtListModel {
 public typealias ArtList = [ArtModel]
 
 public struct ArtModel {
-    public let id: Int
+    public let artId: Int
     public let imageId: String?
     public let title: String
     public let year: Int
     public let author: String?
 
     public init(
-        id: Int,
+        artId: Int,
         imageId: String?,
         title: String,
         year: Int,
         author: String?
     ) {
-        self.id = id
+        self.artId = artId
         self.imageId = imageId
         self.title = title
         self.year = year

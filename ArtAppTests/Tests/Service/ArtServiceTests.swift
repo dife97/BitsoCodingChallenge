@@ -111,7 +111,7 @@ final class ArtServiceTests: XCTestCase {
                 offset: 0
             ),
             data: [
-                .init(id: "any", imageId: "any", title: "any", year: "any", author: "any")
+                .init(artId: 123, imageId: "any", title: "any", year: 123, author: "any")
             ]
         )
         let exp = expectation(description: "Wait for provider request")

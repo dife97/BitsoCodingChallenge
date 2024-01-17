@@ -45,27 +45,28 @@ public struct PaginationModel: EquatableModel {
 }
 
 public struct ArtListData: EquatableModel {
-    public let id: Int
+    public let artId: Int
     public let imageId: String?
     public let title: String
     public let year: Int
     public let author: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, title
+        case artId = "id"
         case imageId = "image_id"
+        case title
         case year = "date_start"
         case author = "artist_title"
     }
 
     public init(
-        id: Int,
+        artId: Int,
         imageId: String?,
         title: String,
         year: Int,
         author: String?
     ) {
-        self.id = id
+        self.artId = artId
         self.imageId = imageId
         self.title = title
         self.year = year

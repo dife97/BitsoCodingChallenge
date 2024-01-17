@@ -41,3 +41,13 @@ extension ArtService: ArtListServiceProtocol {
         }
     }
 }
+
+// MARK: - Get Image
+extension ArtService: GetImageServiceProtocol {
+    public func getImage(
+        requestModel: ArtImageRequestModel,
+        _ completion: @escaping (RemoteGetImageResult) -> Void
+    ) {
+
+    }
+}

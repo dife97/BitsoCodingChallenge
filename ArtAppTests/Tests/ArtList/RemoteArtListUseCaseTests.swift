@@ -93,17 +93,17 @@ final class RemoteArtListUseCaseTests: XCTestCase {
         let expectedArtListResponse: ArtListResponseModel = .init(
             pagination: .init(currentPage: 2, offset: 0),
             data: [
-                .init(id: "anyId", imageId: "anyImageId", title: "anyTitle", year: "anyYear", author: "anyAuthor")
+                .init(artId: 123, imageId: "anyImageId", title: "anyTitle", year: 2000, author: "anyAuthor")
             ]
         )
         let expectedArtListModel: ArtListModel = .init(artList: [
-            .init(id: "anyId", imageId: "anyImageId", title: "anyTitle", year: "anyYear", author: "anyAuthor")
+            .init(artId: 123, imageId: "anyImageId", title: "anyTitle", year: 2000, author: "anyAuthor")
         ])
 
         sut.execute { result in
             switch result {
             case .success(let data):
-                XCTAssertTrue(data.artList.first?.id == expectedArtListModel.artList.first?.id)
+                XCTAssertTrue(data.artList.first?.artId == expectedArtListModel.artList.first?.artId)
 
             case .failure:
                 XCTFail("Expected artList but received \(result) instead.")

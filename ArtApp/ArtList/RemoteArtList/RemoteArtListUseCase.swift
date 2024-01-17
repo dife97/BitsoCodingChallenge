@@ -6,9 +6,10 @@ public final class RemoteArtListUseCase: ArtListProtocol {
     private var currentPage = 1
     private let limit = 10
 
-    // MARK: - Initializer
+    // MARK: - Dependency
     private let service: ArtListServiceProtocol
 
+    // MARK: - Initializer
     public init(service: ArtListServiceProtocol) {
         self.service = service
     }
@@ -60,7 +61,7 @@ extension RemoteArtListUseCase {
     private func getArtListModel(from reponseData: [ArtListData]) -> ArtListModel {
         .init(artList: reponseData.map({
             .init(
-                id: $0.id,
+                artId: $0.artId,
                 imageId: $0.imageId,
                 title: $0.title,
                 year: $0.year,
