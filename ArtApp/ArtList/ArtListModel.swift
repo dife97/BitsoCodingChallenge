@@ -10,14 +10,14 @@ public typealias ArtList = [ArtModel]
 
 public struct ArtModel {
     public let id: Int
-    public let imageId: String
+    public let imageId: String?
     public let title: String
     public let year: Int
     public let author: String?
 
     public init(
         id: Int,
-        imageId: String,
+        imageId: String?,
         title: String,
         year: Int,
         author: String?
