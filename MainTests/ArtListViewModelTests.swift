@@ -1,6 +1,6 @@
 import XCTest
 import Main
 
-final class MainTests: XCTestCase {
+final class ArtListViewModelTests: XCTestCase {
     func test_() {}
 }

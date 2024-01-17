@@ -1,4 +1,6 @@
 import UIKit
+import ArtNetwork
+import ArtApp
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -8,9 +10,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions
     ) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+        guard let windowScene = scene as? UIWindowScene else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = ViewController()
+        window?.rootViewController = getTemporaryViewController()
         window?.makeKeyAndVisible()
+    }
+
+    private func getTemporaryViewController() -> UIViewController {
+        let urlSessionHTTPProvider = URLSessionHTTPProvider()
+        let artService = ArtService(provider: urlSessionHTTPProvider)
+        let remoteArtListUseCase = RemoteArtListUseCase(service: artService)
+        let viewModel = ArtListViewModel(artListUseCase: remoteArtListUseCase)
+        let viewController = ArtListViewController(viewModel: viewModel)
+        return viewController
     }
 }

@@ -1,4 +1,4 @@
-protocol ArtListProtocol {
+public protocol ArtListProtocol {
     func execute(_ completion: @escaping (ArtListResult) -> Void)
 }
 

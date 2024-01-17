@@ -9,18 +9,18 @@ public struct ArtListModel {
 public typealias ArtList = [ArtModel]
 
 public struct ArtModel {
-    public let id: String
+    public let id: Int
     public let imageId: String
     public let title: String
-    public let year: String
-    public let author: String
+    public let year: Int
+    public let author: String?
 
     public init(
-        id: String,
+        id: Int,
         imageId: String,
         title: String,
-        year: String,
-        author: String
+        year: Int,
+        author: String?
     ) {
         self.id = id
         self.imageId = imageId

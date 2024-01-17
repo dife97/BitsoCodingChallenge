@@ -7,7 +7,7 @@ public enum ArtServiceTarget {
 extension ArtServiceTarget: ServiceTarget {
     public var server: ArtAPIServer {
         switch self {
-        case .getArtList(let artListRequestModel):
+        case .getArtList:
             return .artAPI
         }
     }
@@ -50,7 +50,7 @@ extension ArtServiceTarget {
                 "title",
                 "date_start",
                 "artist_title"
-            ]
+            ].joined(separator: ",")
         ]
     }
 }

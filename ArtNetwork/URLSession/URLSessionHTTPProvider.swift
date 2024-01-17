@@ -3,7 +3,7 @@ import Foundation
 public final class URLSessionHTTPProvider: HTTPProvider {
     private let session: URLSession
 
-    public init(session: URLSession) {
+    public init(session: URLSession = .shared) {
         self.session = session
     }
 

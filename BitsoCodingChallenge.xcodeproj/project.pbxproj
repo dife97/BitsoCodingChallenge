@@ -19,10 +19,15 @@
 		946B78742B573F6F00F6DC91 /* URLBaseStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B78732B573F6F00F6DC91 /* URLBaseStrings.swift */; };
 		946B787C2B57507700F6DC91 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B787B2B57507700F6DC91 /* AppDelegate.swift */; };
 		946B787E2B57507700F6DC91 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B787D2B57507700F6DC91 /* SceneDelegate.swift */; };
-		946B78802B57507700F6DC91 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B787F2B57507700F6DC91 /* ViewController.swift */; };
+		946B78802B57507700F6DC91 /* ArtListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B787F2B57507700F6DC91 /* ArtListViewController.swift */; };
 		946B78852B57507900F6DC91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946B78842B57507900F6DC91 /* Assets.xcassets */; };
 		946B78882B57507900F6DC91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 946B78862B57507900F6DC91 /* LaunchScreen.storyboard */; };
-		946B78932B57507900F6DC91 /* MainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B78922B57507900F6DC91 /* MainTests.swift */; };
+		946B78932B57507900F6DC91 /* ArtListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B78922B57507900F6DC91 /* ArtListViewModelTests.swift */; };
+		94731E142B57578600FDAD2D /* ArtApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940F4F532B563229006A9AC7 /* ArtApp.framework */; };
+		94731E152B57578600FDAD2D /* ArtApp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 940F4F532B563229006A9AC7 /* ArtApp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		94731E182B57578600FDAD2D /* ArtNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94561D072B56F7E200DD43CC /* ArtNetwork.framework */; };
+		94731E192B57578600FDAD2D /* ArtNetwork.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 94561D072B56F7E200DD43CC /* ArtNetwork.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		94731E1E2B57594A00FDAD2D /* ArtListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94731E1D2B57594A00FDAD2D /* ArtListViewModel.swift */; };
 		94DF17652B56F83B008EB27F /* HTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17642B56F83B008EB27F /* HTTPProvider.swift */; };
 		94DF17672B56F871008EB27F /* ServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17662B56F871008EB27F /* ServiceTarget.swift */; };
 		94DF176A2B56F8CC008EB27F /* URLSessionHTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17692B56F8CC008EB27F /* URLSessionHTTPProvider.swift */; };
@@ -61,6 +66,20 @@
 			remoteGlobalIDString = 946B78782B57507700F6DC91;
 			remoteInfo = Main;
 		};
+		94731E162B57578600FDAD2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 940F4F3B2B56320F006A9AC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 940F4F522B563229006A9AC7;
+			remoteInfo = ArtApp;
+		};
+		94731E1A2B57578600FDAD2D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 940F4F3B2B56320F006A9AC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 94561D062B56F7E200DD43CC;
+			remoteInfo = ArtNetwork;
+		};
 		94DF176E2B56F9F1008EB27F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 940F4F3B2B56320F006A9AC7 /* Project object */;
@@ -71,6 +90,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		94731E1C2B57578600FDAD2D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				94731E152B57578600FDAD2D /* ArtApp.framework in Embed Frameworks */,
+				94731E192B57578600FDAD2D /* ArtNetwork.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		94DF17702B56F9F1008EB27F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -100,12 +131,13 @@
 		946B78792B57507700F6DC91 /* Main.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Main.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		946B787B2B57507700F6DC91 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		946B787D2B57507700F6DC91 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		946B787F2B57507700F6DC91 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		946B787F2B57507700F6DC91 /* ArtListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewController.swift; sourceTree = "<group>"; };
 		946B78842B57507900F6DC91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		946B78872B57507900F6DC91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		946B78892B57507900F6DC91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946B788E2B57507900F6DC91 /* MainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		946B78922B57507900F6DC91 /* MainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTests.swift; sourceTree = "<group>"; };
+		946B78922B57507900F6DC91 /* ArtListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewModelTests.swift; sourceTree = "<group>"; };
+		94731E1D2B57594A00FDAD2D /* ArtListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewModel.swift; sourceTree = "<group>"; };
 		94DF17642B56F83B008EB27F /* HTTPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPProvider.swift; sourceTree = "<group>"; };
 		94DF17662B56F871008EB27F /* ServiceTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceTarget.swift; sourceTree = "<group>"; };
 		94DF17692B56F8CC008EB27F /* URLSessionHTTPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPProvider.swift; sourceTree = "<group>"; };
@@ -156,6 +188,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94731E142B57578600FDAD2D /* ArtApp.framework in Frameworks */,
+				94731E182B57578600FDAD2D /* ArtNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +319,8 @@
 			children = (
 				946B787B2B57507700F6DC91 /* AppDelegate.swift */,
 				946B787D2B57507700F6DC91 /* SceneDelegate.swift */,
-				946B787F2B57507700F6DC91 /* ViewController.swift */,
+				946B787F2B57507700F6DC91 /* ArtListViewController.swift */,
+				94731E1D2B57594A00FDAD2D /* ArtListViewModel.swift */,
 				946B78842B57507900F6DC91 /* Assets.xcassets */,
 				946B78862B57507900F6DC91 /* LaunchScreen.storyboard */,
 				946B78892B57507900F6DC91 /* Info.plist */,
@@ -296,7 +331,7 @@
 		946B78912B57507900F6DC91 /* MainTests */ = {
 			isa = PBXGroup;
 			children = (
-				946B78922B57507900F6DC91 /* MainTests.swift */,
+				946B78922B57507900F6DC91 /* ArtListViewModelTests.swift */,
 			);
 			path = MainTests;
 			sourceTree = "<group>";
@@ -453,10 +488,13 @@
 				946B78752B57507700F6DC91 /* Sources */,
 				946B78762B57507700F6DC91 /* Frameworks */,
 				946B78772B57507700F6DC91 /* Resources */,
+				94731E1C2B57578600FDAD2D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				94731E172B57578600FDAD2D /* PBXTargetDependency */,
+				94731E1B2B57578600FDAD2D /* PBXTargetDependency */,
 			);
 			name = Main;
 			productName = Main;
@@ -637,7 +675,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				946B78802B57507700F6DC91 /* ViewController.swift in Sources */,
+				94731E1E2B57594A00FDAD2D /* ArtListViewModel.swift in Sources */,
+				946B78802B57507700F6DC91 /* ArtListViewController.swift in Sources */,
 				946B787C2B57507700F6DC91 /* AppDelegate.swift in Sources */,
 				946B787E2B57507700F6DC91 /* SceneDelegate.swift in Sources */,
 			);
@@ -647,7 +686,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				946B78932B57507900F6DC91 /* MainTests.swift in Sources */,
+				946B78932B57507900F6DC91 /* ArtListViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -668,6 +707,16 @@
 			isa = PBXTargetDependency;
 			target = 946B78782B57507700F6DC91 /* Main */;
 			targetProxy = 946B788F2B57507900F6DC91 /* PBXContainerItemProxy */;
+		};
+		94731E172B57578600FDAD2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 940F4F522B563229006A9AC7 /* ArtApp */;
+			targetProxy = 94731E162B57578600FDAD2D /* PBXContainerItemProxy */;
+		};
+		94731E1B2B57578600FDAD2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 94561D062B56F7E200DD43CC /* ArtNetwork */;
+			targetProxy = 94731E1A2B57578600FDAD2D /* PBXContainerItemProxy */;
 		};
 		94DF176F2B56F9F1008EB27F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -741,7 +790,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -801,7 +850,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -842,9 +891,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -877,8 +929,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -947,9 +1002,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -982,8 +1040,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1033,11 +1094,14 @@
 				DEVELOPMENT_TEAM = P2VHV5YCL6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Main/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Art App";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1045,9 +1109,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = diegoferreira.Main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1061,11 +1129,14 @@
 				DEVELOPMENT_TEAM = P2VHV5YCL6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Main/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Art App";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1073,9 +1144,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = diegoferreira.Main;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
