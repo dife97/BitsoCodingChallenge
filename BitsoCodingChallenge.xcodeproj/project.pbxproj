@@ -259,8 +259,8 @@
 		940F4F542B563229006A9AC7 /* ArtApp */ = {
 			isa = PBXGroup;
 			children = (
-				94731E202B576EBE00FDAD2D /* GetArtImage */,
 				940F4F6A2B56345E006A9AC7 /* ArtList */,
+				94731E202B576EBE00FDAD2D /* GetArtImage */,
 				940F4F762B56A1BA006A9AC7 /* Service */,
 				94DF17802B57229B008EB27F /* Helpers */,
 			);

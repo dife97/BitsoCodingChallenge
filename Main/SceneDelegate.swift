@@ -20,8 +20,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let urlSessionHTTPProvider = URLSessionHTTPProvider()
         let artService = ArtService(provider: urlSessionHTTPProvider)
         let remoteArtListUseCase = RemoteArtListUseCase(service: artService)
-        let viewModel = ArtListViewModel(artListUseCase: remoteArtListUseCase)
+        let getImageUseCase = RemoteGetArtImagesUseCase(service: artService)
+        let viewModel = ArtListViewModel(
+            artListUseCase: remoteArtListUseCase,
+            getImageUseCase: getImageUseCase
+        )
         let viewController = ArtListViewController(viewModel: viewModel)
+        viewModel.delegate = viewController
         return viewController
     }
 }

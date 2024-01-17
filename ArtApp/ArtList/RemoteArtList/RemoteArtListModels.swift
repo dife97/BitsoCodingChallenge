@@ -48,7 +48,7 @@ public struct ArtListData: EquatableModel {
     public let artId: Int
     public let imageId: String?
     public let title: String
-    public let year: Int
+    public let year: Int?
     public let author: String?
 
     enum CodingKeys: String, CodingKey {
@@ -63,7 +63,7 @@ public struct ArtListData: EquatableModel {
         artId: Int,
         imageId: String?,
         title: String,
-        year: Int,
+        year: Int?,
         author: String?
     ) {
         self.artId = artId

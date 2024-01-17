@@ -1,4 +1,4 @@
-protocol GetArtImagesProtocol {
+public protocol GetArtImagesProtocol {
     func execute(
         with images: GetArtImagesRequestModel,
         _ completion: @escaping (GetArtImagesResult) -> Void
