@@ -166,7 +166,7 @@ final class RemoteGetArtImagesUseCaseTests: XCTestCase {
             }
             exp.fulfill()
         }
-        serviceSpy.complete(with: .failure(.dataParsing))
+        serviceSpy.complete(with: .failure(.emptyData))
         wait(for: [exp], timeout: 1)
     }
 
@@ -189,7 +189,7 @@ final class RemoteGetArtImagesUseCaseTests: XCTestCase {
             }
             exp.fulfill()
         }
-        serviceSpy.complete(with: .success(.init(imageData: Data())))
+        serviceSpy.complete(with: .success(.init(imageData: makeEmptyData())))
         wait(for: [exp], timeout: 1)
     }
 
@@ -213,7 +213,7 @@ final class RemoteGetArtImagesUseCaseTests: XCTestCase {
             }
             exp.fulfill()
         }
-        serviceSpy.complete(with: .success(.init(imageData: Data("valid imageData".utf8))))
+        serviceSpy.complete(with: .success(.init(imageData: makeValidData())))
         wait(for: [exp], timeout: 1)
     }
 

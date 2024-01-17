@@ -24,7 +24,7 @@ public final class RemoteGetArtImagesUseCase: GetArtImagesProtocol {
 
             let artImageRequestModel: ArtImageRequestModel = .init(imagedId: imageId)
 
-            service.getImage(requestModel: artImageRequestModel) { [weak self] result in
+            service.getArtImage(requestModel: artImageRequestModel) { [weak self] result in
                 guard let self else { return }
 
                 switch result {
@@ -58,7 +58,7 @@ extension RemoteGetArtImagesUseCase {
         switch serviceError {
         case .connection:
             return .connection
-        case .dataParsing, .undefined:
+        case .emptyData, .undefined:
             return .undefined
         }
     }

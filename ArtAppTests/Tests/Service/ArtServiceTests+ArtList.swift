@@ -11,9 +11,14 @@ final class ArtServiceTests: XCTestCase {
 
         sut.getArtList(requestModel: requestModel) { _ in }
 
+        XCTAssertEqual(providerSpy.receivedTarget?.server, getArtListTarget.server)
         XCTAssertEqual(providerSpy.receivedTarget?.method, getArtListTarget.method)
         XCTAssertEqual(providerSpy.receivedTarget?.path, getArtListTarget.path)
         XCTAssertEqual(providerSpy.receivedTarget?.headers, getArtListTarget.headers)
+        XCTAssertTrue(isDictionary(
+                providerSpy.receivedTarget?.parameters,
+                equalTo: getArtListTarget.parameters
+        ))
     }
 
     func test_getArtList_deliversUndefinedError_whenProviderCompletesWithInvalidURL() {
@@ -46,7 +51,7 @@ final class ArtServiceTests: XCTestCase {
         sut.getArtList(requestModel: requestModel) { result in
             switch result {
             case .success:
-                XCTFail("Expected invalidURL error but received \(result) instead")
+                XCTFail("Expected undefined error but received \(result) instead")
 
             case .failure(let error):
                 XCTAssertEqual(error, .undefined)
@@ -67,7 +72,7 @@ final class ArtServiceTests: XCTestCase {
         sut.getArtList(requestModel: requestModel) { result in
             switch result {
             case .success:
-                XCTFail("Expected invalidURL error but received \(result) instead")
+                XCTFail("Expected undefined error but received \(result) instead")
 
             case .failure(let error):
                 XCTAssertEqual(error, .undefined)
@@ -89,7 +94,7 @@ final class ArtServiceTests: XCTestCase {
         sut.getArtList(requestModel: requestModel) { result in
             switch result {
             case .success:
-                XCTFail("Expected invalidURL error but received \(result) instead")
+                XCTFail("Expected dataParsing error but received \(result) instead")
 
             case .failure(let error):
                 XCTAssertEqual(error, .dataParsing)

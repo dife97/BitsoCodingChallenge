@@ -1,5 +1,5 @@
 public protocol GetImageServiceProtocol {
-    func getImage(
+    func getArtImage(
         requestModel: ArtImageRequestModel,
         _ completion: @escaping (RemoteGetImageResult) -> Void
     )

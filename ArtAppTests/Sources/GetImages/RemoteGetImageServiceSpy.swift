@@ -4,7 +4,7 @@ final class RemoteGetImageServiceSpy: GetImageServiceProtocol {
     private(set) var receivedImageRequestModels: [ArtImageRequestModel] = []
     private var receivedCompletions: [(RemoteGetImageResult) -> Void] = []
 
-    func getImage(
+    func getArtImage(
         requestModel: ArtImageRequestModel,
         _ completion: @escaping (RemoteGetImageResult) -> Void
     ) {

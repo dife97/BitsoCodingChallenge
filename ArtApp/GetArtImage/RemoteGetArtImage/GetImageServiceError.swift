@@ -1,5 +1,5 @@
 public enum GetImageServiceError: Error {
     case connection
-    case dataParsing
+    case emptyData
     case undefined
 }
