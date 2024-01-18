@@ -2,7 +2,7 @@
 
 final class ArtListViewModelSpy: ArtListViewModelProtocol {
     private(set) var fetchArtListCalled: [Bool] = []
-    func fetchArtList() {
+    func fetchArtList(isPrefetch: Bool) {
         fetchArtListCalled.append(true)
     }
 }

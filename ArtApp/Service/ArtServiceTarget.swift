@@ -2,7 +2,7 @@ import ArtNetwork
 
 public enum ArtServiceTarget {
     case getArtList(ArtListRequestModel)
-    case getImage(ArtImageRequestModel)
+    case getArtImage(ArtImageRequestModel)
 }
 
 extension ArtServiceTarget: ServiceTarget {
@@ -10,7 +10,7 @@ extension ArtServiceTarget: ServiceTarget {
         switch self {
         case .getArtList:
             return .artAPI
-        case .getImage:
+        case .getArtImage:
             return .iiifImageAPI
         }
     }
@@ -23,8 +23,8 @@ extension ArtServiceTarget: ServiceTarget {
         switch self {
         case .getArtList:
             return "artworks"
-        case .getImage(let requestModel):
-            return "\(requestModel.imagedId)/full/843,/0/default.jpg"
+        case .getArtImage(let requestModel):
+            return "\(requestModel.imagedId)/full/200,/0/default.jpg" // TODO: Document why using 200 (time and avoid images that does not have this full
         }
     }
 
@@ -39,7 +39,7 @@ extension ArtServiceTarget: ServiceTarget {
         switch self {
         case .getArtList(let artListRequestModel):
             return getArtListParameters(from: artListRequestModel)
-        case .getImage:
+        case .getArtImage:
             return nil
         }
     }

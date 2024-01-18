@@ -17,15 +17,14 @@ final class ArtListViewController: UIViewController {
 
     // MARK: - Life Cycles
     override func loadView() {
-        view = ArtsListView()
+        view = ArtsListView(delegate: self)
         artsListView = view as? ArtListViewProtocol
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         artsListView?.setLoadingState(to: true)
-
-        viewModel.fetchArtList()
+        viewModel.fetchArtList(isPrefetch: false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,14 +41,25 @@ extension ArtListViewController {
     }
 }
 
-// MARK: - View Delegate
+// MARK: - Display Logic
 extension ArtListViewController: ArtListViewModelDelegate {
     func displayArtsList(with artItems: [ArtItemView]) {
         artsListView?.setLoadingState(to: false) // TODO: Add tests
         artsListView?.loadArtsList(with: artItems)
     }
 
+    func displayPrefetchedArtsList(with prefetchedArtItems: [ArtItemView]) {
+        artsListView?.loadArtsList(with: prefetchedArtItems)
+    }
+
     func updateArtImage(with artImage: ArtImageModel) {
         artsListView?.updateArtImage(with: artImage)
+    }
+}
+
+// MARK: - View Delegate
+extension ArtListViewController: ArtsListViewDelegate {
+    func prefetch() {
+        viewModel.fetchArtList(isPrefetch: true)
     }
 }

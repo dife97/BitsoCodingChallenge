@@ -1,13 +1,14 @@
 import Foundation
 import ArtApp
-import UIKit //
+import UIKit
 
 protocol ArtListViewModelProtocol {
-    func fetchArtList()
+    func fetchArtList(isPrefetch: Bool)
 }
 
 protocol ArtListViewModelDelegate: AnyObject {
     func displayArtsList(with artItems: [ArtItemView])
+    func displayPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
     func updateArtImage(with artImage: ArtImageModel)
 }
 
@@ -27,13 +28,13 @@ final class ArtListViewModel: ArtListViewModelProtocol {
     }
 
     // MARK: - Public Methods
-    func fetchArtList() {
+    func fetchArtList(isPrefetch: Bool) {
         artListUseCase.execute { [weak self] result in
             guard let self else { return }
 
             switch result {
             case .success(let data):
-                DispatchQueue.main.sync { [delegate] in // TODO: Decorate Dispatch
+                DispatchQueue.main.async { [delegate] in // TODO: Decorate Dispatch
                     var artItems: [ArtItemView] = []
 
                     data.artList.forEach {
@@ -45,7 +46,12 @@ final class ArtListViewModel: ArtListViewModelProtocol {
                         )))
                     }
 
-                    delegate?.displayArtsList(with: artItems)
+                    // TODO: Improve this isPrefetch approach. Break into two different methods and then encapsulate the artListUseCase.execute invocation
+                    if isPrefetch {
+                        delegate?.displayPrefetchedArtsList(with: artItems)
+                    } else {
+                        delegate?.displayArtsList(with: artItems)
+                    }
                 }
 
                 getImages(from: data.artList)
@@ -67,7 +73,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
         }
 
         getImageUseCase.execute(with: imagesRequestModel) { result in
-            DispatchQueue.main.sync { [weak self] in // TODO: Decorate Dispatch
+            DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
                 guard let self else { return }
 
                 switch result {
@@ -80,9 +86,8 @@ final class ArtListViewModel: ArtListViewModelProtocol {
                 case .failure(let error):
                     delegate?.updateArtImage(with: .init(
                         artId: error.artId,
-                        image: UIImage(systemName: "xmark.seal.fill")?.pngData() ?? Data()
+                        image: UIImage(systemName: "xmark.seal.fill")?.pngData() ?? Data() // TODO: Refactor so ViewModel does not import UIKit
                     ))
-                    print("erro \(error.type)")
                 }
             }
         }

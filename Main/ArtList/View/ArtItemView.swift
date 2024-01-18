@@ -50,7 +50,7 @@ final class ArtItemView: UIView {
     private lazy var artInfoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 2
         label.font = .systemFont(ofSize: 16, weight: .bold) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
@@ -61,8 +61,9 @@ final class ArtItemView: UIView {
     private lazy var authorLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14, weight: .medium) // TODO: Move to metrics
+        label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
         label.text = artItemModel.author
         return label
@@ -79,8 +80,7 @@ final class ArtItemView: UIView {
         NSLayoutConstraint.activate([
             contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            contentStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
+            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
         ])
     }
 
@@ -99,5 +99,5 @@ final class ArtItemView: UIView {
 
 extension ArtItemView: ArtItemViewFactory {
     func makeArtItemView() -> UIView { self }
-    func getCellHeight() -> CGFloat { 235 }
+    func getCellHeight() -> CGFloat { 250 }
 }

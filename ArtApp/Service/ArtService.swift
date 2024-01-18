@@ -48,9 +48,9 @@ extension ArtService: GetImageServiceProtocol {
         requestModel: ArtImageRequestModel,
         _ completion: @escaping (RemoteGetImageResult) -> Void
     ) {
-        let getArtListTarget: ArtServiceTarget = .getImage(requestModel)
+        let getArtImageTarget: ArtServiceTarget = .getArtImage(requestModel)
 
-        provider.request(target: getArtListTarget) { [weak self] result in
+        provider.request(target: getArtImageTarget) { [weak self] result in
             guard let self else { return }
             switch result {
             case .success(let data):

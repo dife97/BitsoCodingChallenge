@@ -6,9 +6,14 @@ protocol ArtListViewProtocol {
     func updateArtImage(with artImage: ArtImageModel)
 }
 
+protocol ArtsListViewDelegate: AnyObject {
+    func prefetch()
+}
+
 final class ArtsListView: UIView {
     // MARK: - Properties
     private var artsList: [ArtItemView] = []
+    private weak var delegate: ArtsListViewDelegate?
 
     // MARK: - UI
     private lazy var artsListTableView: UITableView = {
@@ -19,6 +24,7 @@ final class ArtsListView: UIView {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        tableView.tableFooterView = artsListTableFooterView
         tableView.register(
             ArtItemTableViewCell.self,
             forCellReuseIdentifier: ArtItemTableViewCell.identifier
@@ -26,8 +32,18 @@ final class ArtsListView: UIView {
         return tableView
     }()
 
+    private lazy var artsListTableFooterView: UIView = {
+        let view = UIView(frame: CGRect(
+            x: 0, y: 0,
+            width: UIScreen.main.bounds.size.width,
+            height: 60) // TODO: Move to metrics
+        )
+        return view
+    }()
+
     // MARK: - Initializers
-    init() {
+    init(delegate: ArtsListViewDelegate) {
+        self.delegate = delegate
         super.init(frame: .zero)
         setupView()
     }
@@ -70,7 +86,8 @@ extension ArtsListView: ArtListViewProtocol {
     }
 
     func loadArtsList(with artsList: [ArtItemView]) {
-        self.artsList = artsList
+        self.artsList.append(contentsOf: artsList)
+        artsListTableFooterView.stopLoading()
         artsListTableView.reloadData()
     }
 
@@ -91,8 +108,25 @@ extension ArtsListView: ArtListViewProtocol {
 
 // MARK: - TableView Delegate
 extension ArtsListView: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         artsList[indexPath.row].getCellHeight()
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        willDisplay cell: UITableViewCell,
+        forRowAt indexPath: IndexPath
+    ) {
+        let itemPerPage = 10 // TODO: get from model
+        let firstPageItem = artsList.count - itemPerPage
+
+        if indexPath.row == firstPageItem {
+            artsListTableFooterView.startLoading()
+            delegate?.prefetch()
+        }
     }
 }
 

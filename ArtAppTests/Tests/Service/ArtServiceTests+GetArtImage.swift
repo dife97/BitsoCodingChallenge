@@ -5,7 +5,7 @@ extension ArtServiceTests {
     func test_getImage_sendCorrectTarget() {
         let (sut, providerSpy) = buildSUT()
         let imageRequestModel: ArtImageRequestModel = .init(imagedId: "anyId")
-        let getArtListTarget: ArtServiceTarget = .getImage(imageRequestModel)
+        let getArtListTarget: ArtServiceTarget = .getArtImage(imageRequestModel)
 
         sut.getArtImage(requestModel: imageRequestModel) { _ in }
 
