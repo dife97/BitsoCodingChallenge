@@ -6,7 +6,7 @@ protocol ArtListViewModelProtocol {
 }
 
 protocol ArtListViewModelDelegate: AnyObject {
-    func updateImage(with imageData: Data)
+    func displayArtsList(with artItems: ArtItemViews)
 }
 
 final class ArtListViewModel: ArtListViewModelProtocol {
@@ -26,19 +26,13 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 
     // MARK: - Public Methods
     func fetchArtList() {
-        print("Will Fetch")
-        artListUseCase.execute { result in
-            switch result {
-            case .success(let data):
-                print("SUCCESS: 😎")
-
-                let imageToGet = data.artList.first
-                self.temporaryGetImage(from: imageToGet)
-
-            case .failure(let error):
-                print("FAILURE: ❌")
-                print("\(error)")
-            }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [unowned self] in
+            let artItems: ArtItemViews = [
+                ArtItemView(model: .init(title: "Title", year: "2009", author: "Diego Ferreira")),
+                ArtItemView(model: .init(title: "Title Title", year: "2009", author: "Diego Ferreira")),
+                ArtItemView(model: .init(title: "Title Title Title Title Title Title", year: "2009", author: "Diego Ferreira")),
+            ]
+            delegate?.displayArtsList(with: artItems)
         }
     }
 
@@ -50,9 +44,8 @@ final class ArtListViewModel: ArtListViewModelProtocol {
         ]
         getImageUseCase.execute(with: imagesRequestModel) { result in
             switch result {
-            case .success(let data):
+            case .success(_):
                 print("SUCCESS: 😎")
-                self.delegate?.updateImage(with: data.imageData)
 
             case .failure(let error):
                 print("FAILURE: ❌")
