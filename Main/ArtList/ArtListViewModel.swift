@@ -3,12 +3,15 @@ import ArtApp
 import UIKit
 
 protocol ArtListViewModelProtocol {
-    func fetchArtList(isPrefetch: Bool)
+    func fetchArtList()
+    func prefetchNextPage()
+    func refreshArtsList()
 }
 
 protocol ArtListViewModelDelegate: AnyObject {
     func displayArtsList(with artItems: [ArtItemView])
     func displayPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
+    func refreshArtsList(with refreshedArtItems: [ArtItemView])
     func updateArtImage(with artImage: ArtImageModel)
 }
 
@@ -28,15 +31,54 @@ final class ArtListViewModel: ArtListViewModelProtocol {
     }
 
     // MARK: - Public Methods
-    func fetchArtList(isPrefetch: Bool) {
-        artListUseCase.execute { [weak self] result in
-            guard let self else { return }
-
+    func fetchArtList() {
+        getArtsList { [delegate] result in
             switch result {
-            case .success(let data):
-                DispatchQueue.main.async { [delegate] in // TODO: Decorate Dispatch
-                    var artItems: [ArtItemView] = []
+            case .success(let artItems):
+                delegate?.displayArtsList(with: artItems)
 
+            case .failure(let error):
+                print("\(error)")
+            }
+        }
+    }
+
+    func prefetchNextPage() {
+        getArtsList { [delegate] result in
+            switch result {
+            case .success(let artItems):
+                delegate?.displayPrefetchedArtsList(with: artItems)
+
+            case .failure(let error):
+                print("\(error)")
+            }
+        }
+    }
+
+    func refreshArtsList() {
+        getArtsList(isRefreshing: true) { [delegate] result in
+            switch result {
+            case .success(let artItems):
+                delegate?.refreshArtsList(with: artItems)
+
+            case .failure(let error):
+                print("\(error)")
+            }
+        }
+    }
+
+    // MARK: - Private Methods
+    private func getArtsList(
+        isRefreshing: Bool = false,
+        _ completion: @escaping (Result<[ArtItemView], ArtListError>) -> Void
+    ) {
+        artListUseCase.execute(isRefreshing: isRefreshing) { result in
+            DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
+                guard let self else { return }
+
+                switch result {
+                case .success(let data):
+                    var artItems: [ArtItemView] = []
                     data.artList.forEach {
                         artItems.append(ArtItemView(model: .init(
                             artId: $0.artId,
@@ -45,19 +87,12 @@ final class ArtListViewModel: ArtListViewModelProtocol {
                             author: "\($0.author ?? "-")"
                         )))
                     }
+                    completion(.success(artItems))
+                    getImages(from: data.artList)
 
-                    // TODO: Improve this isPrefetch approach. Break into two different methods and then encapsulate the artListUseCase.execute invocation
-                    if isPrefetch {
-                        delegate?.displayPrefetchedArtsList(with: artItems)
-                    } else {
-                        delegate?.displayArtsList(with: artItems)
-                    }
+                case .failure(let error):
+                    completion(.failure(error))
                 }
-
-                getImages(from: data.artList)
-
-            case .failure(let error):
-                print("\(error)")
             }
         }
     }

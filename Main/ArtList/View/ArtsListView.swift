@@ -3,11 +3,13 @@ import UIKit
 protocol ArtListViewProtocol {
     func setLoadingState(to isLoading: Bool)
     func loadArtsList(with artsList: [ArtItemView])
+    func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView])
     func updateArtImage(with artImage: ArtImageModel)
 }
 
 protocol ArtsListViewDelegate: AnyObject {
-    func prefetch()
+    func prefetchNextPage()
+    func refreshArtsList()
 }
 
 final class ArtsListView: UIView {
@@ -23,6 +25,7 @@ final class ArtsListView: UIView {
         tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.refreshControl = artsListRefreshControl
         tableView.separatorStyle = .none
         tableView.tableFooterView = artsListTableFooterView
         tableView.register(
@@ -30,6 +33,13 @@ final class ArtsListView: UIView {
             forCellReuseIdentifier: ArtItemTableViewCell.identifier
         )
         return tableView
+    }()
+
+    private lazy var artsListRefreshControl: UIRefreshControl = {
+        let refreshControll = UIRefreshControl()
+        refreshControll.tintColor = .black
+        refreshControll.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
+        return refreshControll
     }()
 
     private lazy var artsListTableFooterView: UIView = {
@@ -61,7 +71,7 @@ final class ArtsListView: UIView {
     private func configureArtsListTableView() {
         addSubview(artsListTableView)
         NSLayoutConstraint.activate([
-            artsListTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            artsListTableView.topAnchor.constraint(equalTo: topAnchor),
             artsListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             artsListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             artsListTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
@@ -91,6 +101,13 @@ extension ArtsListView: ArtListViewProtocol {
         artsListTableView.reloadData()
     }
 
+    func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView]) {
+        artsListTableView.refreshControl?.endRefreshing()
+        artsList = refreshedArtsList
+        artsListTableView.reloadData()
+        print("did refresh")
+    }
+
     func updateArtImage(with artImage: ArtImageModel) {
         guard let artItemView = artsList.first(where: {
             $0.artId == artImage.artId
@@ -103,6 +120,13 @@ extension ArtsListView: ArtListViewProtocol {
         }
 
         artItemView.updateArtImage(with: artImage)
+    }
+}
+
+// MARK: - Private Actions
+extension ArtsListView {
+    @objc private func didPullToRefresh(_ sender: UIRefreshControl) {
+        delegate?.refreshArtsList()
     }
 }
 
@@ -125,7 +149,7 @@ extension ArtsListView: UITableViewDelegate {
 
         if indexPath.row == firstPageItem {
             artsListTableFooterView.startLoading()
-            delegate?.prefetch()
+            delegate?.prefetchNextPage()
         }
     }
 }

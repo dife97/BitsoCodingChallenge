@@ -2,7 +2,15 @@
 
 final class ArtListViewModelSpy: ArtListViewModelProtocol {
     private(set) var fetchArtListCalled: [Bool] = []
-    func fetchArtList(isPrefetch: Bool) {
+    func fetchArtList() {
         fetchArtListCalled.append(true)
+    }
+
+    func prefetchNextPage() {
+        
+    }
+
+    func refreshArtsList() {
+
     }
 }

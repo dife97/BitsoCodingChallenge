@@ -15,9 +15,16 @@ public final class RemoteArtListUseCase: ArtListProtocol {
     }
 
     // MARK: - Public Method
-    public func execute(_ completion: @escaping (ArtListResult) -> Void) {
+    public func execute(
+        isRefreshing: Bool,
+        _ completion: @escaping (ArtListResult) -> Void
+    ) {
         if isFetching {
             return completion(.failure(.isFetching))
+        }
+
+        if isRefreshing { // TODO: Add unit test
+            currentPage = 1
         }
 
         isFetching = true

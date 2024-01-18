@@ -8,5 +8,7 @@ final class ArtListViewSpy: ArtListViewProtocol {
 
     func loadArtsList(with artsList: [ArtItemView]) {}
 
+    func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView]) {}
+
     func updateArtImage(with artImage: ArtImageModel) {}
 }

@@ -24,7 +24,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
         ]
 
         expectedRequestModels.forEach { _ in
-            sut.execute { _ in }
+            sut.execute(isRefreshing: false) { _ in }
             serviceSpy.complete(with: .failure(.connection))
         }
 
@@ -34,10 +34,10 @@ final class RemoteArtListUseCaseTests: XCTestCase {
     func test_deliversIsFetchingError_whenPreviousRequestIsBeingFetched() {
         let (sut, serviceSpy) = buildSUT()
 
-        sut.execute { _ in }
+        sut.execute(isRefreshing: false) { _ in }
 
         let exp = expectation(description: "Wait to complete second request")
-        sut.execute { result in
+        sut.execute(isRefreshing: false) { result in
             switch result {
             case .success:
                 XCTFail("Expected isFetching error but received \(result) instead.")
@@ -55,7 +55,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
         let (sut, serviceSpy) = buildSUT()
         let exp = expectation(description: "Wait to complete request")
 
-        sut.execute { result in
+        sut.execute(isRefreshing: false) { result in
             switch result {
             case .success:
                 XCTFail("Expected connection error but received \(result) instead.")
@@ -73,7 +73,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
         let (sut, serviceSpy) = buildSUT()
         let exp = expectation(description: "Wait to complete request")
 
-        sut.execute { result in
+        sut.execute(isRefreshing: false) { result in
             switch result {
             case .success:
                 XCTFail("Expected dataParsing error but received \(result) instead.")
@@ -100,7 +100,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
             .init(artId: 123, imageId: "anyImageId", title: "anyTitle", year: 2000, author: "anyAuthor")
         ])
 
-        sut.execute { result in
+        sut.execute(isRefreshing: false) { result in
             switch result {
             case .success(let data):
                 XCTAssertTrue(data.artList.first?.artId == expectedArtListModel.artList.first?.artId)
@@ -120,7 +120,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
         var sut: RemoteArtListUseCase? = RemoteArtListUseCase(service: serviceSpy)
         var result: ArtListResult?
 
-        sut?.execute { result = $0 }
+        sut?.execute(isRefreshing: false) { result = $0 }
         sut = nil
         serviceSpy.complete(with: .failure(.connection))
 

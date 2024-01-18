@@ -24,7 +24,7 @@ final class ArtListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         artsListView?.setLoadingState(to: true)
-        viewModel.fetchArtList(isPrefetch: false)
+        viewModel.fetchArtList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -37,7 +37,6 @@ final class ArtListViewController: UIViewController {
 extension ArtListViewController {
     private func configureNavigationBar() {
         title = "Arts List"
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
 
@@ -52,6 +51,10 @@ extension ArtListViewController: ArtListViewModelDelegate {
         artsListView?.loadArtsList(with: prefetchedArtItems)
     }
 
+    func refreshArtsList(with refreshedArtItems: [ArtItemView]) {
+        artsListView?.loadRefreshedArtsList(with: refreshedArtItems)
+    }
+
     func updateArtImage(with artImage: ArtImageModel) {
         artsListView?.updateArtImage(with: artImage)
     }
@@ -59,7 +62,11 @@ extension ArtListViewController: ArtListViewModelDelegate {
 
 // MARK: - View Delegate
 extension ArtListViewController: ArtsListViewDelegate {
-    func prefetch() {
-        viewModel.fetchArtList(isPrefetch: true)
+    func prefetchNextPage() {
+        viewModel.prefetchNextPage()
+    }
+
+    func refreshArtsList() {
+        viewModel.refreshArtsList()
     }
 }
