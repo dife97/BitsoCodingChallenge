@@ -34,18 +34,22 @@ final class ArtListViewController: UIViewController {
     }
 }
 
-// MARK: - View Delegate
-extension ArtListViewController: ArtListViewModelDelegate {
-    func displayArtsList(with artItems: ArtItemViews) {
-        artsListView?.setLoadingState(to: false) // TODO: Add tests
-        artsListView?.loadArtsList(with: artItems)
-    }
-}
-
 // MARK: - Private Methods
 extension ArtListViewController {
     private func configureNavigationBar() {
         title = "Arts List"
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+}
+
+// MARK: - View Delegate
+extension ArtListViewController: ArtListViewModelDelegate {
+    func displayArtsList(with artItems: [ArtItemView]) {
+        artsListView?.setLoadingState(to: false) // TODO: Add tests
+        artsListView?.loadArtsList(with: artItems)
+    }
+
+    func updateArtImage(with artImage: ArtImageModel) {
+        artsListView?.updateArtImage(with: artImage)
     }
 }

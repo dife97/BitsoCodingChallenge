@@ -2,12 +2,13 @@ import UIKit
 
 protocol ArtListViewProtocol {
     func setLoadingState(to isLoading: Bool)
-    func loadArtsList(with artsItems: ArtItemViews)
+    func loadArtsList(with artsList: [ArtItemView])
+    func updateArtImage(with artImage: ArtImageModel)
 }
 
 final class ArtsListView: UIView {
     // MARK: - Properties
-    private var artsList: ArtItemViews = []
+    private var artsList: [ArtItemView] = []
 
     // MARK: - UI
     private lazy var artsListTableView: UITableView = {
@@ -68,9 +69,23 @@ extension ArtsListView: ArtListViewProtocol {
         }
     }
 
-    func loadArtsList(with artsList: ArtItemViews) {
+    func loadArtsList(with artsList: [ArtItemView]) {
         self.artsList = artsList
         artsListTableView.reloadData()
+    }
+
+    func updateArtImage(with artImage: ArtImageModel) {
+        guard let artItemView = artsList.first(where: {
+            $0.artId == artImage.artId
+        }) else {
+            return
+        }
+
+        guard let artImage = UIImage(data: artImage.image) else {
+            return
+        }
+
+        artItemView.updateArtImage(with: artImage)
     }
 }
 

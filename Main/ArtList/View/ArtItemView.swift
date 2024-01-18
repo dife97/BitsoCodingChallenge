@@ -3,6 +3,7 @@ import UIKit
 final class ArtItemView: UIView {
     // MARK: - Inner Type
     struct ArtItemModel {
+        let artId: Int
         let title: String
         let year: String
         let author: String
@@ -10,6 +11,7 @@ final class ArtItemView: UIView {
 
     // MARK: - Properties
     private let artItemModel: ArtItemModel
+    var artId: Int { artItemModel.artId }
 
     // MARK: - Initializers
     init(model: ArtItemModel) {
@@ -88,6 +90,10 @@ final class ArtItemView: UIView {
             artImageView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
             artImageView.heightAnchor.constraint(equalToConstant: 150)
         ])
+    }
+
+    func updateArtImage(with image: UIImage) {
+        artImageView.image = image
     }
 }
 

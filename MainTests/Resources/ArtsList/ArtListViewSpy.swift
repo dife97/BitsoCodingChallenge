@@ -6,5 +6,7 @@ final class ArtListViewSpy: ArtListViewProtocol {
         receivedLoadingStates.append(isLoading)
     }
 
-    func loadArtsList(with artsList: ArtItemViews) {}
+    func loadArtsList(with artsList: [ArtItemView]) {}
+
+    func updateArtImage(with artImage: ArtImageModel) {}
 }
