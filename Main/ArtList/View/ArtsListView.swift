@@ -21,7 +21,6 @@ final class ArtsListView: UIView {
     private lazy var artsListTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.showsVerticalScrollIndicator = false
         tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
