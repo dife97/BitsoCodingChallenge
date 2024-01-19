@@ -1,7 +1,7 @@
 import XCTest
 import ArtApp
 
-final class ArtServiceTests: XCTestCase {
+extension ArtServiceTests {
     // MARK: - Art List
     func test_getArtList_sendsCorrectTarget() {
         let providerSpy = HTTPProviderSpy()
@@ -11,17 +11,10 @@ final class ArtServiceTests: XCTestCase {
 
         sut.getArtList(requestModel: requestModel) { _ in }
 
-        XCTAssertEqual(providerSpy.receivedTarget?.server, getArtListTarget.server)
-        XCTAssertEqual(providerSpy.receivedTarget?.method, getArtListTarget.method)
-        XCTAssertEqual(providerSpy.receivedTarget?.path, getArtListTarget.path)
-        XCTAssertEqual(providerSpy.receivedTarget?.headers, getArtListTarget.headers)
-        XCTAssertTrue(isDictionary(
-                providerSpy.receivedTarget?.parameters,
-                equalTo: getArtListTarget.parameters
-        ))
+        assertArtServiceTarget(getArtListTarget, from: providerSpy)
     }
 
-    func test_getArtList_deliversUndefinedError_whenProviderCompletesWithInvalidURL() {
+    func test_getArtList_deliversUnexpectedError_whenProviderCompletesWithInvalidRequest() {
         let providerSpy = HTTPProviderSpy()
         let sut = ArtService(provider: providerSpy)
         let requestModel: ArtListRequestModel = .init(page: 1, limit: 10)
@@ -33,7 +26,7 @@ final class ArtServiceTests: XCTestCase {
                 XCTFail("Expected invalidURL error but received \(result) instead")
 
             case .failure(let error):
-                XCTAssertEqual(error, .undefined)
+                XCTAssertEqual(error, .unexpected)
             }
             exp.fulfill()
         }
@@ -42,7 +35,7 @@ final class ArtServiceTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
 
-    func test_getArtList_deliversUndefinedError_whenProviderCompletesWithInvalidData() {
+    func test_getArtList_deliversUnexpectedError_whenProviderCompletesWithInvalidData() {
         let providerSpy = HTTPProviderSpy()
         let sut = ArtService(provider: providerSpy)
         let requestModel: ArtListRequestModel = .init(page: 1, limit: 10)
@@ -54,7 +47,7 @@ final class ArtServiceTests: XCTestCase {
                 XCTFail("Expected undefined error but received \(result) instead")
 
             case .failure(let error):
-                XCTAssertEqual(error, .undefined)
+                XCTAssertEqual(error, .unexpected)
             }
             exp.fulfill()
         }
@@ -63,7 +56,7 @@ final class ArtServiceTests: XCTestCase {
         wait(for: [exp], timeout: 1)
     }
 
-    func test_getArtList_deliversUndefinedError_whenProviderCompletesWithUndefined() {
+    func test_getArtList_deliversUnexpectedError_whenProviderCompletesWithUnexpected() {
         let providerSpy = HTTPProviderSpy()
         let sut = ArtService(provider: providerSpy)
         let requestModel: ArtListRequestModel = .init(page: 1, limit: 10)
@@ -75,16 +68,16 @@ final class ArtServiceTests: XCTestCase {
                 XCTFail("Expected undefined error but received \(result) instead")
 
             case .failure(let error):
-                XCTAssertEqual(error, .undefined)
+                XCTAssertEqual(error, .unexpected)
             }
             exp.fulfill()
         }
 
-        providerSpy.complete(with: .failure(.undefined))
+        providerSpy.complete(with: .failure(.unexpected))
         wait(for: [exp], timeout: 1)
     }
 
-    func test_getArtList_deliversDataParsingError_whenProviderCompletesWithInvalidData() {
+    func test_getArtList_deliversInvalidDataError_whenProviderCompletesWithInvalidData() {
         let providerSpy = HTTPProviderSpy()
         let sut = ArtService(provider: providerSpy)
         let requestModel: ArtListRequestModel = .init(page: 1, limit: 10)
@@ -97,7 +90,7 @@ final class ArtServiceTests: XCTestCase {
                 XCTFail("Expected dataParsing error but received \(result) instead")
 
             case .failure(let error):
-                XCTAssertEqual(error, .dataParsing)
+                XCTAssertEqual(error, .invalidData)
             }
             exp.fulfill()
         }

@@ -5,15 +5,11 @@ extension ArtServiceTests {
     func test_getImage_sendCorrectTarget() {
         let (sut, providerSpy) = buildSUT()
         let imageRequestModel: ArtImageRequestModel = .init(imagedId: "anyId")
-        let getArtListTarget: ArtServiceTarget = .getArtImage(imageRequestModel)
+        let getArtImageTarget: ArtServiceTarget = .getArtImage(imageRequestModel)
 
         sut.getArtImage(requestModel: imageRequestModel) { _ in }
 
-        XCTAssertEqual(providerSpy.receivedTarget?.server, getArtListTarget.server)
-        XCTAssertEqual(providerSpy.receivedTarget?.method, getArtListTarget.method)
-        XCTAssertEqual(providerSpy.receivedTarget?.path, getArtListTarget.path)
-        XCTAssertEqual(providerSpy.receivedTarget?.headers, getArtListTarget.headers)
-        XCTAssertNil(providerSpy.receivedTarget?.parameters)
+        assertArtServiceTarget(getArtImageTarget, from: providerSpy, hasParameters: false)
     }
 
     func test_getImage_deliversUndefinedError_whenProviderCompletesWithInvalidURL() {
@@ -26,7 +22,7 @@ extension ArtServiceTests {
             case .success(_):
                 XCTFail("Expected undefined error but received \(result) instead")
             case .failure(let error):
-                XCTAssertEqual(error, .undefined)
+                XCTAssertEqual(error, .unexpected)
             }
             exp.fulfill()
         }
@@ -44,7 +40,7 @@ extension ArtServiceTests {
             case .success(_):
                 XCTFail("Expected undefined error but received \(result) instead")
             case .failure(let error):
-                XCTAssertEqual(error, .undefined)
+                XCTAssertEqual(error, .unexpected)
             }
             exp.fulfill()
         }
@@ -62,11 +58,11 @@ extension ArtServiceTests {
             case .success(_):
                 XCTFail("Expected undefined error but received \(result) instead")
             case .failure(let error):
-                XCTAssertEqual(error, .undefined)
+                XCTAssertEqual(error, .unexpected)
             }
             exp.fulfill()
         }
-        providerSpy.complete(with: .failure(.undefined))
+        providerSpy.complete(with: .failure(.unexpected))
         wait(for: [exp], timeout: 1)
     }
 
@@ -79,9 +75,9 @@ extension ArtServiceTests {
         sut.getArtImage(requestModel: imageRequestModel) { result in
             switch result {
             case .success(_):
-                XCTFail("Expected emptyData error but received \(result) instead")
+                XCTFail("Expected invalidData error but received \(result) instead")
             case .failure(let error):
-                XCTAssertEqual(error, .emptyData)
+                XCTAssertEqual(error, .invalidData)
             }
             exp.fulfill()
         }
@@ -97,9 +93,9 @@ extension ArtServiceTests {
         sut.getArtImage(requestModel: imageRequestModel) { result in
             switch result {
             case .success(_):
-                XCTFail("Expected emptyData error but received \(result) instead")
+                XCTFail("Expected invalidData error but received \(result) instead")
             case .failure(let error):
-                XCTAssertEqual(error, .emptyData)
+                XCTAssertEqual(error, .invalidData)
             }
             exp.fulfill()
         }
@@ -129,15 +125,3 @@ extension ArtServiceTests {
     }
 }
 
-// MARK: - Helpers
-extension ArtServiceTests {
-    typealias SUT = (
-        ArtService,
-        HTTPProviderSpy
-    )
-    private func buildSUT() -> SUT {
-        let providerSpy = HTTPProviderSpy()
-        let sut = ArtService(provider: providerSpy)
-        return (sut, providerSpy)
-    }
-}

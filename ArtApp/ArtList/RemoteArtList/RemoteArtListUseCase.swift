@@ -54,13 +54,13 @@ public final class RemoteArtListUseCase: ArtListProtocol {
 // MARK: - Private Methods
 extension RemoteArtListUseCase {
     private func handleGetArtList(
-        _ error: ArtListServiceError,
+        _ error: ArtServiceError,
         with completion: @escaping (ArtListResult) -> Void
     ) {
         switch error {
         case .connection:
             completion(.failure(.connection))
-        case .dataParsing, .undefined:
+        case .invalidData, .unexpected:
             completion(.failure(.undefined))
         }
     }

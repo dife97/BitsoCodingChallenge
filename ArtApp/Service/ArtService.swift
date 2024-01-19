@@ -18,12 +18,13 @@ extension ArtService: ArtListServiceProtocol {
 
         provider.request(target: getArtListTarget) { [weak self] result in
             guard let self else { return }
+
             switch result {
             case .success(let data):
                 if let model: ArtListResponseModel = data?.toModel() {
                     completion(.success(model))
                 } else {
-                    completion(.failure(.dataParsing))
+                    completion(.failure(.invalidData))
                 }
 
             case .failure(let error):
@@ -32,12 +33,12 @@ extension ArtService: ArtListServiceProtocol {
         }
     }
 
-    private func getArtListServiceError(from providerError: HTTPProviderError) -> ArtListServiceError {
+    private func getArtListServiceError(from providerError: HTTPProviderError) -> ArtServiceError {
         switch providerError {
         case .connection:
             return .connection
-        case .invalidRequest, .invalidData, .undefined:
-            return .undefined
+        case .invalidRequest, .invalidData, .unexpected:
+            return .unexpected
         }
     }
 }
@@ -52,14 +53,15 @@ extension ArtService: GetImageServiceProtocol {
 
         provider.request(target: getArtImageTarget) { [weak self] result in
             guard let self else { return }
+
             switch result {
             case .success(let data):
                 guard let data else {
-                    return completion(.failure(.emptyData))
+                    return completion(.failure(.invalidData))
                 }
 
                 if data.isEmpty {
-                    completion(.failure(.emptyData))
+                    completion(.failure(.invalidData))
                 } else {
                     completion(.success(.init(imageData: data)))
                 }
@@ -70,12 +72,47 @@ extension ArtService: GetImageServiceProtocol {
         }
     }
 
-    private func getImageServiceError(from providerError: HTTPProviderError) -> GetImageServiceError {
+    private func getImageServiceError(from providerError: HTTPProviderError) -> ArtServiceError {
         switch providerError {
         case .connection:
             return .connection
-        case .invalidRequest, .invalidData, .undefined:
-            return .undefined
+        case .invalidRequest, .invalidData, .unexpected:
+            return .unexpected
+        }
+    }
+}
+
+// MARK: - Art Details
+extension ArtService: ArtDetailsServiceProtocol {
+    func getArtDetails(
+        requestModel: ArtDetailsRequestModel,
+        _ completion: @escaping (RemoteArtDetailsResult) -> Void
+    ) {
+        let getArtDetailsTarget: ArtServiceTarget = .getArtDetails(requestModel)
+
+        provider.request(target: getArtDetailsTarget) { [weak self] result in
+            guard let self else { return }
+
+            switch result {
+            case .success(let data):
+                if let model: ArtDetailsResponseModel = data?.toModel() {
+                    completion(.success(model))
+                } else {
+                    completion(.failure(.invalidData))
+                }
+
+            case .failure(let error):
+                completion(.failure(getArtDetailsServiceError(from: error)))
+            }
+        }
+    }
+
+    private func getArtDetailsServiceError(from providerError: HTTPProviderError) -> ArtServiceError {
+        switch providerError {
+        case .connection:
+            return .connection
+        case .invalidRequest, .invalidData, .unexpected:
+            return .unexpected
         }
     }
 }

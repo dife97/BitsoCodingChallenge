@@ -83,7 +83,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
             exp.fulfill()
         }
 
-        serviceSpy.complete(with: .failure(.undefined))
+        serviceSpy.complete(with: .failure(.unexpected))
         wait(for: [exp], timeout: 1)
     }
 
@@ -140,4 +140,6 @@ extension RemoteArtListUseCaseTests {
         let sut = RemoteArtListUseCase(service: serviceSpy)
         return (sut, serviceSpy)
     }
+
+    
 }

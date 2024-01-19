@@ -1,6 +1,5 @@
-public enum HTTPProviderError: Error {
+public enum ArtServiceError: Error {
     case connection
-    case invalidRequest
     case invalidData
     case unexpected
 }

@@ -54,11 +54,11 @@ public final class RemoteGetArtImagesUseCase: GetArtImagesProtocol {
 
 // MARK: - Private Methods
 extension RemoteGetArtImagesUseCase {
-    private func getArtImageError(from serviceError: GetImageServiceError) -> GetArtImageError {
+    private func getArtImageError(from serviceError: ArtServiceError) -> GetArtImageError {
         switch serviceError {
         case .connection:
             return .connection
-        case .emptyData, .undefined:
+        case .invalidData, .unexpected:
             return .undefined
         }
     }
