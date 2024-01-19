@@ -1,14 +1,14 @@
-final class RemoteArtDetailsUseCase: ArtDetailsProtocol {
+public final class RemoteArtDetailsUseCase: ArtDetailsProtocol {
     // MARK: Dependency
     private let service: ArtDetailsServiceProtocol
 
     // MARK: Initializer
-    init(service: ArtDetailsServiceProtocol) {
+    public init(service: ArtDetailsServiceProtocol) {
         self.service = service
     }
 
     // MARK: Public Method
-    func execute(
+    public func execute(
         model: ArtDetailsRequestModel,
         _ completion: @escaping (ArtDetailsResult) -> Void
     ) {

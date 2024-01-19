@@ -62,7 +62,7 @@ final class ArtItemView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .medium) // TODO: Move to metrics
+        label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
         label.text = artItemModel.author
@@ -92,11 +92,23 @@ final class ArtItemView: UIView {
         ])
     }
 
+    // MARK: - Public Methods
     func updateArtImage(with image: UIImage) {
         artImageView.image = image
     }
+
+    func getArtInfo() -> ArtDetailsInfoModel {
+        .init(
+            artId: artId,
+            artImage: artImageView.image,
+            title: artItemModel.title,
+            author: artItemModel.author,
+            year: artItemModel.year
+        )
+    }
 }
 
+// MARK: - Factory
 extension ArtItemView: ArtItemViewFactory {
     func makeArtItemView() -> UIView { self }
     func getCellHeight() -> CGFloat { 250 }

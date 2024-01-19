@@ -84,7 +84,7 @@ extension ArtService: GetImageServiceProtocol {
 
 // MARK: - Art Details
 extension ArtService: ArtDetailsServiceProtocol {
-    func getArtDetails(
+    public func getArtDetails(
         requestModel: ArtDetailsRequestModel,
         _ completion: @escaping (RemoteArtDetailsResult) -> Void
     ) {

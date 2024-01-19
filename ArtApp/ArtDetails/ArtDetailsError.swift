@@ -1,4 +1,4 @@
-enum ArtDetailsError: Error {
+public enum ArtDetailsError: Error {
     case connection
     case invalidData
     case unexpected

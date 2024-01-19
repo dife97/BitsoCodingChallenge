@@ -1,8 +1,8 @@
-protocol ArtDetailsProtocol {
+public protocol ArtDetailsProtocol {
     func execute(
         model: ArtDetailsRequestModel,
         _ completion: @escaping (ArtDetailsResult) -> Void
     )
 }
 
-typealias ArtDetailsResult = Result<ArtDetailsModel, ArtDetailsError>
+public typealias ArtDetailsResult = Result<ArtDetailsModel, ArtDetailsError>

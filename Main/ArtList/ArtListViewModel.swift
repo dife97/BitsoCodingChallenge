@@ -17,17 +17,19 @@ protocol ArtListViewModelDelegate: AnyObject {
 
 final class ArtListViewModel: ArtListViewModelProtocol {
     // MARK: - Dependency
-    private let artListUseCase: ArtListProtocol
-    private let getImageUseCase: GetArtImagesProtocol
+    private let useCases: UseCases
     weak var delegate: ArtListViewModelDelegate?
 
+    // MARK: - Inner Type
+    struct UseCases {
+        let getArtsList: ArtListProtocol
+        let getArtImage: GetArtImagesProtocol
+        let getArtDetails: ArtDetailsProtocol
+    }
+
     // MARK: - Initializer
-    init(
-        artListUseCase: ArtListProtocol,
-        getImageUseCase: GetArtImagesProtocol
-    ) {
-        self.artListUseCase = artListUseCase
-        self.getImageUseCase = getImageUseCase
+    init(useCases: UseCases) {
+        self.useCases = useCases
     }
 
     // MARK: - Public Methods
@@ -66,13 +68,15 @@ final class ArtListViewModel: ArtListViewModelProtocol {
             }
         }
     }
+}
 
-    // MARK: - Private Methods
+// MARK: - Private Methods
+extension ArtListViewModel {
     private func getArtsList(
         isRefreshing: Bool = false,
         _ completion: @escaping (Result<[ArtItemView], ArtListError>) -> Void
     ) {
-        artListUseCase.execute(isRefreshing: isRefreshing) { result in
+        useCases.getArtsList.execute(isRefreshing: isRefreshing) { result in
             DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
                 guard let self else { return }
 
@@ -107,7 +111,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
             ))
         }
 
-        getImageUseCase.execute(with: imagesRequestModel) { result in
+        useCases.getArtImage.execute(with: imagesRequestModel) { result in
             DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
                 guard let self else { return }
 

@@ -10,6 +10,7 @@ protocol ArtListViewProtocol {
 protocol ArtsListViewDelegate: AnyObject {
     func prefetchNextPage()
     func refreshArtsList()
+    func didTapArtItem(with artInfo: ArtDetailsInfoModel)
 }
 
 final class ArtsListView: UIView {
@@ -21,7 +22,6 @@ final class ArtsListView: UIView {
     private lazy var artsListTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.allowsSelection = false
         tableView.dataSource = self
         tableView.delegate = self
         tableView.refreshControl = artsListRefreshControl
@@ -129,6 +129,29 @@ extension ArtsListView {
     }
 }
 
+// MARK: - TableView DataSource
+extension ArtsListView: UITableViewDataSource {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
+        artsList.count
+    }
+
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
+        let cell = ArtItemTableViewCell(
+            style: .default,
+            reuseIdentifier: ArtItemTableViewCell.identifier
+        )
+        let artItemView = artsList[indexPath.row].makeArtItemView()
+        cell.configure(with: artItemView)
+        return cell
+    }
+}
+
 // MARK: - TableView Delegate
 extension ArtsListView: UITableViewDelegate {
     func tableView(
@@ -151,27 +174,12 @@ extension ArtsListView: UITableViewDelegate {
             delegate?.prefetchNextPage()
         }
     }
-}
-
-// MARK: - TableView DataSource
-extension ArtsListView: UITableViewDataSource {
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        artsList.count
-    }
 
     func tableView(
         _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        let cell = ArtItemTableViewCell(
-            style: .default,
-            reuseIdentifier: ArtItemTableViewCell.identifier
-        )
-        let artItemView = artsList[indexPath.row].makeArtItemView()
-        cell.configure(with: artItemView)
-        return cell
+        didSelectRowAt indexPath: IndexPath
+    ) {
+        let artItemInfo = artsList[indexPath.row].getArtInfo()
+        delegate?.didTapArtItem(with: artItemInfo)
     }
 }

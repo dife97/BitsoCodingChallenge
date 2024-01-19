@@ -19,12 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func getTemporaryViewController() -> UIViewController {
         let urlSessionHTTPProvider = URLSessionHTTPProvider()
         let artService = ArtService(provider: urlSessionHTTPProvider)
-        let remoteArtListUseCase = RemoteArtListUseCase(service: artService)
+        let getArtsListUseCase = RemoteArtListUseCase(service: artService)
         let getImageUseCase = RemoteGetArtImagesUseCase(service: artService)
-        let viewModel = ArtListViewModel(
-            artListUseCase: remoteArtListUseCase,
-            getImageUseCase: getImageUseCase
-        )
+        let getArtDetailsUseCase = RemoteArtDetailsUseCase(service: artService)
+        let viewModel = ArtListViewModel(useCases: .init(
+            getArtsList: getArtsListUseCase,
+            getArtImage: getImageUseCase,
+            getArtDetails: getArtDetailsUseCase
+        ))
         let viewController = ArtListViewController(viewModel: viewModel)
         viewModel.delegate = viewController
         return viewController

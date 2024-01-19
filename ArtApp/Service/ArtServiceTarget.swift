@@ -23,7 +23,7 @@ extension ArtServiceTarget: ServiceTarget {
         case .getArtList:
             return "artworks"
         case .getArtImage(let model):
-            return "\(model.imagedId)/full/200,/0/default.jpg" // TODO: Document why using 200 (time and avoid images that does not have this full
+            return "\(model.imagedId)/full/400,/0/default.jpg" // TODO: Document why using 200 (time and avoid images that does not have this full
         case .getArtDetails(let model):
             return "artworks/\(model.artId)"
         }
@@ -71,8 +71,8 @@ extension ArtServiceTarget {
                 "date_display",
                 "artist_display",
                 "description",
-                "place",
-                "medium",
+                "place_of_origin",
+                "medium_display",
                 "dimensions",
             ].joined(separator: ",")
         ]

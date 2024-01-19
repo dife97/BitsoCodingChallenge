@@ -1,9 +1,9 @@
-struct ArtDetailsResponseModel: EquatableModel {
+public struct ArtDetailsResponseModel: EquatableModel {
     let data: ArtDetailsResponseData
 }
 
-struct ArtDetailsResponseData: EquatableModel {
-    let artId: String
+public struct ArtDetailsResponseData: EquatableModel {
+    let artId: Int
     let title: String
     let date: String
     let artistInfo: String
