@@ -82,6 +82,7 @@ extension ArtListViewController: ArtsListViewDelegate {
             viewModel: viewModel,
             infoModel: artInfo
         )
+        viewModel.delegate = viewController
         let artDetailNavigationController = UINavigationController(rootViewController: viewController)
         navigationController?.showDetailViewController(artDetailNavigationController, sender: self)
     }

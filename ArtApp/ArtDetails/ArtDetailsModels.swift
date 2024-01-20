@@ -10,11 +10,12 @@ public struct ArtDetailsRequestModel: EquatableModel {
 // MARK: - Response
 public struct ArtDetailsModel: EquatableModel {
     public let artId: Int
-    public let title: String
-    public let date: String
-    public let artistInfo: String
-    public let description: String
-    public let place: String
-    public let medium: String
-    public let dimensions: String
+    public let description: String?
+    public let place: String?
+    public let date: String?
+    public let medium: String?
+    public let inscriptions: String?
+    public let dimensions: String?
+    public let creditLine: String?
+    public let referenceNumber: String?
 }

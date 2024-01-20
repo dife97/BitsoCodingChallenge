@@ -41,13 +41,14 @@ public final class RemoteArtDetailsUseCase: ArtDetailsProtocol {
     private func getArtDetailsModel(from responseData: ArtDetailsResponseData) -> ArtDetailsModel {
         .init(
             artId: responseData.artId,
-            title: responseData.title,
-            date: responseData.date,
-            artistInfo: responseData.artistInfo,
             description: responseData.description,
             place: responseData.place,
+            date: responseData.date,
             medium: responseData.medium,
-            dimensions: responseData.dimensions
+            inscriptions: responseData.inscriptions,
+            dimensions: responseData.dimensions,
+            creditLine: responseData.creditLine,
+            referenceNumber: responseData.referenceNumber
         )
     }
 }

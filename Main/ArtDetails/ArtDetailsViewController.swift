@@ -37,8 +37,8 @@ final class ArtDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        artsListView?.setLoadingState(to: true)
-//        viewModel.fetchArtList()
+        artsDetailsView?.setLoadingState(to: true)
+        viewModel.getArtDetails(with: infoModel.artId)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -50,9 +50,6 @@ final class ArtDetailsViewController: UIViewController {
 // MARK: - Private Methods
 extension ArtDetailsViewController {
     private func configureNavigationBar() {
-//        title = setupModel.title
-//        navigationController?.navigationBar.prefersLargeTitles = true
-
         navigationItem.rightBarButtonItem = .init(
             barButtonSystemItem: .close,
             target: self,
@@ -62,5 +59,13 @@ extension ArtDetailsViewController {
 
     @objc private func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
+    }
+}
+
+// MARK: - Public Methods
+extension ArtDetailsViewController: ArtDetailsViewModelDelegate {
+    func showArtDetails(with artDetailsModel: ArtDetailsSetupModel) {
+        artsDetailsView?.setLoadingState(to: false)
+        artsDetailsView?.showArtDetails(with: artDetailsModel)
     }
 }
