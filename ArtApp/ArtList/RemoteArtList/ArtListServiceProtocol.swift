@@ -5,4 +5,4 @@ public protocol ArtListServiceProtocol {
     )
 }
 
-public typealias RemoteArtListResult = Result<ArtListResponseModel, ArtListServiceError>
+public typealias RemoteArtListResult = Result<ArtListResponseModel, ArtServiceError>

@@ -12,7 +12,10 @@ final class RemoteArtListServiceSpy: ArtListServiceProtocol {
         receivedCompletion.append(completion)
     }
 
-    func complete(with result: RemoteArtListResult) {
-        receivedCompletion.first?(result)
+    func complete(
+        with result: RemoteArtListResult,
+        atIndex index: Int = 0
+    ) {
+        receivedCompletion[index](result)
     }
 }

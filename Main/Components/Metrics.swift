@@ -1,4 +1,4 @@
-import Foundation
+import UIKit
 
 enum Metrics { }
 
@@ -9,7 +9,7 @@ extension Metrics {
     }
 }
 
-// MARK: - Corner
+// MARK: - Radius
 extension Metrics {
     struct Radius {
         static let defaultValue: CGFloat = 8

@@ -23,13 +23,13 @@ public final class URLSessionHTTPProvider: HTTPProvider {
             session.dataTask(with: urlRequest) { data, urlResponse, error in
                 if error == nil {
                     guard let httpURLResponse = urlResponse as? HTTPURLResponse else {
-                        return completion(.failure(.undefined))
+                        return completion(.failure(.unexpected))
                     }
                     switch httpURLResponse.statusCode {
                     case 200...299:
                         completion(.success(data))
                     default:
-                        completion(.failure(.undefined))
+                        completion(.failure(.unexpected))
                     }
                 } else {
                     completion(.failure(.connection))

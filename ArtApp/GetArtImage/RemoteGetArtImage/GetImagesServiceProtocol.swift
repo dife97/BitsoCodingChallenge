@@ -5,5 +5,5 @@ public protocol GetImageServiceProtocol {
     )
 }
 
-public typealias RemoteGetImageResult = Result<ArtImageResponse, GetImageServiceError>
+public typealias RemoteGetImageResult = Result<ArtImageResponse, ArtServiceError>
 

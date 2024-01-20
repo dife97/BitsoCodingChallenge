@@ -143,11 +143,11 @@ final class RemoteGetArtImagesUseCaseTests: XCTestCase {
             }
             exp.fulfill()
         }
-        serviceSpy.complete(with: .failure(.undefined))
+        serviceSpy.complete(with: .failure(.unexpected))
         wait(for: [exp], timeout: 1)
     }
 
-    func test_deliversUndefinedError_whenClientCompletesWithDataParsingError() {
+    func test_deliversUndefinedError_whenClientCompletesWithInvalidDataError() {
         let (sut, serviceSpy) = buildSUT()
         let imagesRequestModel: GetArtImagesRequestModel = [
             .init(
@@ -166,7 +166,7 @@ final class RemoteGetArtImagesUseCaseTests: XCTestCase {
             }
             exp.fulfill()
         }
-        serviceSpy.complete(with: .failure(.emptyData))
+        serviceSpy.complete(with: .failure(.invalidData))
         wait(for: [exp], timeout: 1)
     }
 

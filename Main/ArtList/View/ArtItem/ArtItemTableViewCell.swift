@@ -30,5 +30,6 @@ final class ArtItemTableViewCell: UITableViewCell {
 
     func setupCell() {
         backgroundColor = .clear
+        selectionStyle = .none
     }
 }
