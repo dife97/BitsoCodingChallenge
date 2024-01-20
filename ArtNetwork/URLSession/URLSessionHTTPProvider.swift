@@ -1,12 +1,15 @@
 import Foundation
 
-public final class URLSessionHTTPProvider: HTTPProvider {
+public final class URLSessionHTTPProvider: HTTPProviderProtocol {
+    // MARK: - Dependency
     private let session: URLSession
 
+    // MARK: - Initializer
     public init(session: URLSession = .shared) {
         self.session = session
     }
 
+    // MARK: - Public Methods
     public func request(
         target: ServiceTarget,
         completion: @escaping (Result<Data?, HTTPProviderError>) -> Void
@@ -40,6 +43,7 @@ public final class URLSessionHTTPProvider: HTTPProvider {
         }
     }
 
+    // MARK: - Private Methods
     private func getURL(
         from server: ArtAPIServer,
         path: String,

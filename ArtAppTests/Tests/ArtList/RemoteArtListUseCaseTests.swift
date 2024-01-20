@@ -96,7 +96,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
                 .init(artId: 123, imageId: "anyImageId", title: "anyTitle", year: 2000, author: "anyAuthor")
             ]
         )
-        let expectedArtListModel: ArtListModel = .init(artList: [
+        let expectedArtListModel: ArtsListModel = .init(artList: [
             .init(artId: 123, imageId: "anyImageId", title: "anyTitle", year: 2000, author: "anyAuthor")
         ])
 
@@ -118,7 +118,7 @@ final class RemoteArtListUseCaseTests: XCTestCase {
     func test_doesNotComplete_whenSUTIsDeallocatedBeforeClientCompletion() {
         let serviceSpy = RemoteArtListServiceSpy()
         var sut: RemoteArtListUseCase? = RemoteArtListUseCase(service: serviceSpy)
-        var result: ArtListResult?
+        var result: ArtsListResult?
 
         sut?.execute(isRefreshing: false) { result = $0 }
         sut = nil

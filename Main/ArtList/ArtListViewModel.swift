@@ -22,7 +22,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 
     // MARK: - Inner Type
     struct UseCases {
-        let getArtsList: ArtListProtocol
+        let getArtsList: ArtsListProtocol
         let getArtImage: GetArtImagesProtocol
         let getArtDetails: ArtDetailsProtocol
     }
@@ -74,7 +74,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 extension ArtListViewModel {
     private func getArtsList(
         isRefreshing: Bool = false,
-        _ completion: @escaping (Result<[ArtItemView], ArtListError>) -> Void
+        _ completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
     ) {
         useCases.getArtsList.execute(isRefreshing: isRefreshing) { result in
             DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch

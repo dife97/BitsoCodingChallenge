@@ -1,6 +1,6 @@
 import ArtNetwork
 
-public final class RemoteArtListUseCase: ArtListProtocol {
+public final class RemoteArtListUseCase: ArtsListProtocol {
     // MARK: - Properties
     private var isFetching = false
     private var currentPage = 1
@@ -17,7 +17,7 @@ public final class RemoteArtListUseCase: ArtListProtocol {
     // MARK: - Public Method
     public func execute(
         isRefreshing: Bool,
-        _ completion: @escaping (ArtListResult) -> Void
+        _ completion: @escaping (ArtsListResult) -> Void
     ) {
         if isFetching {
             return completion(.failure(.isFetching))
@@ -55,7 +55,7 @@ public final class RemoteArtListUseCase: ArtListProtocol {
 extension RemoteArtListUseCase {
     private func handleGetArtList(
         _ error: ArtServiceError,
-        with completion: @escaping (ArtListResult) -> Void
+        with completion: @escaping (ArtsListResult) -> Void
     ) {
         switch error {
         case .connection:
@@ -65,7 +65,7 @@ extension RemoteArtListUseCase {
         }
     }
 
-    private func getArtListModel(from reponseData: [ArtListData]) -> ArtListModel {
+    private func getArtListModel(from reponseData: [ArtListData]) -> ArtsListModel {
         .init(artList: reponseData.map({
             .init(
                 artId: $0.artId,

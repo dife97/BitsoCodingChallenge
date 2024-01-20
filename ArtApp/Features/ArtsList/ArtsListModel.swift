@@ -1,4 +1,4 @@
-public struct ArtListModel {
+public struct ArtsListModel {
     public let artList: ArtList
 
     public init(artList: ArtList) {
@@ -8,7 +8,7 @@ public struct ArtListModel {
 
 public typealias ArtList = [ArtModel]
 
-public struct ArtModel {
+public struct ArtModel: Codable {
     public let artId: Int
     public let imageId: String?
     public let title: String

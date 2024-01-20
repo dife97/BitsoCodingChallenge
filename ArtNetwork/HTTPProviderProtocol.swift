@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol HTTPProvider {
+public protocol HTTPProviderProtocol {
     func request(
         target: ServiceTarget,
         completion: @escaping (HTTPProviderResult) -> Void

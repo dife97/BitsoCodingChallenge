@@ -1,9 +1,9 @@
 import ArtNetwork
 
 public final class ArtService {
-    private let provider: HTTPProvider
+    private let provider: HTTPProviderProtocol
 
-    public init(provider: HTTPProvider) {
+    public init(provider: HTTPProviderProtocol) {
         self.provider = provider
     }
 }
