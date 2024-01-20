@@ -1,5 +1,3 @@
-import ArtNetwork
-
 public final class RemoteArtListUseCase: ArtsListProtocol {
     // MARK: - Properties
     private var isFetching = false

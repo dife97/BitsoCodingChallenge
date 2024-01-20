@@ -1,6 +1,4 @@
-import ArtStore
-
-enum ArtStoreError: Error {
+public enum ArtStoreError: Error {
     case invalidRequest
     case unexpected
 }

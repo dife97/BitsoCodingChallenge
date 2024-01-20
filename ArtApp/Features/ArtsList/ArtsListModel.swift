@@ -7,8 +7,9 @@ public struct ArtsListModel {
 }
 
 public typealias ArtList = [ArtModel]
+extension ArtList: EquatableModel {}
 
-public struct ArtModel: Codable {
+public struct ArtModel: EquatableModel {
     public let artId: Int
     public let imageId: String?
     public let title: String

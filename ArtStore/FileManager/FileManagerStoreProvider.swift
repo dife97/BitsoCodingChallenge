@@ -11,11 +11,11 @@ final class FileManagerStoreProvider: StoreProviderProtocol {
 
     // MARK: - Public Methods
     func insert(
-        target: StoreTarget,
+        path: String,
         data: CacheDataModel,
         completion: @escaping (StoreProviderError?) -> Void
     ) {
-        guard let url = getURL(from: target.path) else {
+        guard let url = getURL(from: path) else {
             return completion(.invalidRequest)
         }
 
@@ -28,10 +28,10 @@ final class FileManagerStoreProvider: StoreProviderProtocol {
     }
 
     func retrieve(
-        target: StoreTarget,
+        path: String,
         completion: @escaping (RetriveResult) -> Void
     ) {
-        guard let url = getURL(from: target.path) else {
+        guard let url = getURL(from: path) else {
             return completion(.error(.invalidRequest))
         }
 
@@ -47,10 +47,10 @@ final class FileManagerStoreProvider: StoreProviderProtocol {
     }
 
     func delete(
-        target: StoreTarget,
+        path: String,
         completion: @escaping (StoreProviderError?) -> Void
     ) {
-        guard let url = getURL(from: target.path) else {
+        guard let url = getURL(from: path) else {
             return completion(.invalidRequest)
         }
 

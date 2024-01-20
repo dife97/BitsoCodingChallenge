@@ -3,18 +3,18 @@ import Foundation
 // TODO: Segregate
 public protocol StoreProviderProtocol {
     func insert(
-        target: StoreTarget,
+        path: String,
         data: CacheDataModel,
         completion: @escaping (StoreProviderError?) -> Void
     )
 
     func retrieve(
-        target: StoreTarget,
+        path: String,
         completion: @escaping (RetriveResult) -> Void
     )
 
     func delete(
-        target: StoreTarget,
+        path: String,
         completion: @escaping (StoreProviderError?) -> Void
     )
 }
@@ -26,6 +26,14 @@ public enum RetriveResult {
 }
 
 public struct CacheDataModel: Decodable {
-    let data: Data
-    let timestamp: Date
+    public let data: Data
+    public let timestamp: Date
+
+    public init(
+        data: Data,
+        timestamp: Date = Date()
+    ) {
+        self.data = data
+        self.timestamp = timestamp
+    }
 }
