@@ -94,7 +94,7 @@ public final class ArtsListManager: ArtsListProtocol {
             completion(.failure(.connection)) // TODO: Add unit test
         }
 
-        if isFirstPage { // TODO: Add unit test and refactor to clean code
+        if isFirstPage { // TODO: Add unit test
             localArtsList.getArtsList { result in
                 switch result {
                 case .success(let artsList):

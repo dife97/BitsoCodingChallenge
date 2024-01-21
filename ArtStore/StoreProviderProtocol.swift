@@ -1,6 +1,5 @@
 import Foundation
 
-// TODO: Segregate
 public protocol StoreProviderProtocol {
     func insert(
         path: String,
@@ -12,11 +11,6 @@ public protocol StoreProviderProtocol {
         path: String,
         completion: @escaping (RetriveResult) -> Void
     )
-
-//    func delete(
-//        path: String,
-//        completion: @escaping (StoreProviderError?) -> Void
-//    )
 }
 
 public enum RetriveResult {

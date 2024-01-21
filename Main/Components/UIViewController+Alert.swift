@@ -5,7 +5,7 @@ extension UIViewController {
         title: String,
         message: String,
         buttonTitle: String,
-        action: @escaping () -> Void
+        action: (() -> Void)? = nil
     ) {
         let alertController = UIAlertController(
             title: title,
@@ -16,7 +16,7 @@ extension UIViewController {
             title: buttonTitle,
             style: .default,
             handler: { _ in
-                action()
+                action?()
             }
         )
         alertController.addAction(alertAction)

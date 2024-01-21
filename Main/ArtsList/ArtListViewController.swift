@@ -4,11 +4,11 @@ import ArtNetwork
 
 final class ArtListViewController: UIViewController {
     // MARK: - Dependencies
-    private let viewModel: ArtListViewModelProtocol
+    private let viewModel: ArtsListInputProtocol
     var artsListView: ArtListViewProtocol?
 
     // MARK: - Initializers
-    init(viewModel: ArtListViewModelProtocol) {
+    init(viewModel: ArtsListInputProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,22 +43,19 @@ extension ArtListViewController {
 }
 
 // MARK: - Display Logic
-extension ArtListViewController: ArtListViewModelDelegate {
+extension ArtListViewController: ArtsListOutputProtocol {
     func showFetchArtsListError(with alertErrorModel: AlertErrorModel) {
         artsListView?.setLoadingState(to: false)
 
         showAlert(
             title: alertErrorModel.title,
             message: alertErrorModel.description,
-            buttonTitle: alertErrorModel.confirmButtonTitle,
-            action: {
-                print("Ok")
-            }
+            buttonTitle: alertErrorModel.confirmButtonTitle
         )
     }
 
     func showArtsList(with artItems: [ArtItemView]) {
-        artsListView?.setLoadingState(to: false) // TODO: Add tests
+        artsListView?.setLoadingState(to: false)
         artsListView?.loadArtsList(with: artItems)
     }
 
@@ -76,9 +73,7 @@ extension ArtListViewController: ArtListViewModelDelegate {
         showAlert(
             title: alertErrorModel.title,
             message: alertErrorModel.description,
-            buttonTitle: alertErrorModel.confirmButtonTitle,
-            action: {
-            }
+            buttonTitle: alertErrorModel.confirmButtonTitle
         )
     }
 
@@ -107,7 +102,7 @@ extension ArtListViewController: ArtsListViewDelegate {
             viewModel: viewModel,
             infoModel: artInfo
         )
-        viewModel.delegate = viewController
+        viewModel.viewController = viewController
         let artDetailNavigationController = UINavigationController(rootViewController: viewController)
         navigationController?.showDetailViewController(artDetailNavigationController, sender: self)
     }

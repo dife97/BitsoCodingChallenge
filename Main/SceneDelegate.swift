@@ -32,7 +32,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             getArtImage: getImageUseCase
         ))
         let viewController = ArtListViewController(viewModel: viewModel)
-        viewModel.delegate = viewController
+        viewModel.viewController = viewController
         return viewController
     }
 }

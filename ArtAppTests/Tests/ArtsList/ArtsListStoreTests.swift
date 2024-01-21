@@ -75,28 +75,6 @@ final class ArtStoreTests: XCTestCase {
         let validCache: CacheDataModel = .init(data: expectedArtsListData)
         expectGetArtsList(.success(expectedArtsList), whenStoreCompletesWith: .retrievedData(validCache))
     }
-
-    // MARK: - Delete Arts List
-//    func test_cleanArtsList_sendsCorrectPath() {
-//        let (sut, providerSpy) = buildSUT()
-//        let expectedPath = "arts-list"
-//
-//        sut.cleanArtsList { _ in }
-//
-//        XCTAssertEqual(providerSpy.receivedDeletePath, [expectedPath])
-//    }
-//
-//    func test_cleanArtsList_deliversUnexpectedError_whenDeletionCompletesWithUnexpected() {
-//        expectCleanArtsList(.unexpected, whenStoreCompletesWith: .unexpected)
-//    }
-//
-//    func test_cleanArtsList_deliversInvalidRequestError_whenDeletionCompletesWithInvalidRequest() {
-//        expectCleanArtsList(.invalidRequest, whenStoreCompletesWith: .invalidRequest)
-//    }
-//
-//    func test_cleanArtsList_deliversNoError_whenDeletionCompletesSuccesfully() {
-//        expectCleanArtsList(nil, whenStoreCompletesWith: nil)
-//    }
 }
 
 // MARK: - Helpers
@@ -157,28 +135,6 @@ extension ArtStoreTests {
         providerSpy.completeRetrieve(with: storeResult)
         wait(for: [exp], timeout: 1)
     }
-
-//    private func expectCleanArtsList(
-//        _ expectedResult: ArtsListStoreError?,
-//        whenStoreCompletesWith storeResult: StoreProviderError?,
-//        file: StaticString = #filePath,
-//        line: UInt = #line
-//    ) {
-//        let (sut, providerSpy) = buildSUT()
-//        let exp = expectation(description: "Wait store to complete")
-//        sut.cleanArtsList { receivedResult in
-//            XCTAssertEqual(
-//                expectedResult,
-//                receivedResult,
-//                "Expected \(String(describing: expectedResult)) error and received \(String(describing: receivedResult)) instead",
-//                file: file,
-//                line: line
-//            )
-//            exp.fulfill()
-//        }
-//        providerSpy.completeDelete(with: storeResult)
-//        wait(for: [exp], timeout: 1)
-//    }
 
     private func makeDummyArtsList() -> ArtsList {
         [

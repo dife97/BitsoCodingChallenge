@@ -1,4 +1,4 @@
-public protocol ServiceTarget { // TODO: Change to HTTPTarget
+public protocol ServiceTarget {
     var server: ArtAPIServer { get }
     var method: HTTPMethod { get }
     var path: String { get }

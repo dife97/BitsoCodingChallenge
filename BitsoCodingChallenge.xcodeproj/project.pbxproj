@@ -648,19 +648,36 @@
 			path = GetImages;
 			sourceTree = "<group>";
 		};
-		94B9ACEF2B5D5AF000D61BF3 /* Main */ = {
+		94A596612B5D6EB600DACF8F /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				94B9AD0F2B5D5B4F00D61BF3 /* ArtsList */,
-				94B9AD222B5D5C4900D61BF3 /* ArtDetails */,
-				94B9AD2E2B5D5CB700D61BF3 /* Components */,
+				94B9AD312B5D5CC800D61BF3 /* Metrics.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		94A596622B5D6F1600DACF8F /* App */ = {
+			isa = PBXGroup;
+			children = (
 				94B9ACF02B5D5AF000D61BF3 /* AppDelegate.swift */,
 				94B9ACF22B5D5AF000D61BF3 /* SceneDelegate.swift */,
-				94B9ACF42B5D5AF000D61BF3 /* ViewController.swift */,
-				94B9ACF62B5D5AF000D61BF3 /* Main.storyboard */,
 				94B9ACF92B5D5AF100D61BF3 /* Assets.xcassets */,
 				94B9ACFB2B5D5AF100D61BF3 /* LaunchScreen.storyboard */,
 				94B9ACFE2B5D5AF100D61BF3 /* Info.plist */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		94B9ACEF2B5D5AF000D61BF3 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				94A596622B5D6F1600DACF8F /* App */,
+				94B9AD0F2B5D5B4F00D61BF3 /* ArtsList */,
+				94B9AD222B5D5C4900D61BF3 /* ArtDetails */,
+				94A596612B5D6EB600DACF8F /* Helpers */,
+				94B9AD2E2B5D5CB700D61BF3 /* Components */,
+				94B9ACF42B5D5AF000D61BF3 /* ViewController.swift */,
+				94B9ACF62B5D5AF000D61BF3 /* Main.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -676,10 +693,10 @@
 		94B9AD0F2B5D5B4F00D61BF3 /* ArtsList */ = {
 			isa = PBXGroup;
 			children = (
-				94B9AD102B5D5B5B00D61BF3 /* View */,
 				94B9AD112B5D5B7C00D61BF3 /* ArtListViewController.swift */,
 				94B9AD132B5D5B9500D61BF3 /* ArtListViewModel.swift */,
 				94B9AD152B5D5BC600D61BF3 /* AlertErrorModel.swift */,
+				94B9AD102B5D5B5B00D61BF3 /* View */,
 			);
 			path = ArtsList;
 			sourceTree = "<group>";
@@ -687,9 +704,9 @@
 		94B9AD102B5D5B5B00D61BF3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				94B9AD172B5D5BDF00D61BF3 /* ArtItem */,
-				94B9AD1E2B5D5C1800D61BF3 /* ArtImageModel.swift */,
 				94B9AD202B5D5C2400D61BF3 /* ArtsListView.swift */,
+				94B9AD1E2B5D5C1800D61BF3 /* ArtImageModel.swift */,
+				94B9AD172B5D5BDF00D61BF3 /* ArtItem */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -697,8 +714,8 @@
 		94B9AD172B5D5BDF00D61BF3 /* ArtItem */ = {
 			isa = PBXGroup;
 			children = (
-				94B9AD182B5D5BEC00D61BF3 /* ArtItemTableViewCell.swift */,
 				94B9AD1A2B5D5BFC00D61BF3 /* ArtItemView.swift */,
+				94B9AD182B5D5BEC00D61BF3 /* ArtItemTableViewCell.swift */,
 				94B9AD1C2B5D5C0900D61BF3 /* ArtItemViewFactory.swift */,
 			);
 			path = ArtItem;
@@ -707,9 +724,9 @@
 		94B9AD222B5D5C4900D61BF3 /* ArtDetails */ = {
 			isa = PBXGroup;
 			children = (
-				94B9AD232B5D5C5800D61BF3 /* View */,
 				94B9AD242B5D5C6100D61BF3 /* ArtDetailsViewController.swift */,
 				94B9AD262B5D5C6B00D61BF3 /* ArtDetailsViewModel.swift */,
+				94B9AD232B5D5C5800D61BF3 /* View */,
 			);
 			path = ArtDetails;
 			sourceTree = "<group>";
@@ -717,9 +734,9 @@
 		94B9AD232B5D5C5800D61BF3 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				94B9AD2C2B5D5C9A00D61BF3 /* ArtDetailsView.swift */,
 				94B9AD282B5D5C8400D61BF3 /* ArtDetailItemView.swift */,
 				94B9AD2A2B5D5C9100D61BF3 /* ArtDetailsSetupModel.swift */,
-				94B9AD2C2B5D5C9A00D61BF3 /* ArtDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -728,7 +745,6 @@
 			isa = PBXGroup;
 			children = (
 				94B9AD2F2B5D5CBF00D61BF3 /* Loader.swift */,
-				94B9AD312B5D5CC800D61BF3 /* Metrics.swift */,
 				94A5965F2B5D60C200DACF8F /* UIViewController+Alert.swift */,
 			);
 			path = Components;

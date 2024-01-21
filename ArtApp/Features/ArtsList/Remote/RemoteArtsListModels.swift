@@ -14,35 +14,12 @@ public struct ArtsListRequestModel: EquatableModel {
 
 // MARK: - Response
 public struct ArtsListResponseModel: EquatableModel { // TODO: Change to use only decoder?
-//    let pagination: PaginationModel
     let data: [ArtListData]
 
-    init(
-//        pagination: PaginationModel,
-        data: [ArtListData]
-    ) {
-//        self.pagination = pagination
+    init(data: [ArtListData]) {
         self.data = data
     }
 }
-
-//struct PaginationModel: EquatableModel {
-//    let currentPage: Int
-//    let offset: Int
-//
-//    enum CodingKeys: String, CodingKey {
-//        case currentPage = "current_page"
-//        case offset
-//    }
-//
-//    init(
-//        currentPage: Int,
-//        offset: Int
-//    ) {
-//        self.currentPage = currentPage
-//        self.offset = offset
-//    }
-//}
 
 struct ArtListData: EquatableModel {
     let artId: Int

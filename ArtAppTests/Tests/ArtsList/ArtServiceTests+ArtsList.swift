@@ -103,15 +103,6 @@ extension ArtServiceTests {
         let providerSpy = HTTPProviderSpy()
         let sut = ArtService(provider: providerSpy)
         let requestModel: ArtsListRequestModel = .init(page: 1, limit: 10)
-//        let expetedResponseData: ArtsListResponseModel = .init(
-//            pagination: .init(
-//                currentPage: 1,
-//                offset: 0
-//            ),
-//            data: [
-//                .init(artId: 123, imageId: "any", title: "any", year: 123, author: "any")
-//            ]
-//        )
         let expetedResponseData: ArtsListResponseModel = .init(data: [
             .init(artId: 123, imageId: "any", title: "any", year: 123, author: "any")
         ])

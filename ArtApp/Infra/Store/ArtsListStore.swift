@@ -54,19 +54,6 @@ extension ArtsListStore: LocalArtsListProtocol {
             }
         }
     }
-
-//    public func cleanArtsList(completion: @escaping (ArtsListStoreError?) -> Void) {
-//        provider.delete(path: artsListPath) { error in
-//            switch error {
-//            case .invalidRequest:
-//                completion(.invalidRequest)
-//            case .unexpected:
-//                completion(.unexpected)
-//            case nil:
-//                completion(nil)
-//            }
-//        }
-//    }
 }
 
 // MARK: - Private Methods

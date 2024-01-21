@@ -42,30 +42,12 @@ public final class FileManagerStoreProvider: StoreProviderProtocol {
             return completion(.empty)
         }
 
-        // String(data: data, encoding: .utf8)
-
         if let cachedData = try? JSONDecoder().decode(CacheDataModel.self, from: data) {
             completion(.retrievedData(cachedData))
         } else {
             completion(.error(.unexpected))
         }
     }
-
-//    public func delete(
-//        path: String,
-//        completion: @escaping (StoreProviderError?) -> Void
-//    ) {
-//        guard let url = getURL(from: path) else {
-//            return completion(.invalidRequest)
-//        }
-//
-//        do {
-//            try manager.removeItem(at: url)
-//            completion(nil)
-//        } catch {
-//            return completion(.unexpected)
-//        }
-//    }
 
     // MARK: - Private Methods
     private func getURL(from path: String) -> URL? {

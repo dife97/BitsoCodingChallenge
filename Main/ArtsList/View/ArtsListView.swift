@@ -170,7 +170,7 @@ extension ArtsListView: UITableViewDelegate {
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        let itemPerPage = 10 // TODO: get from model
+        let itemPerPage = 10 // TODO: receive from model
         let firstPageItem = artsList.count - itemPerPage
 
         if indexPath.row == firstPageItem {

@@ -2,32 +2,25 @@ import Foundation
 import ArtApp
 import UIKit
 
-protocol ArtListViewModelProtocol {
+protocol ArtsListInputProtocol {
     func fetchArtList()
     func prefetchNextPage()
     func refreshArtsList()
 }
 
-protocol ArtListViewModelDelegate: AnyObject {
-    // Fetch ArtsList
+protocol ArtsListOutputProtocol: AnyObject {
     func showArtsList(with artItems: [ArtItemView])
     func showFetchArtsListError(with alertErrorModel: AlertErrorModel)
-
-    // Prefetch
     func showPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
-    
-    // Refresh
     func showRefreshedArtsList(with refreshedArtItems: [ArtItemView])
     func showRefreshedArtsListError(with alertErrorModel: AlertErrorModel)
-
-    // Image
     func updateArtImage(with artImage: ArtImageModel)
 }
 
-final class ArtListViewModel: ArtListViewModelProtocol {
+final class ArtListViewModel: ArtsListInputProtocol {
     // MARK: - Dependency
     private let useCases: UseCases
-    weak var delegate: ArtListViewModelDelegate?
+    weak var viewController: ArtsListOutputProtocol?
 
     // MARK: Inner Type
     struct UseCases {
@@ -47,7 +40,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 
             switch result {
             case .success(let artItems):
-                delegate?.showArtsList(with: artItems)
+                viewController?.showArtsList(with: artItems)
 
             case .failure(let error):
                 handleFetchArtsListError(error)
@@ -56,10 +49,10 @@ final class ArtListViewModel: ArtListViewModelProtocol {
     }
 
     func prefetchNextPage() {
-        getArtsList { [delegate] result in
+        getArtsList { [viewController] result in
             switch result {
             case .success(let artItems):
-                delegate?.showPrefetchedArtsList(with: artItems)
+                viewController?.showPrefetchedArtsList(with: artItems)
 
             case .failure(let error):
                 print("\(error)")
@@ -73,7 +66,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 
             switch result {
             case .success(let artItems):
-                delegate?.showRefreshedArtsList(with: artItems)
+                viewController?.showRefreshedArtsList(with: artItems)
 
             case .failure(let error):
                 handleRefreshArtsListError(error)
@@ -133,7 +126,7 @@ extension ArtListViewModel {
     }
 
     private func handleRefreshArtsListError(_ error: ArtsListError) {
-        delegate?.showRefreshedArtsListError(with: .init(
+        viewController?.showRefreshedArtsListError(with: .init(
             title: "Oops 😪",
             description: "Something wrong happened.",
             confirmButtonTitle: "Ok"
@@ -146,7 +139,7 @@ extension ArtListViewModel {
             description: alertErrorModel.description,
             confirmButtonTitle: alertErrorModel.confirmButtonTitle
         )
-        delegate?.showFetchArtsListError(with: alertErrorModel)
+        viewController?.showFetchArtsListError(with: alertErrorModel)
     }
 
     private func getImages(from artList: ArtsList) {
@@ -165,13 +158,13 @@ extension ArtListViewModel {
 
                 switch result {
                 case .success(let data):
-                    delegate?.updateArtImage(with: .init(
+                    viewController?.updateArtImage(with: .init(
                         artId: data.artId,
                         image: data.imageData
                     ))
 
                 case .failure(let error):
-                    delegate?.updateArtImage(with: .init(
+                    viewController?.updateArtImage(with: .init(
                         artId: error.artId,
                         image: UIImage(systemName: "xmark.seal.fill")?.pngData() ?? Data() // TODO: Refactor so ViewModel does not import UIKit
                     ))
