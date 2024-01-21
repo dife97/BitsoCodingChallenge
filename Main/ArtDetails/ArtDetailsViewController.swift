@@ -11,13 +11,13 @@ struct ArtDetailsInfoModel {
 
 final class ArtDetailsViewController: UIViewController {
     // MARK: - Dependencies
-    private let viewModel: ArtDetailsViewModelProtocol
+    private let viewModel: ArtDetailsInputProtocol
     private let infoModel: ArtDetailsInfoModel
     var artsDetailsView: ArtDetailsViewProtocol?
 
     // MARK: - Initializers
     init(
-        viewModel: ArtDetailsViewModelProtocol,
+        viewModel: ArtDetailsInputProtocol,
         infoModel: ArtDetailsInfoModel
     ) {
         self.viewModel = viewModel
@@ -63,7 +63,7 @@ extension ArtDetailsViewController {
 }
 
 // MARK: - Public Methods
-extension ArtDetailsViewController: ArtDetailsViewModelDelegate {
+extension ArtDetailsViewController: ArtDetailsOutputProtocol {
     func showArtDetails(with artDetailsModel: ArtDetailsSetupModel) {
         artsDetailsView?.setLoadingState(to: false)
         artsDetailsView?.showArtDetails(with: artDetailsModel)

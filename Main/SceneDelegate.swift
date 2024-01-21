@@ -1,5 +1,6 @@
 import UIKit
 import ArtNetwork
+import ArtStore
 import ArtApp
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -19,16 +20,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     private func getTemporaryViewController() -> UIViewController {
         let urlSessionHTTPProvider = URLSessionHTTPProvider()
         let artService = ArtService(provider: urlSessionHTTPProvider)
-        let getArtsListUseCase = RemoteArtListUseCase(service: artService)
+        let storeProvider = FileManagerStoreProvider()
+        let artsListStore = ArtsListStore(provider: storeProvider)
+        let artsListManager = ArtsListManager(
+            remoteArtsList: artService,
+            localArtsList: artsListStore
+        )
         let getImageUseCase = RemoteGetArtImagesUseCase(service: artService)
-        let getArtDetailsUseCase = RemoteArtDetailsUseCase(service: artService)
         let viewModel = ArtListViewModel(useCases: .init(
-            getArtsList: getArtsListUseCase,
-            getArtImage: getImageUseCase,
-            getArtDetails: getArtDetailsUseCase
+            artsListManager: artsListManager,
+            getArtImage: getImageUseCase
         ))
         let viewController = ArtListViewController(viewModel: viewModel)
-        viewModel.delegate = viewController
+        viewModel.viewController = viewController
         return viewController
     }
 }

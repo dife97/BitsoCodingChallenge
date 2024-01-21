@@ -1,6 +1,6 @@
 import ArtNetwork
 
-final class HTTPProviderSpy: HTTPProvider {
+final class HTTPProviderSpy: HTTPProviderProtocol {
     private(set) var receivedTarget: ServiceTarget?
     private var receivedCompletion: [(HTTPProviderResult) -> Void] = []
 

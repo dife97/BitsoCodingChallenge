@@ -1,18 +1,18 @@
 import Foundation
 import ArtApp
 
-protocol ArtDetailsViewModelProtocol {
+protocol ArtDetailsInputProtocol {
     func getArtDetails(with artId: Int)
 }
 
-protocol ArtDetailsViewModelDelegate: AnyObject {
+protocol ArtDetailsOutputProtocol: AnyObject {
     func showArtDetails(with artDetailsModel: ArtDetailsSetupModel)
 }
 
-final class ArtDetailsViewModel: ArtDetailsViewModelProtocol {
+final class ArtDetailsViewModel: ArtDetailsInputProtocol {
     // MARK: - Dependency
     private let getArtDetailsUseCase: ArtDetailsProtocol
-    weak var delegate: ArtDetailsViewModelDelegate?
+    weak var viewController: ArtDetailsOutputProtocol?
 
     // MARK: - Initializer
     init(getArtDetailsUseCase: ArtDetailsProtocol) {
@@ -28,7 +28,7 @@ final class ArtDetailsViewModel: ArtDetailsViewModelProtocol {
                 switch result {
                 case .success(let data):
                     let artDetailsModel = getArtDetailsModel(from: data)
-                    delegate?.showArtDetails(with: artDetailsModel)
+                    viewController?.showArtDetails(with: artDetailsModel)
 
                 case .failure(let error):
                     print("FAIL: \(error)")

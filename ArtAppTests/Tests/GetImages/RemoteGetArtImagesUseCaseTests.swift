@@ -1,5 +1,5 @@
 import XCTest
-import ArtApp
+@testable import ArtApp
 
 final class RemoteGetArtImagesUseCaseTests: XCTestCase {
     func test_executes_forAllImages() {

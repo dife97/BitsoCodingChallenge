@@ -83,14 +83,15 @@ extension RemoteArtDetailsUseCaseTests {
 
     private func makeDummyArtDetails() -> ArtDetailsModel {
         .init(
-            artId: "any id",
-            title: "any title",
-            date: "any data",
-            artistInfo: "any info",
+            artId: 0,
             description: "any description",
             place: "any place",
+            date: "any date",
             medium: "any medium",
-            dimensions: "any dimensions"
+            inscriptions: "any inscription",
+            dimensions: "any dimension",
+            creditLine: "any credit line",
+            referenceNumber: "any reference"
         )
     }
 }
