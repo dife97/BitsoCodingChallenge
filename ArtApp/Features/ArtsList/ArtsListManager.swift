@@ -1,7 +1,9 @@
 public final class ArtsListManager: ArtsListProtocol {
     // MARK: - Properties
     private var isFetching = false
+    private var isRefreshing = false
     private var currentPage = 1
+    private var isFirstPage: Bool { currentPage == 1 }
     private let limitPerPage = 10
 
     // MARK: - Dependencies
@@ -25,6 +27,8 @@ public final class ArtsListManager: ArtsListProtocol {
         if isFetching {
             return completion(.failure(.isFetching))
         }
+
+        self.isRefreshing = isRefreshing
 
         if isRefreshing {
             currentPage = 1
@@ -52,6 +56,7 @@ public final class ArtsListManager: ArtsListProtocol {
                 handleArtServiceError(error, completion: completion)
             }
 
+            self.isRefreshing = false
             isFetching = false
             currentPage += 1
         }
@@ -78,8 +83,6 @@ public final class ArtsListManager: ArtsListProtocol {
                     Logger.log("Saved ArtsList locally.")
                 }
             }
-        } else {
-            Logger.log("")
         }
     }
 
@@ -87,7 +90,11 @@ public final class ArtsListManager: ArtsListProtocol {
         _ error: ArtServiceError,
         completion: @escaping (ArtsListResult) -> Void
     ) {
-        if currentPage == 1 { // TODO: Add unit test and refactor to clean code
+        if isRefreshing && isFirstPage {
+            completion(.failure(.connection)) // TODO: Add unit test
+        }
+
+        if isFirstPage { // TODO: Add unit test and refactor to clean code
             localArtsList.getArtsList { result in
                 switch result {
                 case .success(let artsList):

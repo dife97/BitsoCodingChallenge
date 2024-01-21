@@ -12,7 +12,7 @@ final class ArtListViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError()
     }
@@ -44,8 +44,17 @@ extension ArtListViewController {
 
 // MARK: - Display Logic
 extension ArtListViewController: ArtListViewModelDelegate {
-    func showErrorAlert(with alertErrorModel: AlertErrorModel) {
+    func showFetchArtsListError(with alertErrorModel: AlertErrorModel) {
+        artsListView?.setLoadingState(to: false)
 
+        showAlert(
+            title: alertErrorModel.title,
+            message: alertErrorModel.description,
+            buttonTitle: alertErrorModel.confirmButtonTitle,
+            action: {
+                print("Ok")
+            }
+        )
     }
 
     func showArtsList(with artItems: [ArtItemView]) {
@@ -59,6 +68,18 @@ extension ArtListViewController: ArtListViewModelDelegate {
 
     func showRefreshedArtsList(with refreshedArtItems: [ArtItemView]) {
         artsListView?.loadRefreshedArtsList(with: refreshedArtItems)
+    }
+
+    func showRefreshedArtsListError(with alertErrorModel: AlertErrorModel) {
+        artsListView?.stopLoadingRefresh()
+
+        showAlert(
+            title: alertErrorModel.title,
+            message: alertErrorModel.description,
+            buttonTitle: alertErrorModel.confirmButtonTitle,
+            action: {
+            }
+        )
     }
 
     func updateArtImage(with artImage: ArtImageModel) {

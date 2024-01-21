@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "946B78782B57507700F6DC91"
+               BlueprintIdentifier = "94B9ACED2B5D5AF000D61BF3"
                BuildableName = "Main.app"
                BlueprintName = "Main"
                ReferencedContainer = "container:BitsoCodingChallenge.xcodeproj">
@@ -34,7 +34,7 @@
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "946B788D2B57507900F6DC91"
+               BlueprintIdentifier = "94B9AD052B5D5B0700D61BF3"
                BuildableName = "MainTests.xctest"
                BlueprintName = "MainTests"
                ReferencedContainer = "container:BitsoCodingChallenge.xcodeproj">
@@ -56,7 +56,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "946B78782B57507700F6DC91"
+            BlueprintIdentifier = "94B9ACED2B5D5AF000D61BF3"
             BuildableName = "Main.app"
             BlueprintName = "Main"
             ReferencedContainer = "container:BitsoCodingChallenge.xcodeproj">
@@ -73,7 +73,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "946B78782B57507700F6DC91"
+            BlueprintIdentifier = "94B9ACED2B5D5AF000D61BF3"
             BuildableName = "Main.app"
             BlueprintName = "Main"
             ReferencedContainer = "container:BitsoCodingChallenge.xcodeproj">

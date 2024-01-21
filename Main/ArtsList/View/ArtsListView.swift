@@ -4,6 +4,7 @@ protocol ArtListViewProtocol {
     func setLoadingState(to isLoading: Bool)
     func loadArtsList(with artsList: [ArtItemView])
     func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView])
+    func stopLoadingRefresh()
     func updateArtImage(with artImage: ArtImageModel)
 }
 
@@ -101,10 +102,13 @@ extension ArtsListView: ArtListViewProtocol {
     }
 
     func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView]) {
-        artsListTableView.refreshControl?.endRefreshing()
+        stopLoadingRefresh()
         artsList = refreshedArtsList
         artsListTableView.reloadData()
-        print("did refresh")
+    }
+
+    func stopLoadingRefresh() {
+        artsListTableView.refreshControl?.endRefreshing()
     }
 
     func updateArtImage(with artImage: ArtImageModel) {

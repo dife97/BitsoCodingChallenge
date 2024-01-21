@@ -9,10 +9,18 @@ protocol ArtListViewModelProtocol {
 }
 
 protocol ArtListViewModelDelegate: AnyObject {
-    func showErrorAlert(with alertErrorModel: AlertErrorModel)
+    // Fetch ArtsList
     func showArtsList(with artItems: [ArtItemView])
+    func showFetchArtsListError(with alertErrorModel: AlertErrorModel)
+
+    // Prefetch
     func showPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
+    
+    // Refresh
     func showRefreshedArtsList(with refreshedArtItems: [ArtItemView])
+    func showRefreshedArtsListError(with alertErrorModel: AlertErrorModel)
+
+    // Image
     func updateArtImage(with artImage: ArtImageModel)
 }
 
@@ -35,7 +43,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
     // MARK: - Public Methods
     func fetchArtList() {
         getArtsList { [weak self] result in
-            guard let self else { return } // TODO: Add unit test tracking memory leak
+            guard let self else { return }
 
             switch result {
             case .success(let artItems):
@@ -60,13 +68,15 @@ final class ArtListViewModel: ArtListViewModelProtocol {
     }
 
     func refreshArtsList() {
-        getArtsList(isRefreshing: true) { [delegate] result in
+        getArtsList(isRefreshing: true) { [weak self] result in
+            guard let self else { return }
+
             switch result {
             case .success(let artItems):
                 delegate?.showRefreshedArtsList(with: artItems)
 
             case .failure(let error):
-                print("\(error)")
+                handleRefreshArtsListError(error)
             }
         }
     }
@@ -78,7 +88,6 @@ extension ArtListViewModel {
         isRefreshing: Bool = false,
         completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
     ) {
-        print("")
         useCases.artsListManager.getArtsList(isRefreshing: isRefreshing) { result in
             DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
                 guard let self else { return }
@@ -105,22 +114,39 @@ extension ArtListViewModel {
     }
 
     private func handleFetchArtsListError(_ error: ArtsListError) {
-        let alertErrorDescription: String = {
-            switch error {
-            case .isFetching:
-                return ""
-            case .connection:
-                return "It seems that you have no internet connection"
-            case .unexpected:
-                return ""
-            }
-        }()
+        switch error {
+        case .isFetching:
+            break
+        case .connection:
+            showAlertError(with: .init(
+                title: "Oops 😪",
+                description: "It seems that you have no internet connection.",
+                confirmButtonTitle: "Ok"
+            ))
+        case .unexpected:
+            showAlertError(with: .init(
+                title: "Oops 😪",
+                description: "Something wrong happened.",
+                confirmButtonTitle: "Try Again"
+            ))
+        }
+    }
 
-        let alertErrorModel: AlertErrorModel = .init(
+    private func handleRefreshArtsListError(_ error: ArtsListError) {
+        delegate?.showRefreshedArtsListError(with: .init(
             title: "Oops 😪",
-            description: alertErrorDescription
+            description: "Something wrong happened.",
+            confirmButtonTitle: "Ok"
+        ))
+    }
+
+    private func showAlertError(with alertErrorModel: AlertErrorModel) {
+        let alertErrorModel: AlertErrorModel = .init(
+            title: alertErrorModel.title,
+            description: alertErrorModel.description,
+            confirmButtonTitle: alertErrorModel.confirmButtonTitle
         )
-        delegate?.showErrorAlert(with: alertErrorModel)
+        delegate?.showFetchArtsListError(with: alertErrorModel)
     }
 
     private func getImages(from artList: ArtsList) {

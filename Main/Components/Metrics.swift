@@ -1,6 +1,6 @@
 import UIKit
 
-enum Metrics { }
+enum Metrics {}
 
 // MARK: - Spacings
 extension Metrics {
