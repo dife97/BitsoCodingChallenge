@@ -7,7 +7,7 @@ extension UIView {
         let loader = UIActivityIndicatorView()
         loader.translatesAutoresizingMaskIntoConstraints = false
         loader.tag = loaderTag
-        loader.color = .black
+        loader.color = .label
 
         addSubview(loader)
         NSLayoutConstraint.activate([

@@ -60,7 +60,7 @@
 		94B9ACFA2B5D5AF100D61BF3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94B9ACF92B5D5AF100D61BF3 /* Assets.xcassets */; };
 		94B9ACFD2B5D5AF100D61BF3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94B9ACFB2B5D5AF100D61BF3 /* LaunchScreen.storyboard */; };
 		94B9AD092B5D5B0700D61BF3 /* MainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9AD082B5D5B0700D61BF3 /* MainTests.swift */; };
-		94B9AD122B5D5B7C00D61BF3 /* ArtListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9AD112B5D5B7C00D61BF3 /* ArtListViewController.swift */; };
+		94B9AD122B5D5B7C00D61BF3 /* ArtsListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9AD112B5D5B7C00D61BF3 /* ArtsListViewController.swift */; };
 		94B9AD142B5D5B9500D61BF3 /* ArtListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9AD132B5D5B9500D61BF3 /* ArtListViewModel.swift */; };
 		94B9AD162B5D5BC600D61BF3 /* AlertErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9AD152B5D5BC600D61BF3 /* AlertErrorModel.swift */; };
 		94B9AD192B5D5BEC00D61BF3 /* ArtItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94B9AD182B5D5BEC00D61BF3 /* ArtItemTableViewCell.swift */; };
@@ -252,7 +252,7 @@
 		94B9ACFE2B5D5AF100D61BF3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94B9AD062B5D5B0700D61BF3 /* MainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		94B9AD082B5D5B0700D61BF3 /* MainTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTests.swift; sourceTree = "<group>"; };
-		94B9AD112B5D5B7C00D61BF3 /* ArtListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewController.swift; sourceTree = "<group>"; };
+		94B9AD112B5D5B7C00D61BF3 /* ArtsListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsListViewController.swift; sourceTree = "<group>"; };
 		94B9AD132B5D5B9500D61BF3 /* ArtListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewModel.swift; sourceTree = "<group>"; };
 		94B9AD152B5D5BC600D61BF3 /* AlertErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertErrorModel.swift; sourceTree = "<group>"; };
 		94B9AD182B5D5BEC00D61BF3 /* ArtItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -693,7 +693,7 @@
 		94B9AD0F2B5D5B4F00D61BF3 /* ArtsList */ = {
 			isa = PBXGroup;
 			children = (
-				94B9AD112B5D5B7C00D61BF3 /* ArtListViewController.swift */,
+				94B9AD112B5D5B7C00D61BF3 /* ArtsListViewController.swift */,
 				94B9AD132B5D5B9500D61BF3 /* ArtListViewModel.swift */,
 				94B9AD152B5D5BC600D61BF3 /* AlertErrorModel.swift */,
 				94B9AD102B5D5B5B00D61BF3 /* View */,
@@ -1212,7 +1212,7 @@
 				94B9AD142B5D5B9500D61BF3 /* ArtListViewModel.swift in Sources */,
 				94B9AD212B5D5C2400D61BF3 /* ArtsListView.swift in Sources */,
 				94B9AD192B5D5BEC00D61BF3 /* ArtItemTableViewCell.swift in Sources */,
-				94B9AD122B5D5B7C00D61BF3 /* ArtListViewController.swift in Sources */,
+				94B9AD122B5D5B7C00D61BF3 /* ArtsListViewController.swift in Sources */,
 				94B9AD272B5D5C6B00D61BF3 /* ArtDetailsViewModel.swift in Sources */,
 				94B9AD292B5D5C8400D61BF3 /* ArtDetailItemView.swift in Sources */,
 				94B9AD2D2B5D5C9A00D61BF3 /* ArtDetailsView.swift in Sources */,

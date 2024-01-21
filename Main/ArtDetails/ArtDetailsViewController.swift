@@ -50,11 +50,14 @@ final class ArtDetailsViewController: UIViewController {
 // MARK: - Private Methods
 extension ArtDetailsViewController {
     private func configureNavigationBar() {
-        navigationItem.rightBarButtonItem = .init(
-            barButtonSystemItem: .close,
+        let closeButton: UIBarButtonItem = .init(
+            image: .init(systemName: "xmark"),
+            style: .plain,
             target: self,
             action: #selector(closeButtonTapped)
         )
+        closeButton.tintColor = .label
+        navigationItem.rightBarButtonItem = closeButton
     }
 
     @objc private func closeButtonTapped() {

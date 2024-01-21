@@ -48,7 +48,7 @@ final class ArtDetailsView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = Metrics.Radius.defaultValue
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .systemGray5
         return imageView
     }()
 
@@ -57,7 +57,7 @@ final class ArtDetailsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 18, weight: .bold) // TODO: Move to metrics
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(model.title) - \(model.year)"
         return label
     }()
@@ -68,7 +68,7 @@ final class ArtDetailsView: UIView {
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(model.author)"
         return label
     }()
@@ -197,7 +197,7 @@ final class ArtDetailsView: UIView {
     }
 
     private func extraSetup() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
         artInfoStackView.setCustomSpacing(8, after: artInfoLabel)
     }
 }

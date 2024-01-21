@@ -15,6 +15,7 @@ final class ArtItemTableViewCell: UITableViewCell {
         fatalError()
     }
 
+    // segregate into Configure methods (hierarquia) pra todos
     func configure(with view: UIView) {
         view.translatesAutoresizingMaskIntoConstraints = false
 

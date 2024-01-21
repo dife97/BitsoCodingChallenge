@@ -2,7 +2,7 @@ import UIKit
 import ArtApp
 import ArtNetwork
 
-final class ArtListViewController: UIViewController {
+final class ArtsListViewController: UIViewController {
     // MARK: - Dependencies
     private let viewModel: ArtsListInputProtocol
     var artsListView: ArtListViewProtocol?
@@ -36,14 +36,14 @@ final class ArtListViewController: UIViewController {
 }
 
 // MARK: - Private Methods
-extension ArtListViewController {
+extension ArtsListViewController {
     private func configureNavigationBar() {
         title = "Arts List"
     }
 }
 
 // MARK: - Display Logic
-extension ArtListViewController: ArtsListOutputProtocol {
+extension ArtsListViewController: ArtsListOutputProtocol {
     func showFetchArtsListError(with alertErrorModel: AlertErrorModel) {
         artsListView?.setLoadingState(to: false)
 
@@ -83,7 +83,7 @@ extension ArtListViewController: ArtsListOutputProtocol {
 }
 
 // MARK: - View Delegate
-extension ArtListViewController: ArtsListViewDelegate {
+extension ArtsListViewController: ArtsListViewDelegate {
     func prefetchNextPage() {
         viewModel.prefetchNextPage()
     }

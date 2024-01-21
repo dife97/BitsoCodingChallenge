@@ -24,7 +24,7 @@ final class ArtDetailItemView: UIView {
     private lazy var dividerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .systemGray4
         return view
     }()
 
@@ -34,7 +34,7 @@ final class ArtDetailItemView: UIView {
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14, weight: .bold) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(model.title)"
         return label
     }()
@@ -45,7 +45,7 @@ final class ArtDetailItemView: UIView {
         label.numberOfLines = 0
         label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(model.description)"
         return label
     }()
@@ -85,6 +85,6 @@ final class ArtDetailItemView: UIView {
     }
 
     private func extraSetup() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
     }
 }

@@ -43,7 +43,7 @@ final class ArtItemView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = Metrics.Radius.defaultValue
         imageView.contentMode = .scaleAspectFit
-        imageView.backgroundColor = .lightGray
+        imageView.backgroundColor = .systemGray5
         return imageView
     }()
 
@@ -54,7 +54,7 @@ final class ArtItemView: UIView {
         label.font = .systemFont(ofSize: 16, weight: .bold) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(artItemModel.title), \(artItemModel.year)"
         return label
     }()
@@ -65,7 +65,7 @@ final class ArtItemView: UIView {
         label.numberOfLines = 1
         label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
+        label.textColor = .label
         label.text = artItemModel.author
         return label
     }()

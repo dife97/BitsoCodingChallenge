@@ -55,7 +55,7 @@ final class ArtListViewModel: ArtsListInputProtocol {
                 viewController?.showPrefetchedArtsList(with: artItems)
 
             case .failure(let error):
-                print("\(error)")
+                print("\(error)") // TODO: Remove print
             }
         }
     }

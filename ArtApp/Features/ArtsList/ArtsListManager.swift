@@ -90,11 +90,14 @@ public final class ArtsListManager: ArtsListProtocol {
         _ error: ArtServiceError,
         completion: @escaping (ArtsListResult) -> Void
     ) {
+        // TODO: Add guard
+
         if isRefreshing && isFirstPage {
-            completion(.failure(.connection)) // TODO: Add unit test
+            completion(.failure(.connection))
         }
 
-        if isFirstPage { // TODO: Add unit test
+        if isFirstPage {
+            // TODO: Move to private method
             localArtsList.getArtsList { result in
                 switch result {
                 case .success(let artsList):

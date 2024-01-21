@@ -23,6 +23,8 @@ final class ArtsListView: UIView {
     private lazy var artsListTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .systemBackground
+        tableView.indicatorStyle = .default
         tableView.dataSource = self
         tableView.delegate = self
         tableView.refreshControl = artsListRefreshControl
@@ -37,7 +39,7 @@ final class ArtsListView: UIView {
 
     private lazy var artsListRefreshControl: UIRefreshControl = {
         let refreshControll = UIRefreshControl()
-        refreshControll.tintColor = .black
+        refreshControll.tintColor = .label
         refreshControll.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         return refreshControll
     }()
@@ -71,7 +73,7 @@ final class ArtsListView: UIView {
     private func configureArtsListTableView() {
         addSubview(artsListTableView)
         NSLayoutConstraint.activate([
-            artsListTableView.topAnchor.constraint(equalTo: topAnchor),
+            artsListTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             artsListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             artsListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             artsListTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
@@ -79,7 +81,8 @@ final class ArtsListView: UIView {
     }
 
     private func extraSetup() {
-        backgroundColor = .white
+//        backgroundColor = .systemGray
+        backgroundColor = .systemBackground
     }
 }
 
