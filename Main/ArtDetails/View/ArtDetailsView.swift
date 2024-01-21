@@ -55,9 +55,8 @@ final class ArtDetailsView: UIView {
     private lazy var artInfoLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 2
+        label.numberOfLines = 0
         label.font = .systemFont(ofSize: 18, weight: .bold) // TODO: Move to metrics
-        label.adjustsFontSizeToFitWidth = true
         label.textColor = .black
         label.text = "\(model.title) - \(model.year)"
         return label

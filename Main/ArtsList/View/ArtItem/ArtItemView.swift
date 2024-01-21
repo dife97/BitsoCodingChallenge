@@ -53,6 +53,7 @@ final class ArtItemView: UIView {
         label.numberOfLines = 2
         label.font = .systemFont(ofSize: 16, weight: .bold) // TODO: Move to metrics
         label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.8
         label.textColor = .black
         label.text = "\(artItemModel.title), \(artItemModel.year)"
         return label
