@@ -1,12 +1,5 @@
-//
-//  ArtServiceTestsHelpers.swift
-//  ArtAppTests
-//
-//  Created by Diego Ferreira Rodrigues on 19/01/24.
-//
-
 import XCTest
-import ArtApp
+@testable import ArtApp
 
 final class ArtServiceTests: XCTestCase {
     typealias SUT = (

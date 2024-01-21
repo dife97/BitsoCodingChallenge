@@ -1,6 +1,6 @@
 public struct ArtImageError: Error {
     public let artId: Int
-    public let type: GetArtImageError
+    let type: GetArtImageError
 }
 
 public enum GetArtImageError {

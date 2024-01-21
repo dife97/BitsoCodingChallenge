@@ -1,13 +1,5 @@
-public struct ArtsListModel {
-    public let artList: ArtList
-
-    public init(artList: ArtList) {
-        self.artList = artList
-    }
-}
-
-public typealias ArtList = [ArtModel]
-extension ArtList: EquatableModel {}
+public typealias ArtsList = [ArtModel]
+extension ArtsList: EquatableModel {}
 
 public struct ArtModel: EquatableModel {
     public let artId: Int
@@ -16,17 +8,17 @@ public struct ArtModel: EquatableModel {
     public let year: Int?
     public let author: String?
 
-    public init(
-        artId: Int,
-        imageId: String?,
-        title: String,
-        year: Int?,
-        author: String?
-    ) {
-        self.artId = artId
-        self.imageId = imageId
-        self.title = title
-        self.year = year
-        self.author = author
-    }
+//    init(
+//        artId: Int,
+//        imageId: String?,
+//        title: String,
+//        year: Int?,
+//        author: String?
+//    ) {
+//        self.artId = artId
+//        self.imageId = imageId
+//        self.title = title
+//        self.year = year
+//        self.author = author
+//    }
 }

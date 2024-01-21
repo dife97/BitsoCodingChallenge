@@ -1,33 +1,36 @@
 import Foundation
 
-final class FileManagerStoreProvider: StoreProviderProtocol {
+public final class FileManagerStoreProvider: StoreProviderProtocol {
     // MARK: - Dependency
     private let manager: FileManager
 
     // MARK: - Initializer
-    init(manager: FileManager = .default) {
+    public init(manager: FileManager = .default) {
         self.manager = manager
     }
 
     // MARK: - Public Methods
-    func insert(
+    public func insert(
         path: String,
         data: CacheDataModel,
         completion: @escaping (StoreProviderError?) -> Void
     ) {
-        guard let url = getURL(from: path) else {
+        guard 
+            let url = getURL(from: path),
+            let encodedData = try? JSONEncoder().encode(data)
+        else {
             return completion(.invalidRequest)
         }
 
         do {
-            try data.data.write(to: url)
+            try encodedData.write(to: url)
             completion(nil)
         } catch {
             completion(.unexpected)
         }
     }
 
-    func retrieve(
+    public func retrieve(
         path: String,
         completion: @escaping (RetriveResult) -> Void
     ) {
@@ -39,6 +42,8 @@ final class FileManagerStoreProvider: StoreProviderProtocol {
             return completion(.empty)
         }
 
+        // String(data: data, encoding: .utf8)
+
         if let cachedData = try? JSONDecoder().decode(CacheDataModel.self, from: data) {
             completion(.retrievedData(cachedData))
         } else {
@@ -46,21 +51,21 @@ final class FileManagerStoreProvider: StoreProviderProtocol {
         }
     }
 
-    func delete(
-        path: String,
-        completion: @escaping (StoreProviderError?) -> Void
-    ) {
-        guard let url = getURL(from: path) else {
-            return completion(.invalidRequest)
-        }
-
-        do {
-            try manager.removeItem(at: url)
-            completion(nil)
-        } catch {
-            return completion(.unexpected)
-        }
-    }
+//    public func delete(
+//        path: String,
+//        completion: @escaping (StoreProviderError?) -> Void
+//    ) {
+//        guard let url = getURL(from: path) else {
+//            return completion(.invalidRequest)
+//        }
+//
+//        do {
+//            try manager.removeItem(at: url)
+//            completion(nil)
+//        } catch {
+//            return completion(.unexpected)
+//        }
+//    }
 
     // MARK: - Private Methods
     private func getURL(from path: String) -> URL? {

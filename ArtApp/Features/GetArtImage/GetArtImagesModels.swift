@@ -4,8 +4,8 @@ import Foundation
 public typealias GetArtImagesRequestModel = [GetArtImageRequestModel]
 
 public struct GetArtImageRequestModel {
-    public let artId: Int
-    public let imagedId: String?
+    let artId: Int
+    let imagedId: String?
 
     public init(
         artId: Int,

@@ -1,13 +1,13 @@
 import ArtNetwork
 
-public enum ArtServiceTarget {
-    case getArtList(ArtListRequestModel)
+enum ArtServiceTarget {
+    case getArtList(ArtsListRequestModel)
     case getArtImage(ArtImageRequestModel)
     case getArtDetails(ArtDetailsRequestModel)
 }
 
 extension ArtServiceTarget: ServiceTarget {
-    public var server: ArtAPIServer {
+    var server: ArtAPIServer {
         switch self {
         case .getArtList, .getArtDetails:
             return .artAPI
@@ -16,9 +16,9 @@ extension ArtServiceTarget: ServiceTarget {
         }
     }
 
-    public var method: HTTPMethod { .get }
+    var method: HTTPMethod { .get }
 
-    public var path: String {
+    var path: String {
         switch self {
         case .getArtList:
             return "artworks"
@@ -29,13 +29,13 @@ extension ArtServiceTarget: ServiceTarget {
         }
     }
 
-    public var headers: [String : String] {
+    var headers: [String : String] {
         [
             "AIC-User-Agent" : "BitsoCodingChallenge (diferodrigues@gmail.com)"
         ]
     }
 
-    public var parameters: [String : Any]? {
+    var parameters: [String : Any]? {
         switch self {
         case .getArtList(let artListRequestModel):
             return getArtListParameters(from: artListRequestModel)
@@ -49,7 +49,7 @@ extension ArtServiceTarget: ServiceTarget {
 
 // MARK: - Private Methods
 extension ArtServiceTarget {
-    private func getArtListParameters(from requestModel: ArtListRequestModel) -> [String: Any] {
+    private func getArtListParameters(from requestModel: ArtsListRequestModel) -> [String: Any] {
         [
             "page": requestModel.page,
             "limit": requestModel.limit,

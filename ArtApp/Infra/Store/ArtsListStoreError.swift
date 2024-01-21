@@ -1,4 +1,4 @@
-public enum ArtStoreError: Error {
+public enum ArtsListStoreError: Error {
     case invalidRequest
     case unexpected
 }

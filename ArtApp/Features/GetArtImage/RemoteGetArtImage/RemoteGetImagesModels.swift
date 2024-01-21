@@ -4,7 +4,7 @@ import Foundation
 public struct ArtImageRequestModel {
     let imagedId: String
 
-    public init(imagedId: String) {
+    init(imagedId: String) {
         self.imagedId = imagedId
     }
 }
@@ -13,7 +13,7 @@ public struct ArtImageRequestModel {
 public struct ArtImageResponse: EquatableModel {
     let imageData: Data
 
-    public init(imageData: Data) {
+    init(imageData: Data) {
         self.imageData = imageData
     }
 }

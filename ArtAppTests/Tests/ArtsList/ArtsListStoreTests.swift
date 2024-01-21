@@ -1,6 +1,6 @@
 import XCTest
 import ArtStore
-import ArtApp
+@testable import ArtApp
 
 final class ArtStoreTests: XCTestCase {
     // MARK: - Save Arts List
@@ -22,7 +22,7 @@ final class ArtStoreTests: XCTestCase {
 
     func test_saveArtsList_sendsCorrectPath() {
         let (sut, providerSpy) = buildSUT()
-        let artsList: ArtList = makeDummyArtsList()
+        let artsList: ArtsList = makeDummyArtsList()
         let expectedPath = "arts-list"
 
         sut.saveArtsList(model: artsList) { _ in }
@@ -102,24 +102,24 @@ final class ArtStoreTests: XCTestCase {
 // MARK: - Helpers
 extension ArtStoreTests {
     typealias SUT = (
-        ArtStore,
+        ArtsListStore,
         StoreProviderSpy
     )
 
     private func buildSUT() -> SUT {
         let storeProviderSpy = StoreProviderSpy()
-        let sut = ArtStore(provider: storeProviderSpy)
+        let sut = ArtsListStore(provider: storeProviderSpy)
         return (sut, storeProviderSpy)
     }
 
     private func expectSaveArtsList(
-        _ expectedResult: ArtStoreError?,
+        _ expectedResult: ArtsListStoreError?,
         whenStoreCompletesWith storeResult: StoreProviderError?,
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
         let (sut, providerSpy) = buildSUT()
-        let artsList: ArtList = makeDummyArtsList()
+        let artsList: ArtsList = makeDummyArtsList()
         let exp = expectation(description: "Wait store to complete")
         sut.saveArtsList(model: artsList) { receivedResult in
             XCTAssertEqual(
@@ -159,13 +159,12 @@ extension ArtStoreTests {
     }
 
     private func expectCleanArtsList(
-        _ expectedResult: ArtStoreError?,
+        _ expectedResult: ArtsListStoreError?,
         whenStoreCompletesWith storeResult: StoreProviderError?,
         file: StaticString = #filePath,
         line: UInt = #line
     ) {
         let (sut, providerSpy) = buildSUT()
-        let artsList: ArtList = makeDummyArtsList()
         let exp = expectation(description: "Wait store to complete")
         sut.cleanArtsList { receivedResult in
             XCTAssertEqual(
@@ -181,7 +180,7 @@ extension ArtStoreTests {
         wait(for: [exp], timeout: 1)
     }
 
-    private func makeDummyArtsList() -> ArtList {
+    private func makeDummyArtsList() -> ArtsList {
         [
             .init(artId: 1, imageId: "any id", title: "any title", year: nil, author: nil),
             .init(artId: 2, imageId: "any id", title: "any title", year: 23, author: nil),

@@ -1,8 +1,8 @@
 import Foundation
 
-public protocol EquatableModel: Codable, Equatable {}
+protocol EquatableModel: Codable, Equatable {}
 
-public extension EquatableModel {
+extension EquatableModel {
     func toData() -> Data? {
         try? JSONEncoder().encode(self)
     }

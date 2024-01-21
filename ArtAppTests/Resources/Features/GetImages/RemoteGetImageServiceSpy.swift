@@ -1,4 +1,4 @@
-import ArtApp
+@testable import ArtApp
 
 final class RemoteGetImageServiceSpy: GetImageServiceProtocol {
     private(set) var receivedImageRequestModels: [ArtImageRequestModel] = []

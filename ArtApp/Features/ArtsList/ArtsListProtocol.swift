@@ -1,8 +1,8 @@
 public protocol ArtsListProtocol {
-    func execute(
+    func getArtsList(
         isRefreshing: Bool,
-        _ completion: @escaping (ArtsListResult) -> Void
+        completion: @escaping (ArtsListResult) -> Void
     )
 }
 
-public typealias ArtsListResult = Result<ArtsListModel, ArtsListError>
+public typealias ArtsListResult = Result<ArtsList, ArtsListError>

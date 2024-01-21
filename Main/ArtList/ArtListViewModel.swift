@@ -20,11 +20,10 @@ final class ArtListViewModel: ArtListViewModelProtocol {
     private let useCases: UseCases
     weak var delegate: ArtListViewModelDelegate?
 
-    // MARK: - Inner Type
+    // MARK: Inner Type
     struct UseCases {
-        let getArtsList: ArtsListProtocol
+        let artsListManager: ArtsListProtocol
         let getArtImage: GetArtImagesProtocol
-        let getArtDetails: ArtDetailsProtocol
     }
 
     // MARK: - Initializer
@@ -76,14 +75,14 @@ extension ArtListViewModel {
         isRefreshing: Bool = false,
         _ completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
     ) {
-        useCases.getArtsList.execute(isRefreshing: isRefreshing) { result in
+        useCases.artsListManager.getArtsList(isRefreshing: isRefreshing) { result in
             DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
                 guard let self else { return }
 
                 switch result {
-                case .success(let data):
+                case .success(let artList):
                     var artItems: [ArtItemView] = []
-                    data.artList.forEach {
+                    artList.forEach {
                         artItems.append(ArtItemView(model: .init(
                             artId: $0.artId,
                             title: $0.title,
@@ -92,7 +91,7 @@ extension ArtListViewModel {
                         )))
                     }
                     completion(.success(artItems))
-                    getImages(from: data.artList)
+                    getImages(from: artList)
 
                 case .failure(let error):
                     completion(.failure(error))
@@ -101,7 +100,7 @@ extension ArtListViewModel {
         }
     }
 
-    private func getImages(from artList: ArtList) {
+    private func getImages(from artList: ArtsList) {
         var imagesRequestModel: GetArtImagesRequestModel = []
 
         artList.forEach {

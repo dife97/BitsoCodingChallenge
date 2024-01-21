@@ -1,47 +1,13 @@
 import ArtNetwork
 
 public final class ArtService {
-    private let provider: HTTPProviderProtocol
+    let provider: HTTPProviderProtocol
 
     public init(provider: HTTPProviderProtocol) {
         self.provider = provider
     }
 }
 
-// MARK: - Art List
-extension ArtService: ArtListServiceProtocol {
-    public func getArtList(
-        requestModel: ArtListRequestModel,
-        _ completion: @escaping (RemoteArtListResult) -> Void
-    ) {
-        let getArtListTarget: ArtServiceTarget = .getArtList(requestModel)
-
-        provider.request(target: getArtListTarget) { [weak self] result in
-            guard let self else { return }
-
-            switch result {
-            case .success(let data):
-                if let model: ArtListResponseModel = data?.toModel() {
-                    completion(.success(model))
-                } else {
-                    completion(.failure(.invalidData))
-                }
-
-            case .failure(let error):
-                completion(.failure(getArtListServiceError(from: error)))
-            }
-        }
-    }
-
-    private func getArtListServiceError(from providerError: HTTPProviderError) -> ArtServiceError {
-        switch providerError {
-        case .connection:
-            return .connection
-        case .invalidRequest, .invalidData, .unexpected:
-            return .unexpected
-        }
-    }
-}
 
 // MARK: - ArtImage
 extension ArtService: GetImageServiceProtocol {

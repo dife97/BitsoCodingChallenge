@@ -1,5 +1,5 @@
 import XCTest
-import ArtApp
+@testable import ArtApp
 
 extension ArtServiceTests {
     func test_getImage_sendCorrectTarget() {

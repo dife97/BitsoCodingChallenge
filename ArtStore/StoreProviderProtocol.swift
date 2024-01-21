@@ -13,10 +13,10 @@ public protocol StoreProviderProtocol {
         completion: @escaping (RetriveResult) -> Void
     )
 
-    func delete(
-        path: String,
-        completion: @escaping (StoreProviderError?) -> Void
-    )
+//    func delete(
+//        path: String,
+//        completion: @escaping (StoreProviderError?) -> Void
+//    )
 }
 
 public enum RetriveResult {
@@ -25,7 +25,7 @@ public enum RetriveResult {
     case error(StoreProviderError)
 }
 
-public struct CacheDataModel: Decodable {
+public struct CacheDataModel: Codable {
     public let data: Data
     public let timestamp: Date
 
