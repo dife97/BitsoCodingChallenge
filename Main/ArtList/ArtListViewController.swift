@@ -44,16 +44,20 @@ extension ArtListViewController {
 
 // MARK: - Display Logic
 extension ArtListViewController: ArtListViewModelDelegate {
-    func displayArtsList(with artItems: [ArtItemView]) {
+    func showErrorAlert(with alertErrorModel: AlertErrorModel) {
+
+    }
+
+    func showArtsList(with artItems: [ArtItemView]) {
         artsListView?.setLoadingState(to: false) // TODO: Add tests
         artsListView?.loadArtsList(with: artItems)
     }
 
-    func displayPrefetchedArtsList(with prefetchedArtItems: [ArtItemView]) {
+    func showPrefetchedArtsList(with prefetchedArtItems: [ArtItemView]) {
         artsListView?.loadArtsList(with: prefetchedArtItems)
     }
 
-    func refreshArtsList(with refreshedArtItems: [ArtItemView]) {
+    func showRefreshedArtsList(with refreshedArtItems: [ArtItemView]) {
         artsListView?.loadRefreshedArtsList(with: refreshedArtItems)
     }
 

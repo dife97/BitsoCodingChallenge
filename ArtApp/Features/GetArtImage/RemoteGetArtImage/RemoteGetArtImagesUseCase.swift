@@ -12,7 +12,7 @@ public final class RemoteGetArtImagesUseCase: GetArtImagesProtocol {
     // MARK: - Public Method
     public func execute(
         with images: GetArtImagesRequestModel,
-        _ completion: @escaping (GetArtImagesResult) -> Void
+        completion: @escaping (GetArtImagesResult) -> Void
     ) {
         images.forEach { imageRequestModel in
             guard let imageId = imageRequestModel.imagedId else {

@@ -45,7 +45,7 @@ public final class ArtsListManager: ArtsListProtocol {
                 Logger.log("Fetched remote ArtsList successfully.")
                 let artsList = getArtsList(from: artsListResponse.data)
                 completion(.success(artsList))
-                saveArtsList(artsList)
+                checkToSaveArtsList(artsList)
 
             case .failure(let error):
                 Logger.log("Failed to fetch ArtsList remotely. Error: \(error)")
@@ -69,13 +69,17 @@ public final class ArtsListManager: ArtsListProtocol {
         }
     }
 
-    private func saveArtsList(_ artsList: ArtsList) {
-        localArtsList.saveArtsList(model: artsList) { error in
-            if let error {
-                Logger.log("Failed to save ArtsList locally. Error: \(error)")
-            } else {
-                Logger.log("Saved ArtsList locally.")
+    private func checkToSaveArtsList(_ artsList: ArtsList) {
+        if currentPage == 1 { // TODO: Add unit test
+            localArtsList.saveArtsList(model: artsList) { error in
+                if let error {
+                    Logger.log("Failed to save ArtsList locally. Error: \(error)")
+                } else {
+                    Logger.log("Saved ArtsList locally.")
+                }
             }
+        } else {
+            Logger.log("")
         }
     }
 
@@ -83,19 +87,21 @@ public final class ArtsListManager: ArtsListProtocol {
         _ error: ArtServiceError,
         completion: @escaping (ArtsListResult) -> Void
     ) {
-        localArtsList.getArtsList { result in
-            switch result {
-            case .success(let artsList):
-                guard let artsList, !artsList.isEmpty else {
-                    Logger.log("Failed to fetch ArtsList locally. Error: empty")
-                    return completion(.failure(.unexpected))
-                }
-                Logger.log("Fetched local ArtsList successfully.")
-                completion(.success(artsList))
+        if currentPage == 1 { // TODO: Add unit test and refactor to clean code
+            localArtsList.getArtsList { result in
+                switch result {
+                case .success(let artsList):
+                    guard let artsList, !artsList.isEmpty else {
+                        Logger.log("Failed to fetch ArtsList locally. Error: empty")
+                        return completion(.failure(.unexpected))
+                    }
+                    Logger.log("Fetched local ArtsList successfully.")
+                    completion(.success(artsList))
 
-            case .failure(let storeError):
-                Logger.log("Failed to fetch ArtsList locally. Error: \(storeError)")
-                completion(.failure(self.getArtsListError(from: error)))
+                case .failure(let storeError):
+                    Logger.log("Failed to fetch ArtsList locally. Error: \(storeError)")
+                    completion(.failure(self.getArtsListError(from: error)))
+                }
             }
         }
     }

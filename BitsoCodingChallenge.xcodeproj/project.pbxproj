@@ -32,7 +32,7 @@
 		946B78802B57507700F6DC91 /* ArtListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B787F2B57507700F6DC91 /* ArtListViewController.swift */; };
 		946B78852B57507900F6DC91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 946B78842B57507900F6DC91 /* Assets.xcassets */; };
 		946B78882B57507900F6DC91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 946B78862B57507900F6DC91 /* LaunchScreen.storyboard */; };
-		946B78932B57507900F6DC91 /* ArtListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B78922B57507900F6DC91 /* ArtListViewControllerTests.swift */; };
+		946B78932B57507900F6DC91 /* ArtsListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946B78922B57507900F6DC91 /* ArtsListViewControllerTests.swift */; };
 		946D4B9C2B586A4200ABDC95 /* ArtsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946D4B9B2B586A4200ABDC95 /* ArtsListView.swift */; };
 		946D4BA22B586D8B00ABDC95 /* ArtListViewModelSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946D4BA12B586D8B00ABDC95 /* ArtListViewModelSpy.swift */; };
 		946D4BA42B5870CC00ABDC95 /* ArtListViewSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946D4BA32B5870CC00ABDC95 /* ArtListViewSpy.swift */; };
@@ -81,6 +81,12 @@
 		94BE1C092B5CCC8900DC11EA /* ArtService+RemoteArtsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BE1C082B5CCC8900DC11EA /* ArtService+RemoteArtsList.swift */; };
 		94BE1C0A2B5CDF0000DC11EA /* ArtStore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9435D5EA2B5C1DB400B7DDCF /* ArtStore.framework */; };
 		94BE1C0B2B5CDF0000DC11EA /* ArtStore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9435D5EA2B5C1DB400B7DDCF /* ArtStore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		94BE1C0F2B5D3D2900DC11EA /* ArtsListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BE1C0E2B5D3D2900DC11EA /* ArtsListViewModelTests.swift */; };
+		94BE1C112B5D3DB900DC11EA /* ArtsListManagerDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BE1C102B5D3DB900DC11EA /* ArtsListManagerDoubles.swift */; };
+		94BE1C132B5D3DF000DC11EA /* RemoteGetArtImagesSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BE1C122B5D3DF000DC11EA /* RemoteGetArtImagesSpy.swift */; };
+		94BE1C152B5D3EE500DC11EA /* ArtsListViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BE1C142B5D3EE500DC11EA /* ArtsListViewControllerSpy.swift */; };
+		94BE1C172B5D42AF00DC11EA /* ErrorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94BE1C162B5D42AF00DC11EA /* ErrorModel.swift */; };
+		94BE1C192B5D445800DC11EA /* EquatableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17832B5723CE008EB27F /* EquatableModel.swift */; };
 		94DF17652B56F83B008EB27F /* HTTPProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17642B56F83B008EB27F /* HTTPProviderProtocol.swift */; };
 		94DF17672B56F871008EB27F /* HTTPTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17662B56F871008EB27F /* HTTPTarget.swift */; };
 		94DF176A2B56F8CC008EB27F /* URLSessionHTTPProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17692B56F8CC008EB27F /* URLSessionHTTPProvider.swift */; };
@@ -221,7 +227,7 @@
 		946B78872B57507900F6DC91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		946B78892B57507900F6DC91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		946B788E2B57507900F6DC91 /* MainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		946B78922B57507900F6DC91 /* ArtListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewControllerTests.swift; sourceTree = "<group>"; };
+		946B78922B57507900F6DC91 /* ArtsListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsListViewControllerTests.swift; sourceTree = "<group>"; };
 		946D4B9B2B586A4200ABDC95 /* ArtsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsListView.swift; sourceTree = "<group>"; };
 		946D4BA12B586D8B00ABDC95 /* ArtListViewModelSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewModelSpy.swift; sourceTree = "<group>"; };
 		946D4BA32B5870CC00ABDC95 /* ArtListViewSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtListViewSpy.swift; sourceTree = "<group>"; };
@@ -264,6 +270,11 @@
 		94B4A3ED2B58CAB100B14918 /* ArtImageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtImageModel.swift; sourceTree = "<group>"; };
 		94BE1C052B5CADDF00DC11EA /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		94BE1C082B5CCC8900DC11EA /* ArtService+RemoteArtsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtService+RemoteArtsList.swift"; sourceTree = "<group>"; };
+		94BE1C0E2B5D3D2900DC11EA /* ArtsListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsListViewModelTests.swift; sourceTree = "<group>"; };
+		94BE1C102B5D3DB900DC11EA /* ArtsListManagerDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsListManagerDoubles.swift; sourceTree = "<group>"; };
+		94BE1C122B5D3DF000DC11EA /* RemoteGetArtImagesSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteGetArtImagesSpy.swift; sourceTree = "<group>"; };
+		94BE1C142B5D3EE500DC11EA /* ArtsListViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtsListViewControllerSpy.swift; sourceTree = "<group>"; };
+		94BE1C162B5D42AF00DC11EA /* ErrorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorModel.swift; sourceTree = "<group>"; };
 		94DF17642B56F83B008EB27F /* HTTPProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPProviderProtocol.swift; sourceTree = "<group>"; };
 		94DF17662B56F871008EB27F /* HTTPTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTarget.swift; sourceTree = "<group>"; };
 		94DF17692B56F8CC008EB27F /* URLSessionHTTPProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionHTTPProvider.swift; sourceTree = "<group>"; };
@@ -570,6 +581,7 @@
 			children = (
 				946B787F2B57507700F6DC91 /* ArtListViewController.swift */,
 				94731E1D2B57594A00FDAD2D /* ArtListViewModel.swift */,
+				94BE1C162B5D42AF00DC11EA /* ErrorModel.swift */,
 				946D4BA82B588A5500ABDC95 /* View */,
 			);
 			path = ArtList;
@@ -594,7 +606,8 @@
 		946D4B9F2B586D1100ABDC95 /* ArtsLIst */ = {
 			isa = PBXGroup;
 			children = (
-				946B78922B57507900F6DC91 /* ArtListViewControllerTests.swift */,
+				946B78922B57507900F6DC91 /* ArtsListViewControllerTests.swift */,
+				94BE1C0E2B5D3D2900DC11EA /* ArtsListViewModelTests.swift */,
 			);
 			path = ArtsLIst;
 			sourceTree = "<group>";
@@ -603,7 +616,10 @@
 			isa = PBXGroup;
 			children = (
 				946D4BA12B586D8B00ABDC95 /* ArtListViewModelSpy.swift */,
+				94BE1C142B5D3EE500DC11EA /* ArtsListViewControllerSpy.swift */,
 				946D4BA32B5870CC00ABDC95 /* ArtListViewSpy.swift */,
+				94BE1C102B5D3DB900DC11EA /* ArtsListManagerDoubles.swift */,
+				94BE1C122B5D3DF000DC11EA /* RemoteGetArtImagesSpy.swift */,
 			);
 			path = ArtsList;
 			sourceTree = "<group>";
@@ -1216,6 +1232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94BE1C172B5D42AF00DC11EA /* ErrorModel.swift in Sources */,
 				946D4BAB2B588A8800ABDC95 /* ArtItemTableViewCell.swift in Sources */,
 				946D4BB12B58926600ABDC95 /* Metrics.swift in Sources */,
 				946D4BA72B5873EA00ABDC95 /* Loader.swift in Sources */,
@@ -1227,6 +1244,7 @@
 				946D4BAD2B588DF200ABDC95 /* ArtItemViewFactory.swift in Sources */,
 				946B787C2B57507700F6DC91 /* AppDelegate.swift in Sources */,
 				946B787E2B57507700F6DC91 /* SceneDelegate.swift in Sources */,
+				94BE1C192B5D445800DC11EA /* EquatableModel.swift in Sources */,
 				947CDBB92B5AEEDD001F2266 /* ArtDetailsViewController.swift in Sources */,
 				946D4BAF2B58916B00ABDC95 /* ArtItemView.swift in Sources */,
 				946D4B9C2B586A4200ABDC95 /* ArtsListView.swift in Sources */,
@@ -1239,7 +1257,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				946B78932B57507900F6DC91 /* ArtListViewControllerTests.swift in Sources */,
+				94BE1C152B5D3EE500DC11EA /* ArtsListViewControllerSpy.swift in Sources */,
+				94BE1C0F2B5D3D2900DC11EA /* ArtsListViewModelTests.swift in Sources */,
+				94BE1C132B5D3DF000DC11EA /* RemoteGetArtImagesSpy.swift in Sources */,
+				94BE1C112B5D3DB900DC11EA /* ArtsListManagerDoubles.swift in Sources */,
+				946B78932B57507900F6DC91 /* ArtsListViewControllerTests.swift in Sources */,
 				946D4BA22B586D8B00ABDC95 /* ArtListViewModelSpy.swift in Sources */,
 				946D4BA42B5870CC00ABDC95 /* ArtListViewSpy.swift in Sources */,
 			);

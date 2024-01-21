@@ -1,7 +1,7 @@
 import XCTest
 @testable import Main
 
-final class ArtListViewModelTests: XCTestCase {
+final class ArtsListViewControllerTests: XCTestCase {
     func test_loadView_instatiateArtListViewAndStoreIt() {
         let viewModelSpy = ArtListViewModelSpy()
         let sut = ArtListViewController(viewModel: viewModelSpy)
@@ -12,15 +12,6 @@ final class ArtListViewModelTests: XCTestCase {
         XCTAssertNotNil(sut.artsListView)
     }
 
-    func test_viewDidLoad_callsViewModelToFetchArtsList() {
-        let viewModelSpy = ArtListViewModelSpy()
-        let sut = buildSUT(viewModel: viewModelSpy)
-
-        sut.viewDidLoad()
-
-        XCTAssertEqual(viewModelSpy.fetchArtListCalled, [true])
-    }
-
     func test_viewDidLoad_callsViewToStartLoading() {
         let artListView = ArtListViewSpy()
         let sut = buildSUT(artListView: artListView)
@@ -29,10 +20,19 @@ final class ArtListViewModelTests: XCTestCase {
 
         XCTAssertEqual(artListView.receivedLoadingStates, [true])
     }
+
+    func test_viewDidLoad_callsViewModelToFetchArtsList() {
+        let viewModelSpy = ArtListViewModelSpy()
+        let sut = buildSUT(viewModel: viewModelSpy)
+
+        sut.viewDidLoad()
+
+        XCTAssertEqual(viewModelSpy.fetchArtListCalled, [true])
+    }
 }
 
 // MARK: - Helpers
-extension ArtListViewModelTests {
+extension ArtsListViewControllerTests {
     private func buildSUT(
         viewModel: ArtListViewModelSpy = ArtListViewModelSpy(),
         artListView: ArtListViewSpy = ArtListViewSpy()

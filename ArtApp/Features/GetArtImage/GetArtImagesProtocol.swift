@@ -1,7 +1,7 @@
 public protocol GetArtImagesProtocol {
     func execute(
         with images: GetArtImagesRequestModel,
-        _ completion: @escaping (GetArtImagesResult) -> Void
+        completion: @escaping (GetArtImagesResult) -> Void
     )
 }
 

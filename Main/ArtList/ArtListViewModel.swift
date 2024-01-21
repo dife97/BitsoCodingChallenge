@@ -9,9 +9,10 @@ protocol ArtListViewModelProtocol {
 }
 
 protocol ArtListViewModelDelegate: AnyObject {
-    func displayArtsList(with artItems: [ArtItemView])
-    func displayPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
-    func refreshArtsList(with refreshedArtItems: [ArtItemView])
+    func showErrorAlert(with alertErrorModel: AlertErrorModel)
+    func showArtsList(with artItems: [ArtItemView])
+    func showPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
+    func showRefreshedArtsList(with refreshedArtItems: [ArtItemView])
     func updateArtImage(with artImage: ArtImageModel)
 }
 
@@ -33,13 +34,15 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 
     // MARK: - Public Methods
     func fetchArtList() {
-        getArtsList { [delegate] result in
+        getArtsList { [weak self] result in
+            guard let self else { return } // TODO: Add unit test tracking memory leak
+
             switch result {
             case .success(let artItems):
-                delegate?.displayArtsList(with: artItems)
+                delegate?.showArtsList(with: artItems)
 
             case .failure(let error):
-                print("\(error)")
+                handleFetchArtsListError(error)
             }
         }
     }
@@ -48,7 +51,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
         getArtsList { [delegate] result in
             switch result {
             case .success(let artItems):
-                delegate?.displayPrefetchedArtsList(with: artItems)
+                delegate?.showPrefetchedArtsList(with: artItems)
 
             case .failure(let error):
                 print("\(error)")
@@ -60,7 +63,7 @@ final class ArtListViewModel: ArtListViewModelProtocol {
         getArtsList(isRefreshing: true) { [delegate] result in
             switch result {
             case .success(let artItems):
-                delegate?.refreshArtsList(with: artItems)
+                delegate?.showRefreshedArtsList(with: artItems)
 
             case .failure(let error):
                 print("\(error)")
@@ -73,8 +76,9 @@ final class ArtListViewModel: ArtListViewModelProtocol {
 extension ArtListViewModel {
     private func getArtsList(
         isRefreshing: Bool = false,
-        _ completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
+        completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
     ) {
+        print("")
         useCases.artsListManager.getArtsList(isRefreshing: isRefreshing) { result in
             DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
                 guard let self else { return }
@@ -98,6 +102,25 @@ extension ArtListViewModel {
                 }
             }
         }
+    }
+
+    private func handleFetchArtsListError(_ error: ArtsListError) {
+        let alertErrorDescription: String = {
+            switch error {
+            case .isFetching:
+                return ""
+            case .connection:
+                return "It seems that you have no internet connection"
+            case .unexpected:
+                return ""
+            }
+        }()
+
+        let alertErrorModel: AlertErrorModel = .init(
+            title: "Oops 😪",
+            description: alertErrorDescription
+        )
+        delegate?.showErrorAlert(with: alertErrorModel)
     }
 
     private func getImages(from artList: ArtsList) {
