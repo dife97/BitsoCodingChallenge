@@ -11,4 +11,14 @@ extension XCTestCase {
 
         return NSDictionary(dictionary: dictionary).isEqual(to: dictionaryToCompare)
     }
+
+    func checkMemoryLeak(
+        for instance: AnyObject,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) {
+        addTeardownBlock { [weak instance] in
+            XCTAssertNil(instance, file: file, line: line)
+        }
+    }
 }

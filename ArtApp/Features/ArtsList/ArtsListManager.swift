@@ -98,7 +98,9 @@ public final class ArtsListManager: ArtsListProtocol {
 
         if isFirstPage {
             // TODO: Move to private method
-            localArtsList.getArtsList { result in
+            localArtsList.getArtsList { [weak self] result in
+                guard let self else { return }
+
                 switch result {
                 case .success(let artsList):
                     guard let artsList, !artsList.isEmpty else {
@@ -110,7 +112,7 @@ public final class ArtsListManager: ArtsListProtocol {
 
                 case .failure(let storeError):
                     Logger.log("Failed to fetch ArtsList locally. Error: \(storeError)")
-                    completion(.failure(self.getArtsListError(from: error)))
+                    completion(.failure(getArtsListError(from: error)))
                 }
             }
         }

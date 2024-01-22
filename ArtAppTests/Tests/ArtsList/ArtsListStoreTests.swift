@@ -84,9 +84,13 @@ extension ArtStoreTests {
         StoreProviderSpy
     )
 
-    private func buildSUT() -> SUT {
+    private func buildSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> SUT {
         let storeProviderSpy = StoreProviderSpy()
         let sut = ArtsListStore(provider: storeProviderSpy)
+        checkMemoryLeak(for: sut, file: file, line: line)
         return (sut, storeProviderSpy)
     }
 
