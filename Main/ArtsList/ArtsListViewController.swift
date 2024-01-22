@@ -1,14 +1,13 @@
 import UIKit
-import ArtApp
-import ArtNetwork
 
 final class ArtsListViewController: UIViewController {
     // MARK: - Dependencies
-    private let viewModel: ArtsListInputProtocol
+    typealias ViewModel = ArtsListInputProtocol & ArtsListCoordinatorProtocol
+    private let viewModel: ViewModel
     var artsListView: ArtListViewProtocol?
 
     // MARK: - Initializers
-    init(viewModel: ArtsListInputProtocol) {
+    init(viewModel: ViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -92,18 +91,7 @@ extension ArtsListViewController: ArtsListViewDelegate {
         viewModel.refreshArtsList()
     }
 
-    func didTapArtItem(with artInfo: ArtDetailsInfoModel) {
-        // TODO: Move to configurator and remove import ArtApp
-        let provider = URLSessionHTTPProvider()
-        let service = ArtService(provider: provider)
-        let getArtDetailsUseCase = RemoteArtDetailsUseCase(service: service)
-        let viewModel = ArtDetailsViewModel(getArtDetailsUseCase: getArtDetailsUseCase)
-        let viewController = ArtDetailsViewController(
-            viewModel: viewModel,
-            infoModel: artInfo
-        )
-        viewModel.viewController = viewController
-        let artDetailNavigationController = UINavigationController(rootViewController: viewController)
-        navigationController?.showDetailViewController(artDetailNavigationController, sender: self)
+    func didTapArtItem(with artDetailsInfo: ArtDetailsInfoModel) {
+        viewModel.showArtDetails?(artDetailsInfo)
     }
 }

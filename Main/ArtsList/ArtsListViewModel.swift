@@ -17,10 +17,17 @@ protocol ArtsListOutputProtocol: AnyObject {
     func updateArtImage(with artImage: ArtImageModel)
 }
 
-final class ArtListViewModel: ArtsListInputProtocol {
+protocol ArtsListCoordinatorProtocol {
+    var showArtDetails: ((_ artDetailInfo: ArtDetailsInfoModel) -> Void)? { get }
+}
+
+final class ArtsListViewModel: ArtsListInputProtocol, ArtsListCoordinatorProtocol {
     // MARK: - Dependency
     private let useCases: UseCases
     weak var viewController: ArtsListOutputProtocol?
+
+    // MARK: - Properties
+    var showArtDetails: ((_ artDetailInfo: ArtDetailsInfoModel) -> Void)?
 
     // MARK: Inner Type
     struct UseCases {
@@ -76,7 +83,7 @@ final class ArtListViewModel: ArtsListInputProtocol {
 }
 
 // MARK: - Private Methods
-extension ArtListViewModel {
+extension ArtsListViewModel {
     private func getArtsList(
         isRefreshing: Bool = false,
         completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void

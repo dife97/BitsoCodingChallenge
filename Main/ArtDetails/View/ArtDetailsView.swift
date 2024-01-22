@@ -173,6 +173,14 @@ final class ArtDetailsView: UIView {
                 )
             )
             attributedString.addAttribute(
+                .foregroundColor,
+                value: UIColor.label,
+                range: .init(
+                    location: 0,
+                    length: attributedString.length
+                )
+            )
+            attributedString.addAttribute(
                 .paragraphStyle,
                 value: paragraphStyle,
                 range: .init(

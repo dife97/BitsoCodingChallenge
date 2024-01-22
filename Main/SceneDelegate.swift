@@ -1,7 +1,4 @@
 import UIKit
-import ArtNetwork
-import ArtStore
-import ArtApp
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
@@ -12,27 +9,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions
     ) {
         guard let windowScene = scene as? UIWindowScene else { return }
-        window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = UINavigationController(rootViewController: getTemporaryViewController())
-        window?.makeKeyAndVisible()
-    }
+        let navigationController = UINavigationController()
+        let artCoordinator = ArtCoordinator(navigationController: navigationController)
 
-    private func getTemporaryViewController() -> UIViewController {
-        let urlSessionHTTPProvider = URLSessionHTTPProvider()
-        let artService = ArtService(provider: urlSessionHTTPProvider)
-        let storeProvider = FileManagerStoreProvider()
-        let artsListStore = ArtsListStore(provider: storeProvider)
-        let artsListManager = ArtsListManager(
-            remoteArtsList: artService,
-            localArtsList: artsListStore
-        )
-        let getImageUseCase = RemoteGetArtImagesUseCase(service: artService)
-        let viewModel = ArtListViewModel(useCases: .init(
-            artsListManager: artsListManager,
-            getArtImage: getImageUseCase
-        ))
-        let viewController = ArtsListViewController(viewModel: viewModel)
-        viewModel.viewController = viewController
-        return viewController
+        window = UIWindow(windowScene: windowScene)
+        window?.rootViewController = navigationController
+        artCoordinator.start()
+        window?.makeKeyAndVisible()
     }
 }
