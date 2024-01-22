@@ -22,7 +22,7 @@ The project is structured into 4 main modules using native Xcode frameworks for 
 ![image](https://github.com/dife97/BitsoCodingChallenge/assets/25800276/6305614c-838e-4c86-ad4d-2304f3c31cd8)
 
 Dependency diagram:
-![ArtAppDependencyDiagram](https://github.com/dife97/BitsoCodingChallenge/assets/25800276/aa1a5c0c-13b0-4257-9105-a9b018802fe2)
+![ArtAppDependencyDiagram](https://github.com/dife97/BitsoCodingChallenge/assets/25800276/7e60c4bb-090c-4d07-a03d-0e3f8f0da9ce)
 
 ### ArtApp Module
 This module encapsulates the domain logic, including rules for remote and caching operations. It implements three main features:
