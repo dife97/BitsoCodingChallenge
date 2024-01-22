@@ -1837,7 +1837,7 @@
 				DEVELOPMENT_TEAM = P2VHV5YCL6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Main/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Art App";
+				INFOPLIST_KEY_CFBundleDisplayName = ArtApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -1872,7 +1872,7 @@
 				DEVELOPMENT_TEAM = P2VHV5YCL6;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Main/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Art App";
+				INFOPLIST_KEY_CFBundleDisplayName = ArtApp;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
