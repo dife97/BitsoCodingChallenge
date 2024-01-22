@@ -2,6 +2,7 @@ import UIKit
 
 protocol ArtListViewProtocol {
     func setLoadingState(to isLoading: Bool)
+    func setFooterViewLoadingState(to isLoading: Bool)
     func loadArtsList(with artsList: [ArtItemView])
     func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView])
     func stopLoadingRefresh()
@@ -23,6 +24,8 @@ final class ArtsListView: UIView {
     private lazy var artsListTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.backgroundColor = .systemBackground
+        tableView.indicatorStyle = .default
         tableView.dataSource = self
         tableView.delegate = self
         tableView.refreshControl = artsListRefreshControl
@@ -37,7 +40,7 @@ final class ArtsListView: UIView {
 
     private lazy var artsListRefreshControl: UIRefreshControl = {
         let refreshControll = UIRefreshControl()
-        refreshControll.tintColor = .black
+        refreshControll.tintColor = .label
         refreshControll.addTarget(self, action: #selector(didPullToRefresh), for: .valueChanged)
         return refreshControll
     }()
@@ -45,9 +48,9 @@ final class ArtsListView: UIView {
     private lazy var artsListTableFooterView: UIView = {
         let view = UIView(frame: CGRect(
             x: 0, y: 0,
-            width: UIScreen.main.bounds.size.width,
-            height: 60) // TODO: Move to metrics
-        )
+            width: ViewMetrics.screenHeight,
+            height: ViewMetrics.footerViewHeight
+        ))
         return view
     }()
 
@@ -62,6 +65,12 @@ final class ArtsListView: UIView {
         fatalError()
     }
 
+    // MARK: - Metrics
+    struct ViewMetrics {
+        static let footerViewHeight: CGFloat = 60
+        static let screenHeight: CGFloat = UIScreen.main.bounds.size.width
+    }
+
     // MARK: - Layout Setup
     private func setupView() {
         configureArtsListTableView()
@@ -71,7 +80,7 @@ final class ArtsListView: UIView {
     private func configureArtsListTableView() {
         addSubview(artsListTableView)
         NSLayoutConstraint.activate([
-            artsListTableView.topAnchor.constraint(equalTo: topAnchor),
+            artsListTableView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             artsListTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             artsListTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             artsListTableView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
@@ -79,7 +88,7 @@ final class ArtsListView: UIView {
     }
 
     private func extraSetup() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
     }
 }
 
@@ -97,8 +106,16 @@ extension ArtsListView: ArtListViewProtocol {
 
     func loadArtsList(with artsList: [ArtItemView]) {
         self.artsList.append(contentsOf: artsList)
-        artsListTableFooterView.stopLoading()
+        setFooterViewLoadingState(to: false)
         artsListTableView.reloadData()
+    }
+
+    func setFooterViewLoadingState(to isLoading: Bool) {
+        if isLoading {
+            artsListTableFooterView.startLoading()
+        } else {
+            artsListTableFooterView.stopLoading()
+        }
     }
 
     func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView]) {
@@ -170,11 +187,11 @@ extension ArtsListView: UITableViewDelegate {
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        let itemPerPage = 10 // TODO: receive from model
+        let itemPerPage = 10
         let firstPageItem = artsList.count - itemPerPage
 
         if indexPath.row == firstPageItem {
-            artsListTableFooterView.startLoading()
+            setFooterViewLoadingState(to: true)
             delegate?.prefetchNextPage()
         }
     }

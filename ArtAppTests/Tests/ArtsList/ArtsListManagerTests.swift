@@ -251,13 +251,17 @@ extension ArtsListManagerTests {
         LocalArtsListSpy
     )
 
-    private func buildSUT() -> SUT {
+    private func buildSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> SUT {
         let remoteArtsList = RemoteArtsListSpy()
         let localArtsList = LocalArtsListSpy()
         let sut = ArtsListManager(
             remoteArtsList: remoteArtsList,
             localArtsList: localArtsList
         )
+        checkMemoryLeak(for: sut, file: file, line: line)
         return (sut, remoteArtsList, localArtsList)
     }
 

@@ -29,7 +29,6 @@ public final class ArtsListManager: ArtsListProtocol {
         }
 
         self.isRefreshing = isRefreshing
-
         if isRefreshing {
             currentPage = 1
         }
@@ -75,7 +74,7 @@ public final class ArtsListManager: ArtsListProtocol {
     }
 
     private func checkToSaveArtsList(_ artsList: ArtsList) {
-        if currentPage == 1 { // TODO: Add unit test
+        if currentPage == 1 {
             localArtsList.saveArtsList(model: artsList) { error in
                 if let error {
                     Logger.log("Failed to save ArtsList locally. Error: \(error)")
@@ -91,11 +90,13 @@ public final class ArtsListManager: ArtsListProtocol {
         completion: @escaping (ArtsListResult) -> Void
     ) {
         if isRefreshing && isFirstPage {
-            completion(.failure(.connection)) // TODO: Add unit test
+            return completion(.failure(.connection))
         }
 
-        if isFirstPage { // TODO: Add unit test
-            localArtsList.getArtsList { result in
+        if isFirstPage {
+            localArtsList.getArtsList { [weak self] result in
+                guard let self else { return }
+
                 switch result {
                 case .success(let artsList):
                     guard let artsList, !artsList.isEmpty else {
@@ -107,7 +108,7 @@ public final class ArtsListManager: ArtsListProtocol {
 
                 case .failure(let storeError):
                     Logger.log("Failed to fetch ArtsList locally. Error: \(storeError)")
-                    completion(.failure(self.getArtsListError(from: error)))
+                    completion(.failure(getArtsListError(from: error)))
                 }
             }
         }

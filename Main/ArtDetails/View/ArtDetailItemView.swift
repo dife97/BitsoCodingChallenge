@@ -17,6 +17,7 @@ final class ArtDetailItemView: UIView {
 
     // MARK: - View Metrics
     struct ViewMetrics {
+        static let dividerHeight: CGFloat = 1
         static let descriptionWidth: CGFloat = UIScreen.main.bounds.width * 0.65
     }
 
@@ -24,7 +25,7 @@ final class ArtDetailItemView: UIView {
     private lazy var dividerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .systemGray4
         return view
     }()
 
@@ -32,9 +33,9 @@ final class ArtDetailItemView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .bold) // TODO: Move to metrics
+        label.font = .smallBold
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(model.title)"
         return label
     }()
@@ -43,9 +44,9 @@ final class ArtDetailItemView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
+        label.font = .smallLight
         label.adjustsFontSizeToFitWidth = true
-        label.textColor = .black
+        label.textColor = .label
         label.text = "\(model.description)"
         return label
     }()
@@ -53,7 +54,8 @@ final class ArtDetailItemView: UIView {
     // MARK: - Layout Setup
     private func setupView() {
         configureDividerView()
-        configureLabels()
+        configureDescriptionLabel()
+        configureTitleLabel()
         extraSetup()
     }
 
@@ -64,27 +66,41 @@ final class ArtDetailItemView: UIView {
             dividerView.topAnchor.constraint(equalTo: topAnchor),
             dividerView.leadingAnchor.constraint(equalTo: leadingAnchor),
             dividerView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            dividerView.heightAnchor.constraint(equalToConstant: 1)
+            dividerView.heightAnchor.constraint(equalToConstant: ViewMetrics.dividerHeight)
         ])
     }
 
-    private func configureLabels() {
+    private func configureDescriptionLabel() {
         addSubview(descriptionLabel)
+
+        NSLayoutConstraint.activate([
+            descriptionLabel.topAnchor.constraint(
+                equalTo: dividerView.bottomAnchor,
+                constant: Metrics.Spacings.x2
+            ),
+            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            descriptionLabel.widthAnchor.constraint(equalToConstant: ViewMetrics.descriptionWidth),
+            descriptionLabel.bottomAnchor.constraint(
+                equalTo: bottomAnchor,
+                constant: -Metrics.Spacings.x2
+            )
+        ])
+    }
+
+    private func configureTitleLabel() {
         addSubview(titleLabel)
 
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 16),
-            descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            descriptionLabel.widthAnchor.constraint(equalToConstant: ViewMetrics.descriptionWidth),
-            descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),
-
             titleLabel.topAnchor.constraint(equalTo: descriptionLabel.topAnchor),
             titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            titleLabel.trailingAnchor.constraint(equalTo: descriptionLabel.leadingAnchor, constant: -8)
+            titleLabel.trailingAnchor.constraint(
+                equalTo: descriptionLabel.leadingAnchor,
+                constant: -Metrics.Spacings.x1
+            )
         ])
     }
 
     private func extraSetup() {
-        backgroundColor = .white
+        backgroundColor = .systemBackground
     }
 }

@@ -243,9 +243,13 @@ extension RemoteGetArtImagesUseCaseTests {
         RemoteGetImageServiceSpy
     )
 
-    private func buildSUT() -> SUT {
+    private func buildSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> SUT {
         let serviceSpy = RemoteGetImageServiceSpy()
         let sut = RemoteGetArtImagesUseCase(service: serviceSpy)
+        checkMemoryLeak(for: sut, file: file, line: line)
         return (sut, serviceSpy)
     }
 }

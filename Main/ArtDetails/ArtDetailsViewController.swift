@@ -1,14 +1,5 @@
 import UIKit
 
-// TODO: Move to own file
-struct ArtDetailsInfoModel {
-    let artId: Int
-    let artImage: UIImage?
-    let title: String
-    let author: String
-    let year: String
-}
-
 final class ArtDetailsViewController: UIViewController {
     // MARK: - Dependencies
     private let viewModel: ArtDetailsInputProtocol
@@ -50,11 +41,14 @@ final class ArtDetailsViewController: UIViewController {
 // MARK: - Private Methods
 extension ArtDetailsViewController {
     private func configureNavigationBar() {
-        navigationItem.rightBarButtonItem = .init(
-            barButtonSystemItem: .close,
+        let closeButton: UIBarButtonItem = .init(
+            image: .init(systemName: "xmark"),
+            style: .plain,
             target: self,
             action: #selector(closeButtonTapped)
         )
+        closeButton.tintColor = .label
+        navigationItem.rightBarButtonItem = closeButton
     }
 
     @objc private func closeButtonTapped() {
@@ -67,5 +61,14 @@ extension ArtDetailsViewController: ArtDetailsOutputProtocol {
     func showArtDetails(with artDetailsModel: ArtDetailsSetupModel) {
         artsDetailsView?.setLoadingState(to: false)
         artsDetailsView?.showArtDetails(with: artDetailsModel)
+    }
+
+    func showErrorAlert(with alertErrorModel: AlertErrorModel) {
+        artsDetailsView?.setLoadingState(to: false)
+        showAlert(
+            title: alertErrorModel.title,
+            message: alertErrorModel.description,
+            buttonTitle: alertErrorModel.confirmButtonTitle
+        )
     }
 }

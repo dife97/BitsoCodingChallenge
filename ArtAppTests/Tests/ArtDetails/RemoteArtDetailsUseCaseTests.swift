@@ -49,9 +49,13 @@ extension RemoteArtDetailsUseCaseTests {
         RemoteArtDetailsServiceSpy
     )
 
-    private func buildSUT() -> SUT {
+    private func buildSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> SUT {
         let serviceSpy = RemoteArtDetailsServiceSpy()
         let sut = RemoteArtDetailsUseCase(service: serviceSpy)
+        checkMemoryLeak(for: sut, file: file, line: line)
         return (sut, serviceSpy)
     }
 

@@ -12,15 +12,23 @@ protocol ArtsListOutputProtocol: AnyObject {
     func showArtsList(with artItems: [ArtItemView])
     func showFetchArtsListError(with alertErrorModel: AlertErrorModel)
     func showPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
+    func showPrefetchError()
     func showRefreshedArtsList(with refreshedArtItems: [ArtItemView])
     func showRefreshedArtsListError(with alertErrorModel: AlertErrorModel)
     func updateArtImage(with artImage: ArtImageModel)
 }
 
-final class ArtListViewModel: ArtsListInputProtocol {
+protocol ArtsListCoordinatorProtocol {
+    var showArtDetails: ((_ artDetailInfo: ArtDetailsInfoModel) -> Void)? { get }
+}
+
+final class ArtsListViewModel: ArtsListInputProtocol, ArtsListCoordinatorProtocol {
     // MARK: - Dependency
     private let useCases: UseCases
     weak var viewController: ArtsListOutputProtocol?
+
+    // MARK: - Properties
+    var showArtDetails: ((_ artDetailInfo: ArtDetailsInfoModel) -> Void)?
 
     // MARK: Inner Type
     struct UseCases {
@@ -54,8 +62,8 @@ final class ArtListViewModel: ArtsListInputProtocol {
             case .success(let artItems):
                 viewController?.showPrefetchedArtsList(with: artItems)
 
-            case .failure(let error):
-                print("\(error)")
+            case .failure:
+                viewController?.showPrefetchError()
             }
         }
     }
@@ -76,13 +84,13 @@ final class ArtListViewModel: ArtsListInputProtocol {
 }
 
 // MARK: - Private Methods
-extension ArtListViewModel {
+extension ArtsListViewModel {
     private func getArtsList(
         isRefreshing: Bool = false,
         completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
     ) {
         useCases.artsListManager.getArtsList(isRefreshing: isRefreshing) { result in
-            DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
+            DispatchQueue.main.async { [weak self] in 
                 guard let self else { return }
 
                 switch result {
@@ -153,7 +161,7 @@ extension ArtListViewModel {
         }
 
         useCases.getArtImage.execute(with: imagesRequestModel) { result in
-            DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
+            DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
 
                 switch result {
@@ -166,7 +174,7 @@ extension ArtListViewModel {
                 case .failure(let error):
                     viewController?.updateArtImage(with: .init(
                         artId: error.artId,
-                        image: UIImage(systemName: "xmark.seal.fill")?.pngData() ?? Data() // TODO: Refactor so ViewModel does not import UIKit
+                        image: UIImage(systemName: "photo.artframe")?.pngData() ?? Data()
                     ))
                 }
             }

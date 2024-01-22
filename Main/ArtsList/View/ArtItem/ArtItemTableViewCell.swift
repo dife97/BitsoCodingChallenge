@@ -16,9 +16,17 @@ final class ArtItemTableViewCell: UITableViewCell {
     }
 
     func configure(with view: UIView) {
-        view.translatesAutoresizingMaskIntoConstraints = false
-
         contentView.addSubview(view)
+        setupConstraints(of: view)
+    }
+
+    func setupCell() {
+        backgroundColor = .clear
+        selectionStyle = .none
+    }
+
+    private func setupConstraints(of view: UIView) {
+        view.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             view.topAnchor.constraint(equalTo: topAnchor),
@@ -26,10 +34,5 @@ final class ArtItemTableViewCell: UITableViewCell {
             view.trailingAnchor.constraint(equalTo: trailingAnchor),
             view.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
-    }
-
-    func setupCell() {
-        backgroundColor = .clear
-        selectionStyle = .none
     }
 }

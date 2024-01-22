@@ -7,9 +7,13 @@ final class ArtServiceTests: XCTestCase {
         HTTPProviderSpy
     )
 
-    func buildSUT() -> SUT {
+    func buildSUT(
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> SUT {
         let providerSpy = HTTPProviderSpy()
         let sut = ArtService(provider: providerSpy)
+        checkMemoryLeak(for: sut, file: file, line: line)
         return (sut, providerSpy)
     }
 
