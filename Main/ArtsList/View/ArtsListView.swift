@@ -2,6 +2,7 @@ import UIKit
 
 protocol ArtListViewProtocol {
     func setLoadingState(to isLoading: Bool)
+    func setFooterViewLoadingState(to isLoading: Bool)
     func loadArtsList(with artsList: [ArtItemView])
     func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView])
     func stopLoadingRefresh()
@@ -47,9 +48,9 @@ final class ArtsListView: UIView {
     private lazy var artsListTableFooterView: UIView = {
         let view = UIView(frame: CGRect(
             x: 0, y: 0,
-            width: UIScreen.main.bounds.size.width,
-            height: 60) // TODO: Move to metrics
-        )
+            width: ViewMetrics.screenHeight,
+            height: ViewMetrics.footerViewHeight
+        ))
         return view
     }()
 
@@ -62,6 +63,12 @@ final class ArtsListView: UIView {
 
     required init?(coder: NSCoder) {
         fatalError()
+    }
+
+    // MARK: - Metrics
+    struct ViewMetrics {
+        static let footerViewHeight: CGFloat = 60
+        static let screenHeight: CGFloat = UIScreen.main.bounds.size.width
     }
 
     // MARK: - Layout Setup
@@ -81,7 +88,6 @@ final class ArtsListView: UIView {
     }
 
     private func extraSetup() {
-//        backgroundColor = .systemGray
         backgroundColor = .systemBackground
     }
 }
@@ -100,8 +106,16 @@ extension ArtsListView: ArtListViewProtocol {
 
     func loadArtsList(with artsList: [ArtItemView]) {
         self.artsList.append(contentsOf: artsList)
-        artsListTableFooterView.stopLoading()
+        setFooterViewLoadingState(to: false)
         artsListTableView.reloadData()
+    }
+
+    func setFooterViewLoadingState(to isLoading: Bool) {
+        if isLoading {
+            artsListTableFooterView.startLoading()
+        } else {
+            artsListTableFooterView.stopLoading()
+        }
     }
 
     func loadRefreshedArtsList(with refreshedArtsList: [ArtItemView]) {
@@ -173,11 +187,11 @@ extension ArtsListView: UITableViewDelegate {
         willDisplay cell: UITableViewCell,
         forRowAt indexPath: IndexPath
     ) {
-        let itemPerPage = 10 // TODO: receive from model
+        let itemPerPage = 10
         let firstPageItem = artsList.count - itemPerPage
 
         if indexPath.row == firstPageItem {
-            artsListTableFooterView.startLoading()
+            setFooterViewLoadingState(to: true)
             delegate?.prefetchNextPage()
         }
     }

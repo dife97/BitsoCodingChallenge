@@ -13,7 +13,7 @@ public struct ArtsListRequestModel: EquatableModel {
 }
 
 // MARK: - Response
-public struct ArtsListResponseModel: EquatableModel { // TODO: Change to use only decoder?
+public struct ArtsListResponseModel: EquatableModel {
     let data: [ArtListData]
 
     init(data: [ArtListData]) {

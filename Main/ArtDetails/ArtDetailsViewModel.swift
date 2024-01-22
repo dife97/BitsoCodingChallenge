@@ -7,6 +7,7 @@ protocol ArtDetailsInputProtocol {
 
 protocol ArtDetailsOutputProtocol: AnyObject {
     func showArtDetails(with artDetailsModel: ArtDetailsSetupModel)
+    func showErrorAlert(with alertErrorModel: AlertErrorModel)
 }
 
 final class ArtDetailsViewModel: ArtDetailsInputProtocol {
@@ -31,7 +32,7 @@ final class ArtDetailsViewModel: ArtDetailsInputProtocol {
                     viewController?.showArtDetails(with: artDetailsModel)
 
                 case .failure(let error):
-                    print("FAIL: \(error)")
+                    handleArtDetailsError(error)
                 }
             }
         }
@@ -59,5 +60,31 @@ final class ArtDetailsViewModel: ArtDetailsInputProtocol {
             description: data.description,
             details: details
         )
+    }
+
+    private func handleArtDetailsError(_ error: ArtDetailsError) {
+        switch error {
+        case .connection:
+            showAlertError(with: .init(
+                title: "Oops 😪",
+                description: "It seems that you have no internet connection.",
+                confirmButtonTitle: "Ok"
+            ))
+        case .invalidData, .unexpected:
+            showAlertError(with: .init(
+                title: "Oops 😪",
+                description: "Something wrong happened.",
+                confirmButtonTitle: "Try Again"
+            ))
+        }
+    }
+
+    private func showAlertError(with alertErrorModel: AlertErrorModel) {
+        let alertErrorModel: AlertErrorModel = .init(
+            title: alertErrorModel.title,
+            description: alertErrorModel.description,
+            confirmButtonTitle: alertErrorModel.confirmButtonTitle
+        )
+        viewController?.showErrorAlert(with: alertErrorModel)
     }
 }

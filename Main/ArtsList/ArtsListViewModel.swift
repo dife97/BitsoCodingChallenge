@@ -12,6 +12,7 @@ protocol ArtsListOutputProtocol: AnyObject {
     func showArtsList(with artItems: [ArtItemView])
     func showFetchArtsListError(with alertErrorModel: AlertErrorModel)
     func showPrefetchedArtsList(with prefetchedArtItems: [ArtItemView])
+    func showPrefetchError()
     func showRefreshedArtsList(with refreshedArtItems: [ArtItemView])
     func showRefreshedArtsListError(with alertErrorModel: AlertErrorModel)
     func updateArtImage(with artImage: ArtImageModel)
@@ -61,8 +62,8 @@ final class ArtsListViewModel: ArtsListInputProtocol, ArtsListCoordinatorProtoco
             case .success(let artItems):
                 viewController?.showPrefetchedArtsList(with: artItems)
 
-            case .failure(let error):
-                print("\(error)") // TODO: Remove print
+            case .failure:
+                viewController?.showPrefetchError()
             }
         }
     }
@@ -89,7 +90,7 @@ extension ArtsListViewModel {
         completion: @escaping (Result<[ArtItemView], ArtsListError>) -> Void
     ) {
         useCases.artsListManager.getArtsList(isRefreshing: isRefreshing) { result in
-            DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
+            DispatchQueue.main.async { [weak self] in 
                 guard let self else { return }
 
                 switch result {
@@ -160,7 +161,7 @@ extension ArtsListViewModel {
         }
 
         useCases.getArtImage.execute(with: imagesRequestModel) { result in
-            DispatchQueue.main.async { [weak self] in // TODO: Decorate Dispatch
+            DispatchQueue.main.async { [weak self] in
                 guard let self else { return }
 
                 switch result {
@@ -173,7 +174,7 @@ extension ArtsListViewModel {
                 case .failure(let error):
                     viewController?.updateArtImage(with: .init(
                         artId: error.artId,
-                        image: UIImage(systemName: "xmark.seal.fill")?.pngData() ?? Data() // TODO: Refactor so ViewModel does not import UIKit
+                        image: UIImage(systemName: "photo.artframe")?.pngData() ?? Data()
                     ))
                 }
             }

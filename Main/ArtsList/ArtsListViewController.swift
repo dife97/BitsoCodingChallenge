@@ -62,6 +62,10 @@ extension ArtsListViewController: ArtsListOutputProtocol {
         artsListView?.loadArtsList(with: prefetchedArtItems)
     }
 
+    func showPrefetchError() {
+        artsListView?.setFooterViewLoadingState(to: false)
+    }
+
     func showRefreshedArtsList(with refreshedArtItems: [ArtItemView]) {
         artsListView?.loadRefreshedArtsList(with: refreshedArtItems)
     }

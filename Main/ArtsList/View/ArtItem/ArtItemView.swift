@@ -24,6 +24,12 @@ final class ArtItemView: UIView {
         fatalError()
     }
 
+    // MARK: Metrics
+    struct ViewMetrics {
+        static let cellHeight: CGFloat = 250
+        static let artImageViewHeight: CGFloat = 150
+    }
+
     // MARK: - UI
     private lazy var contentStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [
@@ -33,7 +39,7 @@ final class ArtItemView: UIView {
         ])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 8
+        stackView.spacing = Metrics.Spacings.x2
         return stackView
     }()
 
@@ -41,7 +47,7 @@ final class ArtItemView: UIView {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = Metrics.Radius.defaultValue
+        imageView.layer.cornerRadius = Metrics.Radius.x1
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .systemGray5
         return imageView
@@ -51,7 +57,7 @@ final class ArtItemView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 2
-        label.font = .systemFont(ofSize: 16, weight: .bold) // TODO: Move to metrics
+        label.font = .mediumBold
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.8
         label.textColor = .label
@@ -63,7 +69,7 @@ final class ArtItemView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
+        label.font = .smallLight
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .label
         label.text = artItemModel.author
@@ -79,9 +85,18 @@ final class ArtItemView: UIView {
     private func configureContentStackView() {
         addSubview(contentStackView)
         NSLayoutConstraint.activate([
-            contentStackView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
-            contentStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            contentStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16)
+            contentStackView.topAnchor.constraint(
+                equalTo: topAnchor,
+                constant: Metrics.Spacings.x2
+            ),
+            contentStackView.leadingAnchor.constraint(
+                equalTo: leadingAnchor,
+                constant: Metrics.Spacings.x2
+            ),
+            contentStackView.trailingAnchor.constraint(
+                equalTo: trailingAnchor,
+                constant: -Metrics.Spacings.x2
+            )
         ])
     }
 
@@ -89,7 +104,7 @@ final class ArtItemView: UIView {
         NSLayoutConstraint.activate([
             artImageView.leadingAnchor.constraint(equalTo: contentStackView.leadingAnchor),
             artImageView.trailingAnchor.constraint(equalTo: contentStackView.trailingAnchor),
-            artImageView.heightAnchor.constraint(equalToConstant: 150)
+            artImageView.heightAnchor.constraint(equalToConstant: ViewMetrics.artImageViewHeight)
         ])
     }
 
@@ -112,5 +127,5 @@ final class ArtItemView: UIView {
 // MARK: - Factory
 extension ArtItemView: ArtItemViewFactory {
     func makeArtItemView() -> UIView { self }
-    func getCellHeight() -> CGFloat { 250 }
+    func getCellHeight() -> CGFloat { ViewMetrics.cellHeight }
 }

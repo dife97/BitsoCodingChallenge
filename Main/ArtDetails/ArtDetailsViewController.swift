@@ -1,14 +1,5 @@
 import UIKit
 
-// TODO: Move to own file
-struct ArtDetailsInfoModel {
-    let artId: Int
-    let artImage: UIImage?
-    let title: String
-    let author: String
-    let year: String
-}
-
 final class ArtDetailsViewController: UIViewController {
     // MARK: - Dependencies
     private let viewModel: ArtDetailsInputProtocol
@@ -70,5 +61,14 @@ extension ArtDetailsViewController: ArtDetailsOutputProtocol {
     func showArtDetails(with artDetailsModel: ArtDetailsSetupModel) {
         artsDetailsView?.setLoadingState(to: false)
         artsDetailsView?.showArtDetails(with: artDetailsModel)
+    }
+
+    func showErrorAlert(with alertErrorModel: AlertErrorModel) {
+        artsDetailsView?.setLoadingState(to: false)
+        showAlert(
+            title: alertErrorModel.title,
+            message: alertErrorModel.description,
+            buttonTitle: alertErrorModel.confirmButtonTitle
+        )
     }
 }

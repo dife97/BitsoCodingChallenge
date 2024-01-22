@@ -39,14 +39,14 @@ final class ArtDetailsView: UIView {
             artInfoLabel,
             authorLabel
         ],
-        spacing: 24
+        spacing: Metrics.Spacings.x4
     )
 
     private lazy var artImageView: UIImageView = {
         let imageView = UIImageView(image: model.artImage)
         imageView.heightAnchor.constraint(equalToConstant: ViewMetrics.artImageHeight).isActive = true
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = Metrics.Radius.defaultValue
+        imageView.layer.cornerRadius = Metrics.Radius.x1
         imageView.contentMode = .scaleAspectFit
         imageView.backgroundColor = .systemGray5
         return imageView
@@ -56,7 +56,7 @@ final class ArtDetailsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
-        label.font = .systemFont(ofSize: 18, weight: .bold) // TODO: Move to metrics
+        label.font = .titleBold
         label.textColor = .label
         label.text = "\(model.title) - \(model.year)"
         return label
@@ -66,7 +66,7 @@ final class ArtDetailsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 1
-        label.font = .systemFont(ofSize: 14, weight: .light) // TODO: Move to metrics
+        label.font = .smallLight
         label.adjustsFontSizeToFitWidth = true
         label.textColor = .label
         label.text = "\(model.author)"
@@ -86,7 +86,7 @@ final class ArtDetailsView: UIView {
         return label
     }()
 
-    private lazy var artDetailsStackView = makeStackView(spacing: 0)
+    private lazy var artDetailsStackView = makeStackView(spacing: .zero)
 
     // MARK: - View Metrics
     struct ViewMetrics {
@@ -119,7 +119,10 @@ final class ArtDetailsView: UIView {
             containerView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -16),
+            containerView.bottomAnchor.constraint(
+                equalTo: scrollView.bottomAnchor,
+                constant: -Metrics.Spacings.x2
+            ),
             containerView.widthAnchor.constraint(equalTo: scrollView.widthAnchor)
         ])
     }
@@ -130,15 +133,15 @@ final class ArtDetailsView: UIView {
         NSLayoutConstraint.activate([
             artInfoStackView.topAnchor.constraint(
                 equalTo: containerView.topAnchor,
-                constant: Metrics.Spacings.defaultValue
+                constant: Metrics.Spacings.x2
             ),
             artInfoStackView.leadingAnchor.constraint(
                 equalTo: containerView.leadingAnchor,
-                constant: Metrics.Spacings.defaultValue
+                constant: Metrics.Spacings.x2
             ),
             artInfoStackView.trailingAnchor.constraint(
                 equalTo: containerView.trailingAnchor,
-                constant: -Metrics.Spacings.defaultValue
+                constant: -Metrics.Spacings.x2
             )
         ])
     }
@@ -150,7 +153,10 @@ final class ArtDetailsView: UIView {
             loadingView.topAnchor.constraint(equalTo: artInfoStackView.bottomAnchor),
             loadingView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
             loadingView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            loadingView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -24)
+            loadingView.bottomAnchor.constraint(
+                equalTo: safeAreaLayoutGuide.bottomAnchor,
+                constant: -Metrics.Spacings.x3
+            )
         ])
     }
 
@@ -166,7 +172,7 @@ final class ArtDetailsView: UIView {
 
             attributedString.addAttribute(
                 .font,
-                value: UIFont.systemFont(ofSize: 14, weight: .light),
+                value: UIFont.smallLight,
                 range: .init(
                     location: 0,
                     length: attributedString.length
@@ -197,16 +203,22 @@ final class ArtDetailsView: UIView {
         containerView.addSubview(artDetailsStackView)
 
         NSLayoutConstraint.activate([
-            artDetailsStackView.topAnchor.constraint(equalTo: artInfoStackView.bottomAnchor, constant: 40),
+            artDetailsStackView.topAnchor.constraint(
+                equalTo: artInfoStackView.bottomAnchor,
+                constant: Metrics.Spacings.x5
+            ),
             artDetailsStackView.leadingAnchor.constraint(equalTo: artInfoStackView.leadingAnchor),
             artDetailsStackView.trailingAnchor.constraint(equalTo: artInfoStackView.trailingAnchor),
-            artDetailsStackView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -16)
+            artDetailsStackView.bottomAnchor.constraint(
+                equalTo: containerView.bottomAnchor,
+                constant: -Metrics.Spacings.x2
+            )
         ])
     }
 
     private func extraSetup() {
         backgroundColor = .systemBackground
-        artInfoStackView.setCustomSpacing(8, after: artInfoLabel)
+        artInfoStackView.setCustomSpacing(Metrics.Spacings.x1, after: artInfoLabel)
     }
 }
 

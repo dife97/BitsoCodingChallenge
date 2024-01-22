@@ -23,16 +23,14 @@ extension ArtServiceTarget: ServiceTarget {
         case .getArtList:
             return "artworks"
         case .getArtImage(let model):
-            return "\(model.imagedId)/full/400,/0/default.jpg" // TODO: Document why using 400 (time and avoid images that does not have this full
+            return "\(model.imagedId)/full/400,/0/default.jpg"
         case .getArtDetails(let model):
             return "artworks/\(model.artId)"
         }
     }
 
     var headers: [String : String] {
-        [
-            "AIC-User-Agent" : "BitsoCodingChallenge (diferodrigues@gmail.com)"
-        ]
+        ["AIC-User-Agent" : "BitsoCodingChallenge (diferodrigues@gmail.com)"]
     }
 
     var parameters: [String : Any]? {
