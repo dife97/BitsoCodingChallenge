@@ -104,6 +104,7 @@
 		94DF177F2B571C25008EB27F /* ArtServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF177E2B571C25008EB27F /* ArtServiceError.swift */; };
 		94DF17822B5722AA008EB27F /* Data+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17812B5722AA008EB27F /* Data+Extension.swift */; };
 		94DF17842B5723CE008EB27F /* EquatableModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF17832B5723CE008EB27F /* EquatableModel.swift */; };
+		94E4D2892B5E43F20026EB4E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 94E4D2882B5E43F20026EB4E /* README.md */; };
 		94EBFA692B56C4AC006F0493 /* ArtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA682B56C4AC006F0493 /* ArtService.swift */; };
 		94EBFA6B2B56C4BC006F0493 /* ArtServiceTarget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA6A2B56C4BC006F0493 /* ArtServiceTarget.swift */; };
 		94EBFA702B56D41F006F0493 /* RemoteArtsListModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94EBFA6F2B56D41F006F0493 /* RemoteArtsListModels.swift */; };
@@ -296,6 +297,7 @@
 		94DF177E2B571C25008EB27F /* ArtServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtServiceError.swift; sourceTree = "<group>"; };
 		94DF17812B5722AA008EB27F /* Data+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+Extension.swift"; sourceTree = "<group>"; };
 		94DF17832B5723CE008EB27F /* EquatableModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquatableModel.swift; sourceTree = "<group>"; };
+		94E4D2882B5E43F20026EB4E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		94EBFA682B56C4AC006F0493 /* ArtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtService.swift; sourceTree = "<group>"; };
 		94EBFA6A2B56C4BC006F0493 /* ArtServiceTarget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtServiceTarget.swift; sourceTree = "<group>"; };
 		94EBFA6F2B56D41F006F0493 /* RemoteArtsListModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteArtsListModels.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 		940F4F3A2B56320F006A9AC7 = {
 			isa = PBXGroup;
 			children = (
+				94E4D2882B5E43F20026EB4E /* README.md */,
 				94B9ACEF2B5D5AF000D61BF3 /* Main */,
 				94B9AD072B5D5B0700D61BF3 /* MainTests */,
 				940F4F542B563229006A9AC7 /* ArtApp */,
@@ -1109,6 +1112,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94E4D2892B5E43F20026EB4E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
